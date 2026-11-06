@@ -340,8 +340,9 @@
         resultSection.classList.remove('hidden');
         if (window.lucide) lucide.createIcons();
       } catch (err) {
-        console.error(err);
-        alert('Compression failed. Please try a different PDF or smaller page count.');
+  console.error('Compression error details:', err);
+  alert('Compression failed: ' + (err.message || err));
+}
       } finally {
         startCompressBtn.disabled = false;
       }
