@@ -269,25 +269,28 @@
       return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
     }
 
-    async function handleFile(file) {
-      if (!file || file.type !== 'application/pdf') {
-        alert('Please select a valid PDF file.');
-        return;
-      }
-      currentFile = file;
-      fileName.textContent = file.name;
-      
-      try {
-        const arrayBuffer = await file.arrayBuffer();
-        pdfDocProxy = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-        fileDetails.textContent = `${formatBytes(file.size)} • ${pdfDocProxy.numPages} page(s)`;
-        fileSelectedSection.classList.remove('hidden');
-        resultSection.classList.add('hidden');
-      } catch (err) {
-        console.error(err);
-        alert('Failed to read PDF. It might be password-protected or corrupted.');
-      }
-    }
+   async function handleFile(file) {
+  if (!file || file.type !== 'application/pdf') {
+    alert('Please select a valid PDF file.');
+    return;
+  }
+  currentFile = file;
+  fileName.textContent = file.name;
+  fileSelectedSection.classList.remove('hidden');
+  resultSection.classList.add('hidden');
+
+  try {
+    const rawBuffer = await file.arrayBuffer();
+    // Use Uint8Array slice to prevent buffer detaching
+    const fileDataCopy = new Uint8Array(rawBuffer.slice(0));
+    
+    pdfDocProxy = await pdfjsLib.getDocument({ data: fileDataCopy }).promise;
+    fileDetails.textContent = `${formatBytes(file.size)} • ${pdfDocProxy.numPages} page(s)`;
+  } catch (err) {
+    console.error('File load failed:', err);
+    alert('Failed to read PDF. It might be password-protected or corrupted.');
+  }
+}
 
     // Drag and drop handlers
     ['dragenter', 'dragover'].forEach(name => {
