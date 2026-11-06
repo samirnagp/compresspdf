@@ -87,9 +87,8 @@ async function handleFile(file) {
 });
 
 ['dragleave', 'drop'].forEach(name => {
-  dropzone.addEventListener('click', () => {
-  fileInput.click();
-});
+  dropzone.addEventListener(name, (e) => {
+    e.preventDefault();
     dropzone.classList.remove('border-brand-600', 'bg-indigo-50/50');
   });
 });
@@ -131,8 +130,17 @@ startCompressBtn.addEventListener('click', async () => {
     lucide.createIcons();
   } catch (err) {
     console.error(err);
-    alert('Compression encountered an error. Trying server-side fallback...');
-    await runServerSideFallback();
+    progressStatus.textContent = 'Browser compression failed; trying server-side fallback...';
+    try {
+      await runServerSideFallback();
+      progressStatus.textContent = 'Completed!';
+      progressBar.style.width = '100%';
+      progressPercent.textContent = '100%';
+    } catch (fallbackError) {
+      console.error(fallbackError);
+      progressStatus.textContent = 'Compression failed';
+      alert(`Browser compression failed, and the server-side fallback failed: ${fallbackError.message}`);
+    }
   } finally {
     startCompressBtn.disabled = false;
   }
@@ -214,12 +222,25 @@ async function runServerSideFallback() {
   });
 
   if (!res.ok) {
-    throw new Error('Server compression failed');
+    const responseText = await res.text();
+    let errorMessage = responseText;
+    try {
+      const errorData = JSON.parse(responseText);
+      errorMessage = errorData.error || responseText;
+    } catch {
+      // Keep the response body when the server does not return JSON.
+    }
+    throw new Error(errorMessage || `Server compression failed (${res.status})`);
   }
 
   const blob = await res.blob();
+  resOrigSize.textContent = formatBytes(currentFile.size);
+  resCompSize.textContent = formatBytes(blob.size);
+  const savedPct = Math.max(0, Math.round((1 - blob.size / currentFile.size) * 100));
+  resSavedBadge.textContent = `-${savedPct}%`;
   const blobUrl = URL.createObjectURL(blob);
   downloadBtn.href = blobUrl;
   downloadBtn.download = `compressed_${currentTargetKb}kb_${currentFile.name}`;
   resultSection.classList.remove('hidden');
+  lucide.createIcons();
 }
