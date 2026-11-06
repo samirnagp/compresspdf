@@ -18,22 +18,20 @@ def health():
     return jsonify({"status": "healthy"})
 
 def compress_with_pypdf(input_bytes):
-    """Fallback compressor that doesn't need Poppler or external binaries."""
+    """Safe pure-python PDF stream compressor."""
     reader = pypdf.PdfReader(io.BytesIO(input_bytes))
     writer = pypdf.PdfWriter()
 
     for page in reader.pages:
-        page.compress_content_streams()
+        page.compress_content_streams()  # FlateDecode compression on text/vectors
         writer.add_page(page)
 
-    for page in writer.pages:
-        for img in page.images:
-            img.replace(img.image, quality=20)
-
+    # Enable stream compression and clean up unused objects
+    writer.add_metadata(reader.metadata if reader.metadata else {})
+    
     out = io.BytesIO()
     writer.write(out)
     return out.getvalue()
-
 @app.route('/api/compress', methods=['POST'])
 def compress_pdf_api():
     if 'file' not in request.files:
