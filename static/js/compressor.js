@@ -87,8 +87,9 @@ async function handleFile(file) {
 });
 
 ['dragleave', 'drop'].forEach(name => {
-  dropzone.addEventListener(name, (e) => {
-    e.preventDefault();
+  dropzone.addEventListener('click', () => {
+  fileInput.click();
+});
     dropzone.classList.remove('border-brand-600', 'bg-indigo-50/50');
   });
 });
