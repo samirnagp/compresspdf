@@ -347,25 +347,96 @@
       }
     });
 
-    // In-Browser Multi-Pass Engine
-    async function executeCompression(pdfDoc, targetKb, onProgress) {
-      const targetBytes = targetKb * 1024;
-      const numPages = pdfDoc.numPages;
+    // In-Browser Multi-Pass Engine (Rock-Solid Version)
+async function executeCompression(pdfDoc, targetKb, onProgress) {
+  const targetBytes = targetKb * 1024;
+  const numPages = pdfDoc.numPages;
 
-      let scale = 1.0;
-      let quality = 0.70;
+  // Initial quality heuristics
+  let scale = 1.0;
+  let quality = 0.70;
 
-      if (targetKb <= 15) {
-        scale = 0.5;
-        quality = 0.28;
-      } else if (targetKb <= 50) {
-        scale = 0.75;
-        quality = 0.50;
-      } else if (targetKb <= 100) {
-        scale = 0.95;
-        quality = 0.65;
-      }
+  if (targetKb <= 15) {
+    scale = 0.50;
+    quality = 0.30;
+  } else if (targetKb <= 50) {
+    scale = 0.75;
+    quality = 0.50;
+  } else if (targetKb <= 100) {
+    scale = 0.95;
+    quality = 0.65;
+  }
 
+  // Helper to convert canvas directly to Uint8Array (avoids base64 string crashes)
+  async function canvasToJpgBytes(canvas, q) {
+    return new Promise((resolve, reject) => {
+      canvas.toBlob((blob) => {
+        if (!blob) return reject(new Error("Canvas export failed"));
+        blob.arrayBuffer().then(buf => resolve(new Uint8Array(buf)));
+      }, 'image/jpeg', q);
+    });
+  }
+
+  async function renderDoc(curScale, curQuality) {
+    const { PDFDocument } = PDFLib;
+    const outPdf = await PDFDocument.create();
+
+    for (let i = 1; i <= numPages; i++) {
+      onProgress(`Optimizing page ${i} of ${numPages}...`, ((i - 0.5) / numPages) * 85);
+      
+      const page = await pdfDoc.getPage(i);
+      const viewport = page.getViewport({ scale: curScale });
+
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, Math.floor(viewport.width));
+      canvas.height = Math.max(1, Math.floor(viewport.height));
+      const ctx = canvas.getContext('2d', { alpha: false });
+
+      // Clean white background for transparent PDFs
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const renderContext = {
+        canvasContext: ctx,
+        viewport: viewport
+      };
+
+      await page.render(renderContext).promise;
+
+      // Extract raw JPEG binary buffer
+      const jpgBytes = await canvasToJpgBytes(canvas, curQuality);
+      const embeddedImg = await outPdf.embedJpg(jpgBytes);
+
+      // Preserve original document page aspect ratio
+      const origViewport = page.getViewport({ scale: 1.0 });
+      const newPage = outPdf.addPage([origViewport.width, origViewport.height]);
+      newPage.drawImage(embeddedImg, {
+        x: 0,
+        y: 0,
+        width: origViewport.width,
+        height: origViewport.height
+      });
+    }
+
+    const savedBytes = await outPdf.save({ useObjectStreams: true });
+    return new Blob([savedBytes], { type: 'application/pdf' });
+  }
+
+  // Pass 1
+  let resultBlob = await renderDoc(scale, quality);
+
+  // Auto adjustment pass if still exceeds target
+  if (resultBlob.size > targetBytes && quality > 0.15) {
+    onProgress('Refining compression to hit target limit...', 92);
+    const ratio = Math.sqrt(targetBytes / resultBlob.size);
+    const secondScale = Math.max(0.35, scale * ratio);
+    const secondQuality = Math.max(0.15, quality * ratio);
+    resultBlob = await renderDoc(secondScale, secondQuality);
+  }
+
+  onProgress('Completed!', 100);
+  return resultBlob;
+}
       async function renderDoc(curScale, curQuality) {
         const { PDFDocument } = PDFLib;
         const outPdf = await PDFDocument.create();
