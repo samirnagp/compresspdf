@@ -8,7 +8,7 @@ This package provides a standalone, production-ready web application for compres
 1. **Frontend (Primary / 100% Client-Side):**
    - Uses `pdf.js` for canvas rasterization.
    - Uses `pdf-lib` for document reconstruction.
-   - Zero file upload required: ensures total user privacy and zero server compute/bandwidth costs.
+   - Files stay in the browser unless client-side compression fails and the server fallback is used.
 2. **Backend (Python / Flask + Poppler / Pillow):**
    - Serves the frontend assets.
    - Exposes `/api/compress` as a fallback or headless API endpoint.
@@ -41,10 +41,8 @@ Open [http://localhost:5000](http://localhost:5000) in your browser.
 
 1. Push this project folder to your GitHub / GitLab repository.
 2. Log into Render Dashboard.
-3. Click New + -> Web Service.
-4. Connect your repository.
-5. Set:
-   - Environment: Python 3
-   - Build Command: pip install -r requirements.txt
-   - Start Command: gunicorn app:app
-6. Click Deploy.
+3. Click New + -> Blueprint and connect your repository, or create a Web Service using the Docker runtime.
+4. Ensure the service uses the included `Dockerfile`. It installs Poppler, which the server-side compression fallback requires.
+5. Click Deploy. The container binds to Render's `PORT` environment variable.
+
+The server-side fallback uploads the selected PDF to `/api/compress`. If you deploy with a native Python runtime instead of Docker, install Poppler in that runtime or the fallback will fail.
