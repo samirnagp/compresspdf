@@ -391,7 +391,7 @@ async function executeCompression(pdfDoc, targetKb, onProgress) {
 
     for (let i = 1; i <= numPages; i++) {
       onProgress(`Optimizing page ${i} of ${numPages}...`, ((i - 0.5) / numPages) * 85);
-      
+
       const page = await pdfDoc.getPage(i);
       const viewport = page.getViewport({ scale: curScale });
 
@@ -400,29 +400,25 @@ async function executeCompression(pdfDoc, targetKb, onProgress) {
       canvas.height = Math.max(1, Math.floor(viewport.height));
       const ctx = canvas.getContext('2d', { alpha: false });
 
-      // Clean white background for transparent PDFs
+      // Solid white background for transparent pages
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      const renderContext = {
+      await page.render({
         canvasContext: ctx,
-        viewport: viewport
-      };
+        viewport: viewport,
+      }).promise;
 
-      await page.render(renderContext).promise;
-
-      // Extract raw JPEG binary buffer
-      const jpgBytes = await canvasToJpgBytes(canvas, curQuality);
+      const jpgBytes = await getCanvasBytes(canvas, curQuality);
       const embeddedImg = await outPdf.embedJpg(jpgBytes);
 
-      // Preserve original document page aspect ratio
       const origViewport = page.getViewport({ scale: 1.0 });
       const newPage = outPdf.addPage([origViewport.width, origViewport.height]);
       newPage.drawImage(embeddedImg, {
         x: 0,
         y: 0,
         width: origViewport.width,
-        height: origViewport.height
+        height: origViewport.height,
       });
     }
 
@@ -435,7 +431,7 @@ async function executeCompression(pdfDoc, targetKb, onProgress) {
 
   // Auto adjustment pass if still exceeds target
   if (resultBlob.size > targetBytes && quality > 0.15) {
-    onProgress('Refining compression to hit target limit...', 92);
+    onProgress('Refining compression to fit target limit...', 92);
     const ratio = Math.sqrt(targetBytes / resultBlob.size);
     const secondScale = Math.max(0.35, scale * ratio);
     const secondQuality = Math.max(0.15, quality * ratio);
@@ -444,7 +440,7 @@ async function executeCompression(pdfDoc, targetKb, onProgress) {
 
   onProgress('Completed!', 100);
   return resultBlob;
-}
+}}
       async function renderDoc(curScale, curQuality) {
         const { PDFDocument } = PDFLib;
         const outPdf = await PDFDocument.create();
