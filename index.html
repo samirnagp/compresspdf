@@ -359,20 +359,21 @@ async function executeCompression(pdfDoc, targetKb, onProgress) {
   const targetBytes = targetKb * 1024;
   const numPages = pdfDoc.numPages;
 
-  // Initial quality heuristics
+  // Initial parameters
   let scale = 1.0;
   let quality = 0.70;
 
   if (targetKb <= 15) {
-    scale = 0.50;
-    quality = 0.30;
+    scale = 0.45;
+    quality = 0.22;
   } else if (targetKb <= 50) {
-    scale = 0.75;
-    quality = 0.50;
+    scale = 0.70;
+    quality = 0.45;
   } else if (targetKb <= 100) {
-    scale = 0.95;
-    quality = 0.65;
+    scale = 0.90;
+    quality = 0.60;
   }
+
 
   // Helper to convert canvas directly to Uint8Array (avoids base64 string crashes)
   async function canvasToJpgBytes(canvas, q) {
