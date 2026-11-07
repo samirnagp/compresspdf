@@ -137,6 +137,17 @@ def compress_pdf_api():
             )
         except Exception as pypdf_err:
             return jsonify({"error": f"Compression failed: {str(pypdf_err)}"}), 500
+            @app.route('/privacy')
+def privacy_page():
+    return render_template('privacy.html')
+
+@app.route('/sitemap.xml')
+def sitemap_file():
+    return send_file('sitemap.xml', mimetype='application/xml')
+
+@app.route('/robots.txt')
+def robots_file():
+    return send_file('robots.txt', mimetype='text/plain')
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
