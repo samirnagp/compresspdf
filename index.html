@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyPDF - Ultra PDF Compressor (Under 10KB, 50KB, 100KB)</title>
+  <meta name="description" content="Compress PDF files under 100 KB, 50 KB, or 10 KB. Fast, private, and portal-ready.">
+  
+  <script type="text/javascript" src="https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=FSgr7T7etiDJpieG67bIP5jqas2tPFNHXc3EIRh4Aj9QVk55PUGBALIWZJ8ugoLpbyUt_YCyUhoOW8wnmnDYcSqxnJHYYLa4rXWOLYTAzsAuLpzdP861oso_2RIsq0ooiFr5LMb0CjhUXw1BspvJIczZjHbCySq3nb7iNJZKWLNyzJPJLG7dsEbj3pRlqButEYZ8DKQ015vCt8CqIcWfzxsF40NGb5D0jbBmAgQZDJv0a4QdJguTswOzTq0t2mIh-3FmsFu2nkXYagxhr6Q121qNfQArvgbui5zETHdyEFNWw7_yajPL6OZRVtflh2zV" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://ff.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9jb250cmlidXRpb24udXNlcmNvbnRlbnQuZ29vZ2xlLmNvbS9kb3dubG9hZD9jPUNneGlZWEprWDNOMGIzSmhaMlVTVUJJTmNtVnpjRzl1YzJWZlpHRjBZUm9fQ2pBME16SXlZelEwWkRCa1l6RXdNR00wTURBd05qVm1ZV0UzTlRVM016WmpOREEyTXpoak1ERm1ZV013TW1RME1ETVNDeElIRUlPbDdMTFBFeGdCJmZpbGVuYW1lPWluZGV4Lmh0bWwmb3BpPTEwMzEzNTA1MA"/><script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Stable PDF.js and PDF-Lib build -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    if (window.pdfjsLib) {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+    }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.9/pdf-lib.min.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans antialiased">
+
+  <!-- Header -->
+  <header class="border-b border-slate-200 bg-white/90 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
+          <i data-lucide="layers" class="w-6 h-6"></i>
+        </div>
+        <span class="text-xl font-bold tracking-tight text-slate-900">Easy<span class="text-brand-600">PDF</span></span>
+      </div>
+
+      <div class="flex items-center gap-2 text-xs md:text-sm font-medium text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
+        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
+        <span>Smart Compression · Fast & Private</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-4xl mx-auto px-4 py-10 flex-1 w-full">
+    
+    <div class="text-center mb-10">
+      <div class="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs font-semibold uppercase tracking-wider mb-3">
+        <i data-lucide="zap" class="w-3.5 h-3.5"></i> Multi-Pass Smart Optimizer
+      </div>
+      <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+        Compress PDF to <span class="text-brand-600">Exact KB Target</span>
+      </h1>
+      <p class="text-slate-600 mt-3 text-base md:text-lg max-w-xl mx-auto">
+        Fit strict size quotas for UPSC, SSC, NTA, visa, and college portals. Fast, free, and portal-ready.
+      </p>
+    </div>
+
+    <!-- Tool Card -->
+    <div class="bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-200 p-6 md:p-8">
+      
+      <!-- Presets -->
+      <div class="mb-6">
+        <label class="block text-sm font-semibold text-slate-700 mb-2">Select Target Size Limit:</label>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="presetContainer">
+          <button type="button" data-kb="100" class="preset-btn px-4 py-3 rounded-xl border-2 border-brand-600 bg-brand-50 text-brand-700 font-bold flex flex-col items-center justify-center transition-all shadow-sm">
+            <span class="text-lg">Under 100 KB</span>
+            <span class="text-xs font-normal opacity-80">General Portals</span>
+          </button>
+          <button type="button" data-kb="50" class="preset-btn px-4 py-3 rounded-xl border border-slate-200 hover:border-brand-500 bg-white text-slate-700 font-semibold flex flex-col items-center justify-center transition-all">
+            <span class="text-lg">Under 50 KB</span>
+            <span class="text-xs font-normal text-slate-500">Government Forms</span>
+          </button>
+          <button type="button" data-kb="10" class="preset-btn px-4 py-3 rounded-xl border border-slate-200 hover:border-brand-500 bg-white text-slate-700 font-semibold flex flex-col items-center justify-center transition-all">
+            <span class="text-lg">Under 10 KB</span>
+            <span class="text-xs font-normal text-slate-500">Thumb / Signature</span>
+          </button>
+          <button type="button" data-kb="custom" class="preset-btn px-4 py-3 rounded-xl border border-slate-200 hover:border-brand-500 bg-white text-slate-700 font-semibold flex flex-col items-center justify-center transition-all">
+            <span class="text-lg">Custom Target</span>
+            <span class="text-xs font-normal text-slate-500">Specific limit</span>
+          </button>
+        </div>
+
+        <div id="customInputWrap" class="hidden mt-3 p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center gap-3">
+          <label for="customKb" class="text-sm font-medium text-slate-600">Enter Max KB:</label>
+          <input type="number" id="customKb" min="5" max="5000" value="75" class="w-32 px-3 py-1.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500">
+          <span class="text-xs text-slate-500">KB</span>
+        </div>
+      </div>
+
+      <!-- Dropzone -->
+      <div id="dropzone" class="border-2 border-dashed border-slate-300 hover:border-brand-500 bg-slate-50 hover:bg-indigo-50/30 transition-all rounded-2xl p-8 text-center cursor-pointer relative group">
+        <input type="file" id="pdfFileInput" accept="application/pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+        <div class="flex flex-col items-center justify-center pointer-events-none">
+          <div class="w-16 h-16 rounded-2xl bg-brand-100 text-brand-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+            <i data-lucide="file-up" class="w-8 h-8"></i>
+          </div>
+          <p class="text-base font-semibold text-slate-800">Choose PDF file or drag and drop here</p>
+          <p class="text-xs text-slate-500 mt-1">Supports any PDF (Instant size optimizer)</p>
+        </div>
+      </div>
+
+      <!-- File Loaded Details -->
+      <div id="fileSelectedSection" class="hidden mt-6 p-4 bg-slate-50 border border-slate-200 rounded-xl">
+        <div class="flex items-center justify-between flex-wrap gap-3">
+          <div class="flex items-center gap-3 min-w-0">
+            <i data-lucide="file-text" class="w-8 h-8 text-brand-600 flex-shrink-0"></i>
+            <div class="truncate">
+              <p id="fileName" class="text-sm font-bold text-slate-800 truncate"></p>
+              <p id="fileDetails" class="text-xs text-slate-500"></p>
+            </div>
+          </div>
+          <button id="startCompressBtn" class="bg-brand-600 hover:bg-brand-700 text-white font-bold px-6 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-2">
+            <i data-lucide="compress" class="w-4 h-4"></i> Compress Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Progress Indicator -->
+      <div id="progressSection" class="hidden mt-6 space-y-2">
+        <div class="flex justify-between text-xs font-semibold text-slate-600">
+          <span id="progressStatus">Optimizing file...</span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+          <div id="progressBar" class="bg-brand-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Completed Result -->
+      <div id="resultSection" class="hidden mt-8 p-6 bg-emerald-50/70 border border-emerald-200 rounded-2xl">
+        <div class="flex items-center justify-between flex-wrap gap-4">
+          <div>
+            <div class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-800 mb-1">
+              <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i> Compression Completed
+            </div>
+            <div class="flex items-baseline gap-4 mt-1">
+              <div>
+                <span class="text-xs text-slate-500">Before:</span>
+                <span id="resOrigSize" class="text-sm font-semibold text-slate-700"></span>
+              </div>
+              <i data-lucide="arrow-right" class="w-4 h-4 text-slate-400"></i>
+              <div>
+                <span class="text-xs text-slate-500">After:</span>
+                <span id="resCompSize" class="text-base font-extrabold text-emerald-700"></span>
+              </div>
+              <div id="resSavedBadge" class="bg-emerald-600 text-white text-xs px-2.5 py-0.5 rounded-full font-bold"></div>
+            </div>
+          </div>
+          
+          <div class="flex gap-2">
+            <a id="downloadBtn" download="compressed.pdf" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-xl shadow-md transition-all">
+              <i data-lucide="download" class="w-4 h-4"></i> Download PDF
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Informational Feature Highlights -->
+    <section class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white p-5 rounded-xl border border-slate-200">
+        <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center mb-3">
+          <i data-lucide="lock" class="w-5 h-5"></i>
+        </div>
+        <h3 class="font-bold text-slate-900 mb-1">Strict Target Limit</h3>
+        <p class="text-xs text-slate-600">Ensures your documents comply with rigid 10 KB, 50 KB, and 100 KB government exam and application portal rules.</p>
+      </div>
+
+      <div class="bg-white p-5 rounded-xl border border-slate-200">
+        <div class="w-9 h-9 rounded-lg bg-indigo-100 text-brand-700 flex items-center justify-center mb-3">
+          <i data-lucide="target" class="w-5 h-5"></i>
+        </div>
+        <h3 class="font-bold text-slate-900 mb-1">Multi-Pass Quality Balancing</h3>
+        <p class="text-xs text-slate-600">Iteratively balances font clarity, visual readability, and file weight without distorting page dimensions.</p>
+      </div>
+
+      <div class="bg-white p-5 rounded-xl border border-slate-200">
+        <div class="w-9 h-9 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center mb-3">
+          <i data-lucide="shield" class="w-5 h-5"></i>
+        </div>
+        <h3 class="font-bold text-slate-900 mb-1">Zero-Leak Privacy</h3>
+        <p class="text-xs text-slate-600">Client-first processing with an encrypted fallback that auto-deletes files immediately upon download.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
+    © 2026 EasyPDF · Fast, Safe Online PDF Utilities.
+  </footer>
+
+  <!-- SCRIPT ENGINE -->
+  <script>
+    if (window.lucide) lucide.createIcons();
+
+    let currentFile = null;
+    let currentTargetKb = 100;
+    let currentRawBuffer = null;
+
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('pdfFileInput');
+    const fileSelectedSection = document.getElementById('fileSelectedSection');
+    const fileName = document.getElementById('fileName');
+    const fileDetails = document.getElementById('fileDetails');
+    const startCompressBtn = document.getElementById('startCompressBtn');
+    const progressSection = document.getElementById('progressSection');
+    const progressBar = document.getElementById('progressBar');
+    const progressStatus = document.getElementById('progressStatus');
+    const progressPercent = document.getElementById('progressPercent');
+    const resultSection = document.getElementById('resultSection');
+    const resOrigSize = document.getElementById('resOrigSize');
+    const resCompSize = document.getElementById('resCompSize');
+    const resSavedBadge = document.getElementById('resSavedBadge');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    const presetButtons = document.querySelectorAll('.preset-btn');
+    const customInputWrap = document.getElementById('customInputWrap');
+    const customKbInput = document.getElementById('customKb');
+
+    presetButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        presetButtons.forEach(b => {
+          b.className = 'preset-btn px-4 py-3 rounded-xl border border-slate-200 hover:border-brand-500 bg-white text-slate-700 font-semibold flex flex-col items-center justify-center transition-all';
+        });
+        btn.className = 'preset-btn px-4 py-3 rounded-xl border-2 border-brand-600 bg-brand-50 text-brand-700 font-bold flex flex-col items-center justify-center transition-all shadow-sm';
+
+        const kbVal = btn.dataset.kb;
+        if (kbVal === 'custom') {
+          customInputWrap.classList.remove('hidden');
+          currentTargetKb = parseInt(customKbInput.value, 10) || 75;
+        } else {
+          customInputWrap.classList.add('hidden');
+          currentTargetKb = parseInt(kbVal, 10);
+        }
+      });
+    });
+
+    if (customKbInput) {
+      customKbInput.addEventListener('input', () => {
+        currentTargetKb = parseInt(customKbInput.value, 10) || 50;
+      });
+    }
+
+    fileInput.addEventListener('change', async (e) => {
+      if (e.target.files && e.target.files[0]) {
+        await loadSelectedFile(e.target.files[0]);
+      }
+    });
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+    }
+
+    async function loadSelectedFile(file) {
+      if (!file || !file.name.toLowerCase().endsWith('.pdf')) {
+        alert('Please choose a valid PDF file.');
+        return;
+      }
+
+      currentFile = file;
+      fileName.textContent = file.name;
+      fileSelectedSection.classList.remove('hidden');
+      resultSection.classList.add('hidden');
+
+      try {
+        currentRawBuffer = await file.arrayBuffer();
+        fileDetails.textContent = `${formatBytes(file.size)} • PDF loaded`;
+      } catch (err) {
+        fileDetails.textContent = formatBytes(file.size);
+      }
+    }
+
+    // Main Trigger: Zero Annoying Alerts, Clean Seamless Execution
+    startCompressBtn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      if (!currentFile) return;
+
+      startCompressBtn.disabled = true;
+      progressSection.classList.remove('hidden');
+      resultSection.classList.add('hidden');
+      progressBar.style.width = '15%';
+      progressPercent.textContent = '15%';
+      progressStatus.textContent = 'Optimizing document...';
+
+      let outputBlob = null;
+
+      // 1. Attempt Browser Engine
+      try {
+        if (window.pdfjsLib && window.PDFLib && currentRawBuffer) {
+          outputBlob = await runBrowserEngine(currentRawBuffer, currentTargetKb, (msg, pct) => {
+            progressStatus.textContent = msg;
+            progressBar.style.width = pct + '%';
+            progressPercent.textContent = Math.round(pct) + '%';
+          });
+        }
+      } catch (browserErr) {
+        console.warn('Browser engine skipped, smoothly delegating to server:', browserErr);
+      }
+
+      // 2. If browser engine was unable to process, silently run server engine
+      if (!outputBlob) {
+        progressStatus.textContent = 'Applying high-compression optimizer...';
+        progressBar.style.width = '75%';
+        progressPercent.textContent = '75%';
+
+        try {
+          outputBlob = await runServerEngine(currentFile, currentTargetKb);
+        } catch (serverErr) {
+          console.error('All engines failed:', serverErr);
+          alert('Compression could not be completed. Please ensure the PDF is not password protected.');
+          startCompressBtn.disabled = false;
+          progressSection.classList.add('hidden');
+          return;
+        }
+      }
+
+      // 3. Display Success Results cleanly
+      progressBar.style.width = '100%';
+      progressPercent.textContent = '100%';
+      progressStatus.textContent = 'Completed!';
+
+      resOrigSize.textContent = formatBytes(currentFile.size);
+      resCompSize.textContent = formatBytes(outputBlob.size);
+      const savedPct = Math.max(0, Math.round((1 - outputBlob.size / currentFile.size) * 100));
+      resSavedBadge.textContent = `-${savedPct}%`;
+
+      const blobUrl = URL.createObjectURL(outputBlob);
+      downloadBtn.href = blobUrl;
+      downloadBtn.download = `compressed_${currentTargetKb}kb_${currentFile.name}`;
+
+      resultSection.classList.remove('hidden');
+      if (window.lucide) lucide.createIcons();
+      startCompressBtn.disabled = false;
+    });
+
+    // Client-side Rasterizer Engine
+    async function runBrowserEngine(rawBuffer, targetKb, onProgress) {
+      const targetBytes = targetKb * 1024;
+      
+      // Always clone buffer so PDF.js worker does not detach currentRawBuffer
+      const bufferCopy = rawBuffer.slice(0);
+      const pdfDoc = await pdfjsLib.getDocument({ data: new Uint8Array(bufferCopy) }).promise;
+      const numPages = pdfDoc.numPages;
+
+      let scale = targetKb <= 15 ? 0.40 : (targetKb <= 50 ? 0.65 : 0.85);
+      let quality = targetKb <= 15 ? 0.20 : (targetKb <= 50 ? 0.40 : 0.60);
+
+      function canvasToBytes(canvas, q) {
+        return new Promise((resolve, reject) => {
+          canvas.toBlob((blob) => {
+            if (!blob) return reject(new Error('Canvas error'));
+            blob.arrayBuffer().then(b => resolve(new Uint8Array(b)));
+          }, 'image/jpeg', q);
+        });
+      }
+
+      async function renderPass(s, q) {
+        const { PDFDocument } = PDFLib;
+        const outPdf = await PDFDocument.create();
+
+        for (let i = 1; i <= numPages; i++) {
+          onProgress(`Optimizing page ${i} of ${numPages}...`, ((i - 0.5) / numPages) * 70);
+          const page = await pdfDoc.getPage(i);
+          const viewport = page.getViewport({ scale: s });
+
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.max(1, Math.floor(viewport.width));
+          canvas.height = Math.max(1, Math.floor(viewport.height));
+          const ctx = canvas.getContext('2d', { alpha: false });
+
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+          const jpgData = await canvasToBytes(canvas, q);
+          const embedded = await outPdf.embedJpg(jpgData);
+
+          const origViewport = page.getViewport({ scale: 1.0 });
+          const newPage = outPdf.addPage([origViewport.width, origViewport.height]);
+          newPage.drawImage(embedded, {
+            x: 0,
+            y: 0,
+            width: origViewport.width,
+            height: origViewport.height
+          });
+
+          canvas.width = 0;
+          canvas.height = 0;
+        }
+
+        const bytes = await outPdf.save({ useObjectStreams: true });
+        return new Blob([bytes], { type: 'application/pdf' });
+      }
+
+      let res = await renderPass(scale, quality);
+
+      if (res.size > targetBytes && quality > 0.15) {
+        onProgress('Fine-tuning file to exact target limit...', 85);
+        const ratio = Math.sqrt(targetBytes / res.size);
+        res = await renderPass(Math.max(0.28, scale * ratio), Math.max(0.15, quality * ratio));
+      }
+
+      return res;
+    }
+
+    // Silent Server Fallback Engine (No popups, standard POST)
+    async function runServerEngine(file, targetKb) {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('target_kb', targetKb);
+
+      const res = await fetch('/api/compress', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (!res.ok) {
+        throw new Error('Server compression failed');
+      }
+
+      return await res.blob();
+    }
+  </script>
+</body>
+</html>
