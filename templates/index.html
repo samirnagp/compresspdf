@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EasyPDF - Ultra PDF Compressor (Under 10KB, 50KB, 100KB)</title>
-  <meta name="description" content="Compress PDF files under 100 KB, 50 KB, or 10 KB. Fast, private, and portal-ready.">
-  
-  <script type="text/javascript" src="https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=FSgr7T7etiDJpieG67bIP5jqas2tPFNHXc3EIRh4Aj9QVk55PUGBALIWZJ8ugoLpbyUt_YCyUhoOW8wnmnDYcSqxnJHYYLa4rXWOLYTAzsAuLpzdP861oso_2RIsq0ooiFr5LMb0CjhUXw1BspvJIczZjHbCySq3nb7iNJZKWLNyzJPJLG7dsEbj3pRlqButEYZ8DKQ015vCt8CqIcWfzxsF40NGb5D0jbBmAgQZDJv0a4QdJguTswOzTq0t2mIh-3FmsFu2nkXYagxhr6Q121qNfQArvgbui5zETHdyEFNWw7_yajPL6OZRVtflh2zV" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://ff.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9jb250cmlidXRpb24udXNlcmNvbnRlbnQuZ29vZ2xlLmNvbS9kb3dubG9hZD9jPUNneGlZWEprWDNOMGIzSmhaMlVTVUJJTmNtVnpjRzl1YzJWZlpHRjBZUm9fQ2pBME16SXlZelEwWkRCa1l6RXdNR00wTURBd05qVm1ZV0UzTlRVM016WmpOREEyTXpoak1ERm1ZV013TW1RME1ETVNDeElIRUlPbDdMTFBFeGdCJmZpbGVuYW1lPWluZGV4Lmh0bWwmb3BpPTEwMzEzNTA1MA"/><script src="https://cdn.tailwindcss.com"></script>
+  <title>EasyPDF - Compress PDF Under 10KB, 50KB, 100KB Online</title>
+  <meta name="description" content="Compress PDF to exact size targets (under 100KB, 50KB, 10KB) online for free. Clean, fast, and private.">
+  <link rel="canonical" href="https://easypdf.website/">
+
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -26,7 +27,7 @@
   </script>
 
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- Stable PDF.js and PDF-Lib build -->
+  <!-- Stable CDN scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script>
     if (window.pdfjsLib) {
@@ -40,16 +41,16 @@
   <!-- Header -->
   <header class="border-b border-slate-200 bg-white/90 backdrop-blur sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-3">
+      <a href="/" class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
           <i data-lucide="layers" class="w-6 h-6"></i>
         </div>
         <span class="text-xl font-bold tracking-tight text-slate-900">Easy<span class="text-brand-600">PDF</span></span>
-      </div>
+      </a>
 
       <div class="flex items-center gap-2 text-xs md:text-sm font-medium text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
         <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
-        <span>Smart Compression · Fast & Private</span>
+        <span>100% Private · Safe Optimizer</span>
       </div>
     </div>
   </header>
@@ -109,7 +110,7 @@
             <i data-lucide="file-up" class="w-8 h-8"></i>
           </div>
           <p class="text-base font-semibold text-slate-800">Choose PDF file or drag and drop here</p>
-          <p class="text-xs text-slate-500 mt-1">Supports any PDF (Instant size optimizer)</p>
+          <p class="text-xs text-slate-500 mt-1">Supports any PDF (Processed securely)</p>
         </div>
       </div>
 
@@ -129,7 +130,7 @@
         </div>
       </div>
 
-      <!-- Progress Indicator -->
+      <!-- Progress Section -->
       <div id="progressSection" class="hidden mt-6 space-y-2">
         <div class="flex justify-between text-xs font-semibold text-slate-600">
           <span id="progressStatus">Optimizing file...</span>
@@ -171,22 +172,22 @@
 
     </div>
 
-    <!-- Informational Feature Highlights -->
+    <!-- Features -->
     <section class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="bg-white p-5 rounded-xl border border-slate-200">
         <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center mb-3">
           <i data-lucide="lock" class="w-5 h-5"></i>
         </div>
         <h3 class="font-bold text-slate-900 mb-1">Strict Target Limit</h3>
-        <p class="text-xs text-slate-600">Ensures your documents comply with rigid 10 KB, 50 KB, and 100 KB government exam and application portal rules.</p>
+        <p class="text-xs text-slate-600">Complies with rigid 10 KB, 50 KB, and 100 KB government exam and application portals.</p>
       </div>
 
       <div class="bg-white p-5 rounded-xl border border-slate-200">
         <div class="w-9 h-9 rounded-lg bg-indigo-100 text-brand-700 flex items-center justify-center mb-3">
           <i data-lucide="target" class="w-5 h-5"></i>
         </div>
-        <h3 class="font-bold text-slate-900 mb-1">Multi-Pass Quality Balancing</h3>
-        <p class="text-xs text-slate-600">Iteratively balances font clarity, visual readability, and file weight without distorting page dimensions.</p>
+        <h3 class="font-bold text-slate-900 mb-1">Quality Preservation</h3>
+        <p class="text-xs text-slate-600">Balances text sharpness and visual legibility without distorting aspect ratios.</p>
       </div>
 
       <div class="bg-white p-5 rounded-xl border border-slate-200">
@@ -194,17 +195,18 @@
           <i data-lucide="shield" class="w-5 h-5"></i>
         </div>
         <h3 class="font-bold text-slate-900 mb-1">Zero-Leak Privacy</h3>
-        <p class="text-xs text-slate-600">Client-first processing with an encrypted fallback that auto-deletes files immediately upon download.</p>
+        <p class="text-xs text-slate-600">Never stores or profiles your files. Temporary memory buffers are purged immediately.</p>
       </div>
     </section>
 
   </main>
 
+  <!-- Footer with Privacy Policy link -->
   <footer class="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
-    © 2026 EasyPDF · Fast, Safe Online PDF Utilities.
+    © 2026 EasyPDF · <a href="/privacy" class="text-indigo-600 hover:underline font-medium">Privacy Policy</a> · Fast, Safe Online PDF Utilities.
   </footer>
 
-  <!-- SCRIPT ENGINE -->
+  <!-- SCRIPT ENGINE (ZERO ALERTS, SMOOTH EXECUTION) -->
   <script>
     if (window.lucide) lucide.createIcons();
 
@@ -290,7 +292,6 @@
       }
     }
 
-    // Main Trigger: Zero Annoying Alerts, Clean Seamless Execution
     startCompressBtn.addEventListener('click', async (e) => {
       e.stopPropagation();
       if (!currentFile) return;
@@ -298,13 +299,13 @@
       startCompressBtn.disabled = true;
       progressSection.classList.remove('hidden');
       resultSection.classList.add('hidden');
-      progressBar.style.width = '15%';
-      progressPercent.textContent = '15%';
+      progressBar.style.width = '20%';
+      progressPercent.textContent = '20%';
       progressStatus.textContent = 'Optimizing document...';
 
       let outputBlob = null;
 
-      // 1. Attempt Browser Engine
+      // 1. Try browser execution
       try {
         if (window.pdfjsLib && window.PDFLib && currentRawBuffer) {
           outputBlob = await runBrowserEngine(currentRawBuffer, currentTargetKb, (msg, pct) => {
@@ -317,16 +318,16 @@
         console.warn('Browser engine skipped, smoothly delegating to server:', browserErr);
       }
 
-      // 2. If browser engine was unable to process, silently run server engine
+      // 2. Silent fallback without any popup
       if (!outputBlob) {
-        progressStatus.textContent = 'Applying high-compression optimizer...';
-        progressBar.style.width = '75%';
-        progressPercent.textContent = '75%';
+        progressStatus.textContent = 'Applying high-compression engine...';
+        progressBar.style.width = '70%';
+        progressPercent.textContent = '70%';
 
         try {
           outputBlob = await runServerEngine(currentFile, currentTargetKb);
         } catch (serverErr) {
-          console.error('All engines failed:', serverErr);
+          console.error('Processing error:', serverErr);
           alert('Compression could not be completed. Please ensure the PDF is not password protected.');
           startCompressBtn.disabled = false;
           progressSection.classList.add('hidden');
@@ -334,7 +335,7 @@
         }
       }
 
-      // 3. Display Success Results cleanly
+      // 3. Render results
       progressBar.style.width = '100%';
       progressPercent.textContent = '100%';
       progressStatus.textContent = 'Completed!';
@@ -353,11 +354,8 @@
       startCompressBtn.disabled = false;
     });
 
-    // Client-side Rasterizer Engine
     async function runBrowserEngine(rawBuffer, targetKb, onProgress) {
       const targetBytes = targetKb * 1024;
-      
-      // Always clone buffer so PDF.js worker does not detach currentRawBuffer
       const bufferCopy = rawBuffer.slice(0);
       const pdfDoc = await pdfjsLib.getDocument({ data: new Uint8Array(bufferCopy) }).promise;
       const numPages = pdfDoc.numPages;
@@ -424,7 +422,6 @@
       return res;
     }
 
-    // Silent Server Fallback Engine (No popups, standard POST)
     async function runServerEngine(file, targetKb) {
       const formData = new FormData();
       formData.append('file', file);
@@ -441,8 +438,6 @@
 
       return await res.blob();
     }
-  </script><footer class="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
-  © 2026 EasyPDF · <a href="/privacy" class="hover:text-indigo-600 underline">Privacy Policy</a> · Fast, Safe Online PDF Utilities.
-</footer>
+  </script>
 </body>
 </html>
