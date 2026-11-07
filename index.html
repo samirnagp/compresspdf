@@ -326,34 +326,29 @@
       progressBar.style.width = '0%';
       progressPercent.textContent = '0%';
 
+try {
+      const compressedBlob = await executeCompression(pdfDocProxy, currentTargetKb, (msg, pct) => {
+        progressStatus.textContent = msg;
+        progressBar.style.width = pct + '%';
+        progressPercent.textContent = Math.round(pct) + '%';
+      });
+
+      // Show result UI
+      showSuccessResult(compressedBlob);
+
+    } catch (err) {
+      console.warn('Switching seamlessly to secure server engine:', err);
+      progressStatus.textContent = "Processing via high-compression server...";
+      
+      // SILENT FALLBACK: No alert box!
       try {
-        const compressedBlob = await executeCompression(pdfDocProxy, currentTargetKb, (msg, pct) => {
-          progressStatus.textContent = msg;
-          progressBar.style.width = pct + '%';
-          progressPercent.textContent = Math.round(pct) + '%';
-        });
-
-        resOrigSize.textContent = formatBytes(currentFile.size);
-        resCompSize.textContent = formatBytes(compressedBlob.size);
-        
-        const savedPct = Math.max(0, Math.round((1 - compressedBlob.size / currentFile.size) * 100));
-        resSavedBadge.textContent = `-${savedPct}%`;
-
-        const blobUrl = URL.createObjectURL(compressedBlob);
-        downloadBtn.href = blobUrl;
-        downloadBtn.download = `compressed_${currentTargetKb}kb_${currentFile.name}`;
-
-        resultSection.classList.remove('hidden');
-        if (window.lucide) lucide.createIcons();
-      } catch (err) {
-  console.error('Compression error details:', err);
-  alert('Compression failed: ' + (err.message || err));
-}
-      } finally {
-        startCompressBtn.disabled = false;
+        await runServerSideFallback();
+      } catch (serverErr) {
+        alert('Compression failed. Please try a different or smaller file.');
       }
-    });
-
+    } finally {
+      startCompressBtn.disabled = false;
+    }
     // In-Browser Multi-Pass Engine (Rock-Solid Version)
 async function executeCompression(pdfDoc, targetKb, onProgress) {
   const targetBytes = targetKb * 1024;
