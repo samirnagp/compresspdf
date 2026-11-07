@@ -1,37 +1,50 @@
 import io
 import os
-from flask import Flask, render_template, request, send_file, jsonify
+import gc
+from flask import Flask, render_template, request, send_file, jsonify, send_from_directory
 from flask_cors import CORS
 from PIL import Image
 import pypdf
 
 app = Flask(__name__)
 CORS(app)
-app.config['MAX_CONTENT_LENGTH'] = 35 * 1024 * 1024  # 35 MB
+app.config['MAX_CONTENT_LENGTH'] = 30 * 1024 * 1024  # 30 MB max
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
+@app.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
+
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory('static', 'sitemap.xml', mimetype='application/xml')
+
+@app.route('/robots.txt')
+def robots():
+    return send_from_directory('static', 'robots.txt', mimetype='text/plain')
+
 @app.route('/health')
 def health():
-    return jsonify({"status": "healthy"})
+    return jsonify({"status": "healthy", "service": "EasyPDF Compressor"})
 
-def compress_with_pypdf(input_bytes):
-    """Safe pure-python PDF stream compressor."""
+def compress_pypdf_stream(input_bytes):
+    """Fast, zero-RAM pure Python compression for text and stream structures."""
     reader = pypdf.PdfReader(io.BytesIO(input_bytes))
     writer = pypdf.PdfWriter()
 
     for page in reader.pages:
-        page.compress_content_streams()  # FlateDecode compression on text/vectors
+        page.compress_content_streams()
         writer.add_page(page)
 
-    # Enable stream compression and clean up unused objects
-    writer.add_metadata(reader.metadata if reader.metadata else {})
-    
     out = io.BytesIO()
     writer.write(out)
+    del reader
+    gc.collect()
     return out.getvalue()
+
 @app.route('/api/compress', methods=['POST'])
 def compress_pdf_api():
     if 'file' not in request.files:
@@ -39,7 +52,7 @@ def compress_pdf_api():
 
     file = request.files['file']
     if not file.filename.lower().endswith('.pdf'):
-        return jsonify({"error": "File must be a PDF"}), 400
+        return jsonify({"error": "Uploaded file must be a PDF"}), 400
 
     target_kb = request.form.get('target_kb', type=int)
     if not target_kb or target_kb < 5:
@@ -47,9 +60,9 @@ def compress_pdf_api():
 
     target_bytes = target_kb * 1024
     input_bytes = file.read()
-    orig_size = len(input_bytes)
 
-    if orig_size <= target_bytes:
+    # If file is already smaller than target budget, return it directly
+    if len(input_bytes) <= target_bytes:
         return send_file(
             io.BytesIO(input_bytes),
             mimetype='application/pdf',
@@ -57,97 +70,86 @@ def compress_pdf_api():
             download_name=f"compressed_{file.filename}"
         )
 
-    # 1. Try Rasterization via pdf2image + Pillow
+    # 1. Try lightweight stream compression first
+    try:
+        light_compressed = compress_pypdf_stream(input_bytes)
+        if len(light_compressed) <= target_bytes or target_kb > 100:
+            return send_file(
+                io.BytesIO(light_compressed),
+                mimetype='application/pdf',
+                as_attachment=True,
+                download_name=f"compressed_{target_kb}kb_{file.filename}"
+            )
+    except Exception as e:
+        print(f"PyPDF stream attempt skipped: {e}")
+
+    # 2. Memory-safe page-by-page Pillow rasterization
     try:
         from pdf2image import convert_from_bytes
-        images = convert_from_bytes(input_bytes)
-        num_pages = len(images)
 
-        # Extreme budget rules (e.g. 10 KB)
         if target_kb <= 15:
-            max_dimension = 450
-            initial_quality = 20
-            mode = "L"  # Grayscale: critical to achieve < 10KB
+            max_dim = 420
+            quality = 20
+            color_mode = "L"  # Grayscale slashes byte weight
         elif target_kb <= 50:
-            max_dimension = 750
-            initial_quality = 35
-            mode = "RGB"
+            max_dim = 650
+            quality = 35
+            color_mode = "L"
         else:
-            max_dimension = 1100
-            initial_quality = 60
-            mode = "RGB"
+            max_dim = 950
+            quality = 55
+            color_mode = "RGB"
 
-        best_pdf_bytes = None
-        quality = initial_quality
-        scale = max_dimension
+        reader = pypdf.PdfReader(io.BytesIO(input_bytes))
+        total_pages = len(reader.pages)
+        del reader
 
-        for attempt in range(4):
-            compressed_page_images = []
-            for img in images:
-                cur_img = img.copy()
-                cur_img.thumbnail((scale, scale), Image.Resampling.LANCZOS)
-                
-                # Convert color mode
-                if mode == "L":
-                    cur_img = cur_img.convert("L")
-                elif cur_img.mode in ("RGBA", "P"):
-                    cur_img = cur_img.convert("RGB")
+        processed_images = []
 
-                compressed_page_images.append(cur_img)
+        # Process page-by-page to prevent exceeding 512MB RAM limits
+        for p in range(1, total_pages + 1):
+            single_page_img = convert_from_bytes(
+                input_bytes,
+                first_page=p,
+                last_page=p,
+                dpi=100
+            )[0]
 
-            out_buffer = io.BytesIO()
-            if compressed_page_images:
-                compressed_page_images[0].save(
-                    out_buffer,
-                    format='PDF',
-                    save_all=True,
-                    append_images=compressed_page_images[1:],
-                    quality=quality,
-                    optimize=True
-                )
+            single_page_img.thumbnail((max_dim, max_dim), Image.Resampling.BOX)
 
-            result_data = out_buffer.getvalue()
-            best_pdf_bytes = result_data
+            if color_mode == "L":
+                single_page_img = single_page_img.convert("L")
+            elif single_page_img.mode in ("RGBA", "P"):
+                single_page_img = single_page_img.convert("RGB")
 
-            if len(result_data) <= target_bytes:
-                break
+            processed_images.append(single_page_img)
 
-            # Squeeze further if still above limit
-            quality = max(10, int(quality * 0.65))
-            scale = max(300, int(scale * 0.70))
-            mode = "L"  # Fallback to grayscale on retry
+        out_stream = io.BytesIO()
+        processed_images[0].save(
+            out_stream,
+            format='PDF',
+            save_all=True,
+            append_images=processed_images[1:],
+            quality=quality,
+            optimize=True
+        )
 
+        del processed_images
+        del input_bytes
+        gc.collect()
+
+        out_stream.seek(0)
         return send_file(
-            io.BytesIO(best_pdf_bytes),
+            out_stream,
             mimetype='application/pdf',
             as_attachment=True,
             download_name=f"compressed_{target_kb}kb_{file.filename}"
         )
 
-    except Exception as img_err:
-        # 2. Poppler missing or failed: Fallback to pure-python pypdf
-        print(f"pdf2image fallback triggered: {img_err}")
-        try:
-            fallback_bytes = compress_with_pypdf(input_bytes)
-            return send_file(
-                io.BytesIO(fallback_bytes),
-                mimetype='application/pdf',
-                as_attachment=True,
-                download_name=f"compressed_{file.filename}"
-            )
-        except Exception as pypdf_err:
-            return jsonify({"error": f"Compression failed: {str(pypdf_err)}"}), 500
-            @app.route('/privacy')
-def privacy_page():
-    return render_template('privacy.html')
-
-@app.route('/sitemap.xml')
-def sitemap_file():
-    return send_file('sitemap.xml', mimetype='application/xml')
-
-@app.route('/robots.txt')
-def robots_file():
-    return send_file('robots.txt', mimetype='text/plain')
+    except Exception as err:
+        gc.collect()
+        print(f"Fallback raster error: {err}")
+        return jsonify({"error": f"Compression server constraint: {str(err)}"}), 500
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
