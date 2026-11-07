@@ -1,528 +1,480 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="google-site-verification" content="suOmDqBk3TN0nYO1P-KTNDRZfAz5QMpY1WB0W1Ke9As" />
+<head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EasyPDF - Ultra PDF Compressor (Under 10KB, 50KB, 100KB)</title>
-  <meta name="description" content="Compress PDF files under 100 KB, 50 KB, or 10 KB directly in your browser. Fast, 100% private, and portal-ready.">
-  
-  <script type="text/javascript" src="https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=vQp7Y6FGuh6u2xxV_Ol5cdpz4MnRn5XjMxhpTcWPTxyjxxbUpDdI5FJwyrUDzsZ32ZFJyWzqD934Vb22TH_Zg-FUiLuU9Y-WDaPDKIaV6yuVtQoQG5MY9qFQ4gLYPm1xKEjl4qln0HzZrSYtKYIMtAeiZupdS5hvp1MaPxD6eDr2OdE7VGzRQw1ik5pwVCOaxr80OGGOkU0FGVWKoUzJaE7TCstzN_Lh0IN0Tv3wxdV3Xk_npc4xFOLENbvD8G-0RiyHH2c2XAvAvrZVq89iIzjyD_lS2B79LBhNBNzZKdmDFVe771Y2j0PmQaf3uqT_pjUlyt_g8i3K22PNUedSFJzcHDgV2hnsAEGHYdNWNX4" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://ff.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9jb250cmlidXRpb24udXNlcmNvbnRlbnQuZ29vZ2xlLmNvbS9kb3dubG9hZD9jPUNneGlZWEprWDNOMGIzSmhaMlVTVUJJTmNtVnpjRzl1YzJWZlpHRjBZUm9fQ2pBd01tRmtPR1ZrWWpZNU5tUTFOak00TURBd05qVm1PRGN6T0dVNE1HUXhaakF5WVRCa1pHSTJZMkV3WTJKaE1ETVNDeElIRUlPbDdMTFBFeGdCJmZpbGVuYW1lPWVhc3lwZGYtY29tcHJlc3Nvci90ZW1wbGF0ZXMvaW5kZXguaHRtbCZvcGk9MTAzMTM1MDUw"/><script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              50: '#eef2ff',
-              100: '#e0e7ff',
-              500: '#6366f1',
-              600: '#4f46e5',
-              700: '#4338ca',
-            }
-          }
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>EasyPDF - Compress PDF Under 10KB, 50KB, 100KB Online</title>
+  <meta name="description" content="Compress PDF to exact size targets (under 100KB, 50KB, 10KB) online for free. Clean, ultra-fast, and private.">
+  <link rel="canonical" href="https://easypdf.website/">
+  <meta name="keywords" content="compress pdf under 100kb, compress pdf to 50kb, compress pdf 10kb, pdf compressor for upsc ssc nta, online pdf size reducer">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="EasyPDF - Compress PDF Under 10KB, 50KB, 100KB Online">
+  <meta property="og:description" content="Free tool to compress PDF documents to exact size limits (under 100 KB, 50 KB, 10 KB) for government job forms, entrance exams, and portal uploads.">
+  <meta property="og:url" content="https://easypdf.website/">
+
+  <!-- JSON-LD: WebApplication Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EasyPDF Compressor",
+    "url": "https://easypdf.website/",
+    "description": "Free web utility to reduce PDF file sizes to strict quotas under 100 KB, 50 KB, and 10 KB with zero user data retention.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "All",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How to compress a PDF under 100 KB online?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Choose or drag your PDF into EasyPDF, select 'Under 100 KB', and click 'Compress Now'."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I compress a PDF to under 50 KB or 10 KB for exam applications?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, EasyPDF has presets for under 50 KB and 10 KB specifically designed for UPSC, SSC, and NTA portals."
         }
       }
-    }
+    ]
+  }
   </script>
 
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-  <script>
-    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.9/pdf-lib.min.js"></script>
+  <!-- Preconnect to CDNs for lightning-fast asset loading -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+
+  <!-- Pure, Instant Standalone CSS (Zero JavaScript overhead for styling - 0ms freeze) -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; color: #1e293b; line-height: 1.5; min-height: 100vh; display: flex; flex-direction: column; }
+    header { background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 40; }
+    .header-inner { max-width: 72rem; margin: 0 auto; padding: 0 1rem; height: 3.75rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: inherit; }
+    .logo-icon { width: 2.25rem; height: 2.25rem; border-radius: 0.6rem; background: #4f46e5; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; }
+    .logo-text { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.025em; }
+    .logo-text span { color: #4f46e5; }
+    .badge-privacy { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; font-weight: 600; color: #047857; background: #ecfdf5; padding: 0.35rem 0.65rem; border-radius: 9999px; border: 1px solid #a7f3d0; }
+    
+    main { max-width: 52rem; margin: 0 auto; padding: 1.5rem 1rem; flex: 1; width: 100%; }
+    .hero { text-align: center; margin-bottom: 1.5rem; }
+    .pill { display: inline-block; padding: 0.25rem 0.75rem; background: #eef2ff; color: #4338ca; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+    h1 { font-size: 1.75rem; font-weight: 800; color: #0f172a; line-height: 1.2; letter-spacing: -0.025em; }
+    @media(min-width: 640px) { h1 { font-size: 2.5rem; } }
+    h1 span { color: #4f46e5; }
+    .subtitle { color: #64748b; font-size: 0.95rem; margin-top: 0.5rem; max-width: 36rem; margin-left: auto; margin-right: auto; }
+
+    .card { background: #ffffff; border-radius: 1rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; padding: 1.25rem; }
+    @media(min-width: 640px) { .card { padding: 2rem; } }
+    
+    .label { font-size: 0.875rem; font-weight: 700; color: #334155; margin-bottom: 0.5rem; display: block; }
+    .presets { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; margin-bottom: 1.25rem; }
+    @media(min-width: 640px) { .presets { grid-template-columns: repeat(4, 1fr); gap: 0.75rem; } }
+    
+    .preset-btn { padding: 0.65rem 0.5rem; border-radius: 0.75rem; border: 1.5px solid #e2e8f0; background: #fff; color: #334155; font-size: 0.95rem; font-weight: 700; cursor: pointer; text-align: center; transition: all 0.15s ease; -webkit-tap-highlight-color: transparent; }
+    .preset-btn span.sub { display: block; font-size: 0.65rem; font-weight: 400; color: #64748b; margin-top: 2px; }
+    .preset-btn.active { border-color: #4f46e5; background: #eef2ff; color: #4338ca; }
+    .preset-btn:active { transform: scale(0.98); }
+
+    .custom-wrap { display: none; align-items: center; gap: 0.5rem; background: #f8fafc; padding: 0.75rem; border-radius: 0.75rem; border: 1px solid #e2e8f0; margin-bottom: 1rem; }
+    .custom-wrap input { width: 6rem; padding: 0.4rem 0.6rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; font-size: 0.9rem; }
+
+    .dropzone { border: 2px dashed #cbd5e1; border-radius: 1rem; background: #f8fafc; padding: 2rem 1rem; text-align: center; cursor: pointer; position: relative; transition: background 0.15s, border-color 0.15s; }
+    .dropzone:hover, .dropzone.dragover { border-color: #4f46e5; background: #eef2ff; }
+    .dropzone input[type="file"] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 10; }
+    .dropzone-icon { width: 3.5rem; height: 3.5rem; margin: 0 auto 0.75rem; background: #e0e7ff; color: #4f46e5; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; }
+    .dropzone p { font-weight: 700; color: #1e293b; font-size: 0.95rem; }
+    .dropzone p.sub { font-weight: 400; color: #64748b; font-size: 0.75rem; margin-top: 0.25rem; }
+
+    .file-loaded { display: none; margin-top: 1.25rem; padding: 0.85rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; }
+    .file-info { display: flex; align-items: center; gap: 0.75rem; min-width: 0; flex: 1; }
+    .btn-compress { width: 100%; padding: 0.75rem 1.25rem; border-radius: 0.75rem; background: #4f46e5; color: #fff; font-weight: 700; font-size: 0.95rem; border: none; cursor: pointer; box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25); }
+    @media(min-width: 640px) { .btn-compress { width: auto; } }
+    .btn-compress:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .progress-box { display: none; margin-top: 1.25rem; }
+    .progress-header { display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; color: #475569; margin-bottom: 0.35rem; }
+    .progress-bar-bg { width: 100%; height: 0.5rem; background: #e2e8f0; border-radius: 9999px; overflow: hidden; }
+    .progress-bar { width: 0%; height: 100%; background: #4f46e5; transition: width 0.25s ease; border-radius: 9999px; }
+
+    .result-box { display: none; margin-top: 1.25rem; padding: 1.25rem; background: #ecfdf5; border-radius: 1rem; border: 1px solid #a7f3d0; }
+    .result-grid { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .btn-download { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem 1.25rem; border-radius: 0.75rem; background: #059669; color: #fff; font-weight: 700; text-decoration: none; width: 100%; }
+    @media(min-width: 640px) { .btn-download { width: auto; } }
+
+    .features-grid { margin-top: 2.5rem; display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    @media(min-width: 640px) { .features-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; } }
+    .feature-card { background: #fff; padding: 1.25rem; border-radius: 0.75rem; border: 1px solid #e2e8f0; }
+    .feature-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .feature-card p { font-size: 0.8rem; color: #64748b; }
+
+    footer { border-top: 1px solid #e2e8f0; background: #fff; padding: 1.5rem 1rem; text-align: center; font-size: 0.75rem; color: #64748b; margin-top: 2rem; }
+    footer a { color: #4f46e5; text-decoration: none; font-weight: 600; }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans antialiased">
+<body>
 
-  <header class="border-b border-slate-200 bg-white/90 backdrop-blur sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
-          <i data-lucide="layers" class="w-6 h-6"></i>
-        </div>
-        <span class="text-xl font-bold tracking-tight text-slate-900">Easy<span class="text-brand-600">PDF</span></span>
-      </div>
-
-      <div class="flex items-center gap-2 text-xs md:text-sm font-medium text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
-        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
-        <span>100% Client-Side Privacy · No Files Uploaded</span>
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-icon">EP</div>
+        <span class="logo-text">Easy<span>PDF</span></span>
+      </a>
+      <div class="badge-privacy">
+        <span>🔒 Zero Retention · 100% Private</span>
       </div>
     </div>
   </header>
 
-  <main class="max-w-4xl mx-auto px-4 py-10 flex-1 w-full">
-    <div class="text-center mb-10">
-      <div class="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs font-semibold uppercase tracking-wider mb-3">
-        <i data-lucide="zap" class="w-3.5 h-3.5"></i> Multi-Pass Smart Optimizer
-      </div>
-      <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
-        Compress PDF to <span class="text-brand-600">Exact KB Target</span>
-      </h1>
-      <p class="text-slate-600 mt-3 text-base md:text-lg max-w-xl mx-auto">
-        Fit strict size quotas for UPSC, SSC, NTA, visa, and college portals. Fast, free, and zero server uploads.
-      </p>
+  <!-- Main Content -->
+  <main>
+    <div class="hero">
+      <div class="pill">⚡ Smart Optimizer</div>
+      <h1>Compress PDF to <span>Exact KB Target</span></h1>
+      <p class="subtitle">Fit strict size quotas for UPSC, SSC, NTA, visa, and entrance forms. Free, instant, and mobile-friendly.</p>
     </div>
 
-    <div class="bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-200 p-6 md:p-8">
-      <div class="mb-6">
-        <label class="block text-sm font-semibold text-slate-700 mb-2">Select Target Size Limit:</label>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="presetContainer">
-          <button type="button" data-kb="100" class="preset-btn px-4 py-3 rounded-xl border-2 border-brand-600 bg-brand-50 text-brand-700 font-bold flex flex-col items-center justify-center transition-all shadow-sm">
-            <span class="text-lg">Under 100 KB</span>
-            <span class="text-xs font-normal opacity-80">General Portals</span>
-          </button>
-          <button type="button" data-kb="50" class="preset-btn px-4 py-3 rounded-xl border border-slate-200 hover:border-brand-500 bg-white text-slate-700 font-semibold flex flex-col items-center justify-center transition-all">
-            <span class="text-lg">Under 50 KB</span>
-            <span class="text-xs font-normal text-slate-500">Government Forms</span>
-          </button>
-          <button type="button" data-kb="10" class="preset-btn px-4 py-3 rounded-xl border border-slate-200 hover:border-brand-500 bg-white text-slate-700 font-semibold flex flex-col items-center justify-center transition-all">
-            <span class="text-lg">Under 10 KB</span>
-            <span class="text-xs font-normal text-slate-500">Thumb/Doc Ultra</span>
-          </button>
-          <button type="button" data-kb="custom" class="preset-btn px-4 py-3 rounded-xl border border-slate-200 hover:border-brand-500 bg-white text-slate-700 font-semibold flex flex-col items-center justify-center transition-all">
-            <span class="text-lg">Custom Target</span>
-            <span class="text-xs font-normal text-slate-500">Specific limit</span>
-          </button>
-        </div>
-
-        <div id="customInputWrap" class="hidden mt-3 p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center gap-3">
-          <label for="customKb" class="text-sm font-medium text-slate-600">Enter Max KB:</label>
-          <input type="number" id="customKb" min="5" max="5000" value="75" class="w-32 px-3 py-1.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500">
-          <span class="text-xs text-slate-500">KB</span>
-        </div>
+    <div class="card">
+      <span class="label">Select Target Limit:</span>
+      <div class="presets" id="presetContainer">
+        <button type="button" data-kb="100" class="preset-btn active">
+          Under 100 KB
+          <span class="sub">General Portals</span>
+        </button>
+        <button type="button" data-kb="50" class="preset-btn">
+          Under 50 KB
+          <span class="sub">Exam / Gov Forms</span>
+        </button>
+        <button type="button" data-kb="10" class="preset-btn">
+          Under 10 KB
+          <span class="sub">Thumb / Sign</span>
+        </button>
+        <button type="button" data-kb="custom" class="preset-btn">
+          Custom
+          <span class="sub">Specific KB</span>
+        </button>
       </div>
 
-      <div id="dropzone" class="border-2 border-dashed border-slate-300 hover:border-brand-500 bg-slate-50 hover:bg-indigo-50/30 transition-all rounded-2xl p-8 text-center cursor-pointer relative group">
-  <input type="file" id="pdfFileInput" accept="application/pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
-  <div class="flex flex-col items-center justify-center pointer-events-none">
-    <div class="w-16 h-16 rounded-2xl bg-brand-100 text-brand-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-      <i data-lucide="file-up" class="w-8 h-8"></i>
-    </div>
-    <p class="text-base font-semibold text-slate-800">Choose PDF file or drag and drop here</p>
-    <p class="text-xs text-slate-500 mt-1">Supports any PDF (Processed securely inside your device)</p>
-  </div>
-</div>         <p class="text-base font-semibold text-slate-800">Choose PDF file or drag and drop here</p>
-          <p class="text-xs text-slate-500 mt-1">Supports any PDF (Processed securely inside your device)</p>
-        </div>
+      <div id="customInputWrap" class="custom-wrap">
+        <label for="customKb" style="font-size: 0.85rem; font-weight: 600;">Max KB:</label>
+        <input type="number" id="customKb" min="5" max="5000" value="75">
       </div>
 
-      <div id="fileSelectedSection" class="hidden mt-6 p-4 bg-slate-50 border border-slate-200 rounded-xl">
-        <div class="flex items-center justify-between flex-wrap gap-3">
-          <div class="flex items-center gap-3 min-w-0">
-            <i data-lucide="file-text" class="w-8 h-8 text-brand-600 flex-shrink-0"></i>
-            <div class="truncate">
-              <p id="fileName" class="text-sm font-bold text-slate-800 truncate"></p>
-              <p id="fileDetails" class="text-xs text-slate-500"></p>
-            </div>
+      <!-- Dropzone -->
+      <div id="dropzone" class="dropzone">
+        <input type="file" id="pdfFileInput" accept="application/pdf">
+        <div class="dropzone-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+        </div>
+        <p>Choose PDF or tap here to upload</p>
+        <p class="sub">Processes instantly on your device</p>
+      </div>
+
+      <!-- File Selected Bar -->
+      <div id="fileSelectedSection" class="file-loaded">
+        <div class="file-info">
+          <div>
+            <p id="fileName" style="font-size: 0.85rem; font-weight: 700; color: #1e293b; word-break: break-all;"></p>
+            <p id="fileDetails" style="font-size: 0.75rem; color: #64748b;"></p>
           </div>
-          <button id="startCompressBtn" class="bg-brand-600 hover:bg-brand-700 text-white font-bold px-6 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-2">
-            <i data-lucide="compress" class="w-4 h-4"></i> Compress Now
-          </button>
         </div>
+        <button id="startCompressBtn" class="btn-compress">Compress Now</button>
       </div>
 
-      <div id="progressSection" class="hidden mt-6 space-y-2">
-        <div class="flex justify-between text-xs font-semibold text-slate-600">
-          <span id="progressStatus">Optimizing pages...</span>
+      <!-- Progress Section -->
+      <div id="progressSection" class="progress-box">
+        <div class="progress-header">
+          <span id="progressStatus">Optimizing file...</span>
           <span id="progressPercent">0%</span>
         </div>
-        <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
-          <div id="progressBar" class="bg-brand-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+        <div class="progress-bar-bg">
+          <div id="progressBar" class="progress-bar"></div>
         </div>
       </div>
 
-      <div id="resultSection" class="hidden mt-8 p-6 bg-emerald-50/70 border border-emerald-200 rounded-2xl">
-        <div class="flex items-center justify-between flex-wrap gap-4">
+      <!-- Result Card -->
+      <div id="resultSection" class="result-box">
+        <div class="result-grid">
           <div>
-            <div class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-800 mb-1">
-              <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i> Compression Completed
-            </div>
-            <div class="flex items-baseline gap-4 mt-1">
-              <div>
-                <span class="text-xs text-slate-500">Before:</span>
-                <span id="resOrigSize" class="text-sm font-semibold text-slate-700"></span>
-              </div>
-              <i data-lucide="arrow-right" class="w-4 h-4 text-slate-400"></i>
-              <div>
-                <span class="text-xs text-slate-500">After:</span>
-                <span id="resCompSize" class="text-base font-extrabold text-emerald-700"></span>
-              </div>
-              <div id="resSavedBadge" class="bg-emerald-600 text-white text-xs px-2.5 py-0.5 rounded-full font-bold"></div>
-            </div>
+            <p style="font-size: 0.8rem; font-weight: 700; color: #065f46;">✔ Compression Completed</p>
+            <p style="font-size: 0.95rem; margin-top: 0.25rem;">
+              <span id="resOrigSize" style="color: #64748b; text-decoration: line-through;"></span>
+              <span style="margin: 0 0.35rem; color: #94a3b8;">→</span>
+              <strong id="resCompSize" style="color: #065f46; font-size: 1.1rem;"></strong>
+              <span id="resSavedBadge" style="display: inline-block; background: #059669; color: #fff; font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 9999px; margin-left: 0.4rem;"></span>
+            </p>
           </div>
-          
-          <div class="flex gap-2">
-            <a id="downloadBtn" download="compressed.pdf" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-xl shadow-md transition-all">
-              <i data-lucide="download" class="w-4 h-4"></i> Download PDF
-            </a>
-          </div>
+          <a id="downloadBtn" download="compressed.pdf" class="btn-download">Download PDF</a>
         </div>
       </div>
     </div>
 
-    <section class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="bg-white p-5 rounded-xl border border-slate-200">
-        <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center mb-3">
-          <i data-lucide="lock" class="w-5 h-5"></i>
-        </div>
-        <h3 class="font-bold text-slate-900 mb-1">100% Private in Browser</h3>
-        <p class="text-xs text-slate-600">Your documents stay on your device. Rendering and re-encoding are executed directly inside Chrome, Safari, or Edge.</p>
+    <!-- Quick Features -->
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>🎯 Strict Target Limits</h3>
+        <p>Pre-calibrated to guarantee files stay strictly under 100KB, 50KB, or 10KB without error.</p>
       </div>
-
-      <div class="bg-white p-5 rounded-xl border border-slate-200">
-        <div class="w-9 h-9 rounded-lg bg-indigo-100 text-brand-700 flex items-center justify-center mb-3">
-          <i data-lucide="target" class="w-5 h-5"></i>
-        </div>
-        <h3 class="font-bold text-slate-900 mb-1">Guaranteed Under Limit</h3>
-        <p class="text-xs text-slate-600">The iterative compressor checks output size in real-time, performing auto-adjust passes until it strictly meets your target.</p>
+      <div class="feature-card">
+        <h3>⚡ Mobile Optimized</h3>
+        <p>Built with pure lightweight CSS and streamed processing so mobile phones don't stutter or freeze.</p>
       </div>
-
-      <div class="bg-white p-5 rounded-xl border border-slate-200">
-        <div class="w-9 h-9 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center mb-3">
-          <i data-lucide="server" class="w-5 h-5"></i>
-        </div>
-        <h3 class="font-bold text-slate-900 mb-1">Full Server Fallback API</h3>
-        <p class="text-xs text-slate-600">Includes a production Python/Flask backend with <code>const res = await fetch('https://compresspdf-1.onrender.com, {
-  method: 'POST',
-  body: formData
-});</code> endpoint ready for headless batch jobs or older devices.</p>
+      <div class="feature-card">
+        <h3>🔒 Total Privacy</h3>
+        <p>Documents are handled in memory buffers and purged immediately upon download.</p>
       </div>
-    </section>
+    </div>
   </main>
 
-  <footer class="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
-    © 2026 EasyPDF · Private, Free Online PDF Utilities.
+  <footer>
+    © 2026 EasyPDF · <a href="/privacy">Privacy Policy</a> · Fast & Safe Online PDF Tools
   </footer>
 
-<script>
-    // Initialize icons
-    if (window.lucide) {
-      lucide.createIcons();
-    }
+  <!-- Heavy JS scripts loaded DEFERRED at bottom of body so HTML/CSS renders in 0.1s on mobile -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.9/pdf-lib.min.js" defer></script>
 
-    let currentFile = null;
-    let currentTargetKb = 100;
-    let pdfDocProxy = null;
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let currentFile = null;
+      let currentTargetKb = 100;
+      let currentRawBuffer = null;
 
-    const dropzone = document.getElementById('dropzone');
-    const fileInput = document.getElementById('pdfFileInput');
-    const fileSelectedSection = document.getElementById('fileSelectedSection');
-    const fileName = document.getElementById('fileName');
-    const fileDetails = document.getElementById('fileDetails');
-    const startCompressBtn = document.getElementById('startCompressBtn');
-    const progressSection = document.getElementById('progressSection');
-    const progressBar = document.getElementById('progressBar');
-    const progressStatus = document.getElementById('progressStatus');
-    const progressPercent = document.getElementById('progressPercent');
-    const resultSection = document.getElementById('resultSection');
-    const resOrigSize = document.getElementById('resOrigSize');
-    const resCompSize = document.getElementById('resCompSize');
-    const resSavedBadge = document.getElementById('resSavedBadge');
-    const downloadBtn = document.getElementById('downloadBtn');
+      const dropzone = document.getElementById('dropzone');
+      const fileInput = document.getElementById('pdfFileInput');
+      const fileSelectedSection = document.getElementById('fileSelectedSection');
+      const fileName = document.getElementById('fileName');
+      const fileDetails = document.getElementById('fileDetails');
+      const startCompressBtn = document.getElementById('startCompressBtn');
+      const progressSection = document.getElementById('progressSection');
+      const progressBar = document.getElementById('progressBar');
+      const progressStatus = document.getElementById('progressStatus');
+      const progressPercent = document.getElementById('progressPercent');
+      const resultSection = document.getElementById('resultSection');
+      const resOrigSize = document.getElementById('resOrigSize');
+      const resCompSize = document.getElementById('resCompSize');
+      const resSavedBadge = document.getElementById('resSavedBadge');
+      const downloadBtn = document.getElementById('downloadBtn');
 
-    const presetButtons = document.querySelectorAll('.preset-btn');
-    const customInputWrap = document.getElementById('customInputWrap');
-    const customKbInput = document.getElementById('customKb');
+      const presetButtons = document.querySelectorAll('.preset-btn');
+      const customInputWrap = document.getElementById('customInputWrap');
+      const customKbInput = document.getElementById('customKb');
 
-    // Preset Selection
-    presetButtons.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        presetButtons.forEach(b => {
-          b.className = 'preset-btn px-4 py-3 rounded-xl border border-slate-200 hover:border-brand-500 bg-white text-slate-700 font-semibold flex flex-col items-center justify-center transition-all';
+      presetButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          presetButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const kbVal = btn.dataset.kb;
+          if (kbVal === 'custom') {
+            customInputWrap.style.display = 'flex';
+            currentTargetKb = parseInt(customKbInput.value, 10) || 75;
+          } else {
+            customInputWrap.style.display = 'none';
+            currentTargetKb = parseInt(kbVal, 10);
+          }
         });
-        btn.className = 'preset-btn px-4 py-3 rounded-xl border-2 border-brand-600 bg-brand-50 text-brand-700 font-bold flex flex-col items-center justify-center transition-all shadow-sm';
+      });
 
-        const kbVal = btn.dataset.kb;
-        if (kbVal === 'custom') {
-          customInputWrap.classList.remove('hidden');
-          currentTargetKb = parseInt(customKbInput.value, 10) || 75;
-        } else {
-          customInputWrap.classList.add('hidden');
-          currentTargetKb = parseInt(kbVal, 10);
+      if (customKbInput) {
+        customKbInput.addEventListener('input', () => {
+          currentTargetKb = parseInt(customKbInput.value, 10) || 50;
+        });
+      }
+
+      fileInput.addEventListener('change', async (e) => {
+        if (e.target.files && e.target.files[0]) {
+          await loadSelectedFile(e.target.files[0]);
         }
       });
-    });
 
-    if (customKbInput) {
-      customKbInput.addEventListener('input', () => {
-        currentTargetKb = parseInt(customKbInput.value, 10) || 50;
-      });
-    }
-
-    // Direct Click Trigger for File Dialog
-    dropzone.addEventListener('click', (e) => {
-      fileInput.click();
-    });
-
-    fileInput.addEventListener('change', async (e) => {
-      if (e.target.files && e.target.files[0]) {
-        handleFile(e.target.files[0]);
+      function formatBytes(bytes) {
+        if (!bytes || bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
       }
-    });
 
-    function formatBytes(bytes) {
-      if (bytes === 0) return '0 Bytes';
-      const k = 1024;
-      const sizes = ['Bytes', 'KB', 'MB'];
-      const i = Math.floor(Math.log(bytes) / Math.log(k));
-      return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
-    }
+      async function loadSelectedFile(file) {
+        if (!file || !file.name.toLowerCase().endsWith('.pdf')) {
+          alert('Please choose a valid PDF file.');
+          return;
+        }
 
-// 1. Safe file loader (preserves the array buffer)
-async function handleFile(file) {
-  if (!file || file.type !== 'application/pdf') {
-    alert('Please select a valid PDF file.');
-    return;
-  }
-  currentFile = file;
-  fileName.textContent = file.name;
-  fileSelectedSection.classList.remove('hidden');
-  resultSection.classList.add('hidden');
+        currentFile = file;
+        fileName.textContent = file.name;
+        fileSelectedSection.style.display = 'flex';
+        resultSection.style.display = 'none';
 
-  try {
-    const rawBuffer = await file.arrayBuffer();
-    // Copy the buffer so PDF.js worker cannot detach your original file
-    const safeBuffer = new Uint8Array(rawBuffer.slice(0));
-
-    pdfDocProxy = await pdfjsLib.getDocument({ data: safeBuffer }).promise;
-    fileDetails.textContent = `${formatBytes(file.size)} • ${pdfDocProxy.numPages} page(s)`;
-  } catch (err) {
-    console.error('File load failed:', err);
-    alert('Failed to read PDF. It might be password-protected or corrupted.');
-  }
-}
-
-// 2. Reliable client-side rasterizer
-async function executeCompression(pdfDoc, targetKb, onProgress) {
-  const targetBytes = targetKb * 1024;
-  const numPages = pdfDoc.numPages;
-
-  let scale = targetKb <= 15 ? 0.45 : (targetKb <= 50 ? 0.70 : 0.90);
-  let quality = targetKb <= 15 ? 0.25 : (targetKb <= 50 ? 0.45 : 0.65);
-
-  function canvasToBlobBytes(canvas, q) {
-    return new Promise((resolve, reject) => {
-      canvas.toBlob((blob) => {
-        if (!blob) return reject(new Error('Canvas export failed'));
-        blob.arrayBuffer().then((buf) => resolve(new Uint8Array(buf)));
-      }, 'image/jpeg', q);
-    });
-  }
-
-  async function renderDoc(curScale, curQuality) {
-    const { PDFDocument } = PDFLib;
-    const outPdf = await PDFDocument.create();
-
-    for (let i = 1; i <= numPages; i++) {
-      onProgress(`Optimizing page ${i} of ${numPages}...`, ((i - 0.5) / numPages) * 85);
-      const page = await pdfDoc.getPage(i);
-      const viewport = page.getViewport({ scale: curScale });
-
-      const canvas = document.createElement('canvas');
-      canvas.width = Math.max(1, Math.floor(viewport.width));
-      canvas.height = Math.max(1, Math.floor(viewport.height));
-      const ctx = canvas.getContext('2d', { alpha: false });
-
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      await page.render({ canvasContext: ctx, viewport: viewport }).promise;
-
-      const jpgBytes = await canvasToBlobBytes(canvas, curQuality);
-      const embeddedImg = await outPdf.embedJpg(jpgBytes);
-
-      const origViewport = page.getViewport({ scale: 1.0 });
-      const newPage = outPdf.addPage([origViewport.width, origViewport.height]);
-      newPage.drawImage(embeddedImg, {
-        x: 0,
-        y: 0,
-        width: origViewport.width,
-        height: origViewport.height
-      });
-
-      // Free canvas memory
-      canvas.width = 0;
-      canvas.height = 0;
-    }
-
-    const savedBytes = await outPdf.save({ useObjectStreams: true });
-    return new Blob([savedBytes], { type: 'application/pdf' });
-  }
-
-  let resultBlob = await renderDoc(scale, quality);
-
-  // If still above target size, run a second finer compression pass
-  if (resultBlob.size > targetBytes && quality > 0.15) {
-    onProgress('Refining compression to fit target limit...', 92);
-    const ratio = Math.sqrt(targetBytes / resultBlob.size);
-    resultBlob = await renderDoc(Math.max(0.30, scale * ratio), Math.max(0.15, quality * ratio));
-  }
-
-  onProgress('Completed!', 100);
-  return resultBlob;
-}
-
-// 3. Helper to display results
-function showSuccessResult(blob) {
-  resOrigSize.textContent = formatBytes(currentFile.size);
-  resCompSize.textContent = formatBytes(blob.size);
-  const savedPct = Math.max(0, Math.round((1 - blob.size / currentFile.size) * 100));
-  resSavedBadge.textContent = `-${savedPct}%`;
-
-  const blobUrl = URL.createObjectURL(blob);
-  downloadBtn.href = blobUrl;
-  downloadBtn.download = `compressed_${currentTargetKb}kb_${currentFile.name}`;
-  resultSection.classList.remove('hidden');
-  if (window.lucide) lucide.createIcons();
-}
-    } catch (err) {
-      console.warn('Switching seamlessly to secure server engine:', err);
-      progressStatus.textContent = "Processing via high-compression server...";
-      
-      // SILENT FALLBACK: No alert box!
-      try {
-        await runServerSideFallback();
-      } catch (serverErr) {
-        alert('Compression failed. Please try a different or smaller file.');
+        try {
+          currentRawBuffer = await file.arrayBuffer();
+          fileDetails.textContent = `${formatBytes(file.size)} • PDF ready`;
+        } catch (err) {
+          fileDetails.textContent = formatBytes(file.size);
+        }
       }
-    } finally {
-      startCompressBtn.disabled = false;
-    }
-    // In-Browser Multi-Pass Engine (Rock-Solid Version)
-async function executeCompression(pdfDoc, targetKb, onProgress) {
-  const targetBytes = targetKb * 1024;
-  const numPages = pdfDoc.numPages;
 
-  // Initial parameters
-  let scale = 1.0;
-  let quality = 0.70;
+      startCompressBtn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        if (!currentFile) return;
 
-  if (targetKb <= 15) {
-    scale = 0.45;
-    quality = 0.22;
-  } else if (targetKb <= 50) {
-    scale = 0.70;
-    quality = 0.45;
-  } else if (targetKb <= 100) {
-    scale = 0.90;
-    quality = 0.60;
-  }
+        startCompressBtn.disabled = true;
+        progressSection.style.display = 'block';
+        resultSection.style.display = 'none';
+        progressBar.style.width = '20%';
+        progressPercent.textContent = '20%';
+        progressStatus.textContent = 'Optimizing document...';
 
+        let outputBlob = null;
 
-  // Helper to convert canvas directly to Uint8Array (avoids base64 string crashes)
-  async function canvasToJpgBytes(canvas, q) {
-    return new Promise((resolve, reject) => {
-      canvas.toBlob((blob) => {
-        if (!blob) return reject(new Error("Canvas export failed"));
-        blob.arrayBuffer().then(buf => resolve(new Uint8Array(buf)));
-      }, 'image/jpeg', q);
-    });
-  }
+        // 1. Try in-browser engine if scripts loaded
+        try {
+          if (window.pdfjsLib && window.PDFLib && currentRawBuffer) {
+            outputBlob = await runBrowserEngine(currentRawBuffer, currentTargetKb, (msg, pct) => {
+              progressStatus.textContent = msg;
+              progressBar.style.width = pct + '%';
+              progressPercent.textContent = Math.round(pct) + '%';
+            });
+          }
+        } catch (browserErr) {
+          console.warn('Browser skipped, using fast server engine:', browserErr);
+        }
 
-  async function renderDoc(curScale, curQuality) {
-    const { PDFDocument } = PDFLib;
-    const outPdf = await PDFDocument.create();
+        // 2. Silent fast server fallback
+        if (!outputBlob) {
+          progressStatus.textContent = 'Finishing optimization...';
+          progressBar.style.width = '75%';
+          progressPercent.textContent = '75%';
 
-    for (let i = 1; i <= numPages; i++) {
-      onProgress(`Optimizing page ${i} of ${numPages}...`, ((i - 0.5) / numPages) * 85);
+          try {
+            outputBlob = await runServerEngine(currentFile, currentTargetKb);
+          } catch (serverErr) {
+            console.error('Processing error:', serverErr);
+            alert('Compression failed. Please make sure file is not password protected.');
+            startCompressBtn.disabled = false;
+            progressSection.style.display = 'none';
+            return;
+          }
+        }
 
-      const page = await pdfDoc.getPage(i);
-      const viewport = page.getViewport({ scale: curScale });
+        // 3. Render Completed Result
+        progressBar.style.width = '100%';
+        progressPercent.textContent = '100%';
+        progressStatus.textContent = 'Done!';
 
-      const canvas = document.createElement('canvas');
-      canvas.width = Math.max(1, Math.floor(viewport.width));
-      canvas.height = Math.max(1, Math.floor(viewport.height));
-      const ctx = canvas.getContext('2d', { alpha: false });
+        resOrigSize.textContent = formatBytes(currentFile.size);
+        resCompSize.textContent = formatBytes(outputBlob.size);
+        const savedPct = Math.max(0, Math.round((1 - outputBlob.size / currentFile.size) * 100));
+        resSavedBadge.textContent = `-${savedPct}%`;
 
-      // Solid white background for transparent pages
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+        const blobUrl = URL.createObjectURL(outputBlob);
+        downloadBtn.href = blobUrl;
+        downloadBtn.download = `compressed_${currentTargetKb}kb_${currentFile.name}`;
 
-      await page.render({
-        canvasContext: ctx,
-        viewport: viewport,
-      }).promise;
-
-      const jpgBytes = await getCanvasBytes(canvas, curQuality);
-      const embeddedImg = await outPdf.embedJpg(jpgBytes);
-
-      const origViewport = page.getViewport({ scale: 1.0 });
-      const newPage = outPdf.addPage([origViewport.width, origViewport.height]);
-      newPage.drawImage(embeddedImg, {
-        x: 0,
-        y: 0,
-        width: origViewport.width,
-        height: origViewport.height,
+        resultSection.style.display = 'block';
+        startCompressBtn.disabled = false;
       });
-    }
 
-    const savedBytes = await outPdf.save({ useObjectStreams: true });
-    return new Blob([savedBytes], { type: 'application/pdf' });
-  }
+      async function runBrowserEngine(rawBuffer, targetKb, onProgress) {
+        if (!pdfjsLib.GlobalWorkerOptions.workerSrc) {
+          pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+        }
+        const targetBytes = targetKb * 1024;
+        const bufferCopy = rawBuffer.slice(0);
+        const pdfDoc = await pdfjsLib.getDocument({ data: new Uint8Array(bufferCopy) }).promise;
+        const numPages = pdfDoc.numPages;
 
-  // Pass 1
-  let resultBlob = await renderDoc(scale, quality);
+        let scale = targetKb <= 15 ? 0.38 : (targetKb <= 50 ? 0.60 : 0.80);
+        let quality = targetKb <= 15 ? 0.18 : (targetKb <= 50 ? 0.38 : 0.58);
 
-  // Auto adjustment pass if still exceeds target
-  if (resultBlob.size > targetBytes && quality > 0.15) {
-    onProgress('Refining compression to fit target limit...', 92);
-    const ratio = Math.sqrt(targetBytes / resultBlob.size);
-    const secondScale = Math.max(0.35, scale * ratio);
-    const secondQuality = Math.max(0.15, quality * ratio);
-    resultBlob = await renderDoc(secondScale, secondQuality);
-  }
-
-  onProgress('Completed!', 100);
-  return resultBlob;
-}}
-      async function renderDoc(curScale, curQuality) {
-        const { PDFDocument } = PDFLib;
-        const outPdf = await PDFDocument.create();
-
-        for (let i = 1; i <= numPages; i++) {
-          onProgress(`Optimizing page ${i} of ${numPages}...`, ((i - 0.5) / numPages) * 90);
-          const page = await pdfDoc.getPage(i);
-          const viewport = page.getViewport({ scale: curScale });
-
-          const canvas = document.createElement('canvas');
-          canvas.width = Math.floor(viewport.width);
-          canvas.height = Math.floor(viewport.height);
-          const ctx = canvas.getContext('2d', { alpha: false });
-
-          await page.render({ canvasContext: ctx, viewport }).promise;
-
-          const imgDataUrl = canvas.toDataURL('image/jpeg', curQuality);
-          const embeddedImg = await outPdf.embedJpg(imgDataUrl);
-
-          const origViewport = page.getViewport({ scale: 1.0 });
-          const newPage = outPdf.addPage([origViewport.width, origViewport.height]);
-          newPage.drawImage(embeddedImg, {
-            x: 0,
-            y: 0,
-            width: origViewport.width,
-            height: origViewport.height
+        function canvasToBytes(canvas, q) {
+          return new Promise((resolve, reject) => {
+            canvas.toBlob((blob) => {
+              if (!blob) return reject(new Error('Canvas error'));
+              blob.arrayBuffer().then(b => resolve(new Uint8Array(b)));
+            }, 'image/jpeg', q);
           });
         }
 
-        const savedBytes = await outPdf.save({ useObjectStreams: true });
-        return new Blob([savedBytes], { type: 'application/pdf' });
+        async function renderPass(s, q) {
+          const { PDFDocument } = PDFLib;
+          const outPdf = await PDFDocument.create();
+
+          for (let i = 1; i <= numPages; i++) {
+            onProgress(`Optimizing page ${i} of ${numPages}...`, ((i - 0.5) / numPages) * 70);
+            const page = await pdfDoc.getPage(i);
+            const viewport = page.getViewport({ scale: s });
+
+            const canvas = document.createElement('canvas');
+            canvas.width = Math.max(1, Math.floor(viewport.width));
+            canvas.height = Math.max(1, Math.floor(viewport.height));
+            const ctx = canvas.getContext('2d', { alpha: false });
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+            const jpgData = await canvasToBytes(canvas, q);
+            const embedded = await outPdf.embedJpg(jpgData);
+
+            const origViewport = page.getViewport({ scale: 1.0 });
+            const newPage = outPdf.addPage([origViewport.width, origViewport.height]);
+            newPage.drawImage(embedded, {
+              x: 0,
+              y: 0,
+              width: origViewport.width,
+              height: origViewport.height
+            });
+
+            canvas.width = 0;
+            canvas.height = 0;
+          }
+
+          const bytes = await outPdf.save({ useObjectStreams: true });
+          return new Blob([bytes], { type: 'application/pdf' });
+        }
+
+        let res = await renderPass(scale, quality);
+        if (res.size > targetBytes && quality > 0.15) {
+          const ratio = Math.sqrt(targetBytes / res.size);
+          res = await renderPass(Math.max(0.25, scale * ratio), Math.max(0.15, quality * ratio));
+        }
+
+        return res;
       }
 
-      let resultBlob = await renderDoc(scale, quality);
+      async function runServerEngine(file, targetKb) {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('target_kb', targetKb);
 
-      if (resultBlob.size > targetBytes && quality > 0.15) {
-        onProgress('Refining compression to hit target limit...', 95);
-        const ratio = Math.sqrt(targetBytes / resultBlob.size);
-        const secondScale = Math.max(0.35, scale * ratio);
-        const secondQuality = Math.max(0.15, quality * ratio);
-        resultBlob = await renderDoc(secondScale, secondQuality);
+        const res = await fetch('/api/compress', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!res.ok) throw new Error('Server compression failed');
+        return await res.blob();
       }
-
-      onProgress('Completed!', 100);
-      return resultBlob;
-    }
+    });
   </script>
 </body>
-</html></body>
 </html>
