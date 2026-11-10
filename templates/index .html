@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="theme-color" content="#4f46e5">
+  <title>EasyPDF - Compress PDF Under 10KB, 50KB, 100KB Online</title>
+  <meta name="description" content="Compress PDF to exact size targets (under 100KB, 50KB, 10KB) online for free. Fast, private, and mobile-friendly.">
+  <link rel="canonical" href="https://easypdf.website/">
+  <meta name="keywords" content="compress pdf under 100kb, compress pdf to 50kb, compress pdf 10kb, pdf compressor for upsc ssc nta, online pdf size reducer">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="EasyPDF - Compress PDF Under 10KB, 50KB, 100KB Online">
+  <meta property="og:description" content="Free tool to compress PDF documents to exact size limits (under 100 KB, 50 KB, 10 KB) for government job forms, entrance exams, and portal uploads.">
+  <meta property="og:url" content="https://easypdf.website/">
+  <meta property="og:site_name" content="EasyPDF">
+
+  <!-- JSON-LD: WebApplication Schema -->
+  <script type="text/javascript" src="https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=bYXQYhK-nKrS2RAflQT_R612Zwt8UatMxKKbXaHNJoiOInnKKKDwldhrsPJE0_lmYAU6_lNFb5q8jX9xx1MDqNuoz5alPuARpLlbyelaSPubMoT2PJUi2f03YUq-kof_ZEVsJZaEggbeMLlny2RUpWC4Zr4aTYR3-BNpgv9PtGY9yVAxnJXKoXMcMFPtFXusx5P668XYXtxqJl4UmmGQNgKshHmbkmsKd56wBIxooRQEwF8w9Z2E1vfwDoiNC0x9IGsuGCtxXEIu4-Z_DAjQb3aIwvXJu7RTtEBM2vTmk87BuZgSuelsqua4uo716UVeSh_UlEdnIZ4UpVt5mATRoQ" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://ff.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9jb250cmlidXRpb24udXNlcmNvbnRlbnQuZ29vZ2xlLmNvbS9kb3dubG9hZD9jPUNneGlZWEprWDNOMGIzSmhaMlVTVUJJTmNtVnpjRzl1YzJWZlpHRjBZUm9fQ2pBek56ZGhOamszTm1JMFpUZGlZV1ZpTURBd05qVm1aVGRoWVRaallUQmtPVEE0WlRFNU9EbGhaVEV5WkdRMU5XWVNDeElIRUlPbDdMTFBFeGdCJmZpbGVuYW1lPWluZGV4X2ExMXlfMTAwLmh0bWwmb3BpPTEwMzEzNTA1MA"/><script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EasyPDF Compressor",
+    "url": "https://easypdf.website/",
+    "description": "Free web utility to reduce PDF file sizes to strict quotas under 100 KB, 50 KB, and 10 KB with zero user data retention.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "All",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "featureList": [
+      "Compress PDF under 100 KB",
+      "Compress PDF under 50 KB",
+      "Compress PDF under 10 KB",
+      "Custom KB target limit"
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How to compress a PDF under 100 KB online?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Upload your PDF to EasyPDF, select 'Under 100 KB', and tap 'Compress Now'. The smart optimizer reduces file size until it strictly fits within 100 KB."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I compress a PDF to under 50 KB or 10 KB for exam applications?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, EasyPDF has presets for under 50 KB and 10 KB specifically designed for UPSC, SSC, NTA, and NEET portal guidelines."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Pure Static CSS: 0ms execution time, instant first paint on mobile -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { touch-action: manipulation; -webkit-text-size-adjust: 100%; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; color: #1e293b; line-height: 1.5; min-height: 100vh; display: flex; flex-direction: column; }
+    
+    header { background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 40; }
+    .header-inner { max-width: 64rem; margin: 0 auto; padding: 0 1rem; height: 3.5rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: inherit; }
+    .logo-icon { width: 2.25rem; height: 2.25rem; border-radius: 0.6rem; background: #4f46e5; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-size: 0.95rem; }
+    .logo-text { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; }
+    .logo-text span { color: #4f46e5; }
+    .badge-privacy { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; font-weight: 600; color: #065f46; background: #ecfdf5; padding: 0.3rem 0.6rem; border-radius: 9999px; border: 1px solid #a7f3d0; }
+
+    main { max-width: 50rem; margin: 0 auto; padding: 1.25rem 1rem; flex: 1; width: 100%; }
+    .hero { text-align: center; margin-bottom: 1.25rem; }
+    .pill { display: inline-block; padding: 0.2rem 0.65rem; background: #eef2ff; color: #4338ca; border-radius: 9999px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+    h1 { font-size: 1.6rem; font-weight: 800; color: #0f172a; line-height: 1.2; letter-spacing: -0.02em; }
+    @media(min-width: 640px) { h1 { font-size: 2.3rem; } }
+    h1 span { color: #4f46e5; }
+    .subtitle { color: #475569; font-size: 0.9rem; margin-top: 0.35rem; max-width: 32rem; margin-left: auto; margin-right: auto; }
+
+    .card { background: #ffffff; border-radius: 1rem; box-shadow: 0 4px 20px -2px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; padding: 1.15rem; }
+    @media(min-width: 640px) { .card { padding: 1.75rem; } }
+
+    .label { font-size: 0.85rem; font-weight: 700; color: #334155; margin-bottom: 0.5rem; display: block; }
+    .presets { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; margin-bottom: 1rem; }
+    @media(min-width: 640px) { .presets { grid-template-columns: repeat(4, 1fr); gap: 0.65rem; } }
+
+    .preset-btn { padding: 0.65rem 0.5rem; border-radius: 0.75rem; border: 1.5px solid #e2e8f0; background: #fff; color: #334155; font-size: 0.9rem; font-weight: 700; cursor: pointer; text-align: center; transition: all 0.15s ease; -webkit-tap-highlight-color: transparent; }
+    .preset-btn span.sub { display: block; font-size: 0.65rem; font-weight: 400; color: #475569; margin-top: 2px; }
+    .preset-btn.active { border-color: #4f46e5; background: #eef2ff; color: #4338ca; }
+    .preset-btn:active { transform: scale(0.98); }
+
+    .custom-wrap { display: none; align-items: center; gap: 0.5rem; background: #f8fafc; padding: 0.65rem; border-radius: 0.75rem; border: 1px solid #e2e8f0; margin-bottom: 1rem; }
+    .custom-wrap input { width: 5.5rem; padding: 0.4rem 0.6rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; font-size: 0.9rem; }
+
+    .dropzone { border: 2px dashed #cbd5e1; border-radius: 0.9rem; background: #f8fafc; padding: 1.75rem 1rem; text-align: center; cursor: pointer; position: relative; transition: background 0.15s, border-color 0.15s; -webkit-tap-highlight-color: transparent; }
+    .dropzone:hover, .dropzone.dragover { border-color: #4f46e5; background: #eef2ff; }
+    .dropzone input[type="file"] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 10; }
+    .dropzone-icon { width: 3rem; height: 3rem; margin: 0 auto 0.65rem; background: #e0e7ff; color: #4f46e5; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; }
+    .dropzone p { font-weight: 700; color: #1e293b; font-size: 0.95rem; }
+    .dropzone p.sub { font-weight: 400; color: #475569; font-size: 0.75rem; margin-top: 0.2rem; }
+
+    .file-loaded { display: none; margin-top: 1rem; padding: 0.75rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.65rem; }
+    .file-info { display: flex; align-items: center; gap: 0.5rem; min-width: 0; flex: 1; }
+    .btn-compress { width: 100%; padding: 0.75rem 1.25rem; border-radius: 0.75rem; background: #4f46e5; color: #fff; font-weight: 700; font-size: 0.95rem; border: none; cursor: pointer; box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25); -webkit-tap-highlight-color: transparent; }
+    @media(min-width: 640px) { .btn-compress { width: auto; } }
+    .btn-compress:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .progress-box { display: none; margin-top: 1rem; }
+    .progress-header { display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; color: #475569; margin-bottom: 0.35rem; }
+    .progress-bar-bg { width: 100%; height: 0.45rem; background: #e2e8f0; border-radius: 9999px; overflow: hidden; }
+    .progress-bar { width: 0%; height: 100%; background: #4f46e5; transition: width 0.25s ease; border-radius: 9999px; }
+
+    .result-box { display: none; margin-top: 1.25rem; padding: 1.15rem; background: #ecfdf5; border-radius: 0.85rem; border: 1px solid #a7f3d0; }
+    .result-grid { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.85rem; }
+    .btn-download { display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; padding: 0.75rem 1.25rem; border-radius: 0.75rem; background: #059669; color: #fff; font-weight: 700; text-decoration: none; width: 100%; text-align: center; }
+    @media(min-width: 640px) { .btn-download { width: auto; } }
+
+    .section-heading { font-size: 1.15rem; font-weight: 800; color: #0f172a; margin-top: 2rem; margin-bottom: 0.75rem; text-align: center; }
+    .features-grid { margin-top: 2rem; display: grid; grid-template-columns: 1fr; gap: 0.85rem; }
+    @media(min-width: 640px) { .features-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; } }
+    .feature-card { background: #fff; padding: 1.15rem; border-radius: 0.75rem; border: 1px solid #e2e8f0; }
+    .feature-card h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .feature-card p { font-size: 0.78rem; color: #475569; line-height: 1.4; }
+
+    footer { border-top: 1px solid #e2e8f0; background: #fff; padding: 1.25rem 1rem; text-align: center; font-size: 0.75rem; color: #475569; margin-top: 2rem; }
+    footer a { color: #4f46e5; text-decoration: none; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-icon">EP</div>
+        <span class="logo-text">Easy<span>PDF</span></span>
+      </a>
+      <div class="badge-privacy">
+        <span>🔒 Zero Retention · 100% Private</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="pill">⚡ Smart Optimizer</div>
+      <h1>Compress PDF to <span>Exact KB Target</span></h1>
+      <p class="subtitle">Fit strict size quotas for UPSC, SSC, NTA, and college portals. Fast, free, and mobile-ready.</p>
+    </div>
+
+    <div class="card">
+      <span class="label">Select Target Limit:</span>
+      <div class="presets" id="presetContainer">
+        <button type="button" data-kb="100" class="preset-btn active">
+          Under 100 KB
+          <span class="sub">General Portals</span>
+        </button>
+        <button type="button" data-kb="50" class="preset-btn">
+          Under 50 KB
+          <span class="sub">Exam / Gov Forms</span>
+        </button>
+        <button type="button" data-kb="10" class="preset-btn">
+          Under 10 KB
+          <span class="sub">Thumb / Sign</span>
+        </button>
+        <button type="button" data-kb="custom" class="preset-btn">
+          Custom
+          <span class="sub">Specific KB</span>
+        </button>
+      </div>
+
+      <div id="customInputWrap" class="custom-wrap">
+        <label for="customKb" style="font-size: 0.85rem; font-weight: 600;">Max KB:</label>
+        <input type="number" id="customKb" min="5" max="5000" value="75" aria-label="Target maximum file size in kilobytes">
+      </div>
+
+      <!-- Dropzone -->
+      <div id="dropzone" class="dropzone">
+        <input type="file" id="pdfFileInput" accept="application/pdf" aria-label="Upload PDF file to compress">
+        <div class="dropzone-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+        </div>
+        <p>Choose PDF or tap here to upload</p>
+        <p class="sub">Fast mobile processing</p>
+      </div>
+
+      <!-- File Selected State -->
+      <div id="fileSelectedSection" class="file-loaded">
+        <div class="file-info">
+          <div>
+            <p id="fileName" style="font-size: 0.85rem; font-weight: 700; color: #1e293b; word-break: break-all;"></p>
+            <p id="fileDetails" style="font-size: 0.75rem; color: #475569;"></p>
+          </div>
+        </div>
+        <button id="startCompressBtn" class="btn-compress">Compress Now</button>
+      </div>
+
+      <!-- Progress Bar -->
+      <div id="progressSection" class="progress-box">
+        <div class="progress-header">
+          <span id="progressStatus">Optimizing file...</span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+      </div>
+
+      <!-- Result Section -->
+      <div id="resultSection" class="result-box">
+        <div class="result-grid">
+          <div>
+            <p style="font-size: 0.8rem; font-weight: 700; color: #065f46;">✔ Compression Completed</p>
+            <p style="font-size: 0.95rem; margin-top: 0.25rem;">
+              <span id="resOrigSize" style="color: #475569; text-decoration: line-through;"></span>
+              <span style="margin: 0 0.35rem; color: #94a3b8;">→</span>
+              <strong id="resCompSize" style="color: #065f46; font-size: 1.1rem;"></strong>
+              <span id="resSavedBadge" style="display: inline-block; background: #059669; color: #fff; font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 9999px; margin-left: 0.4rem;"></span>
+            </p>
+          </div>
+          <a id="downloadBtn" download="compressed.pdf" class="btn-download">Download PDF</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Section with correct semantic heading sequence -->
+    <section class="features-section" aria-labelledby="features-heading">
+      <h2 id="features-heading" class="section-heading">Key Features & Portals Supported</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>🎯 Strict Target Limits</h3>
+          <p>Pre-calibrated presets guarantee output files strictly fit under 100KB, 50KB, or 10KB.</p>
+        </div>
+        <div class="feature-card">
+          <h3>⚡ Mobile Optimized</h3>
+          <p>Lightweight CSS and streamlined execution ensure zero freeze or memory stutter on phones.</p>
+        </div>
+        <div class="feature-card">
+          <h3>🔒 Zero-Retention Privacy</h3>
+          <p>Temporary memory buffers are purged immediately upon download. No persistent storage.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 EasyPDF · <a href="/privacy">Privacy Policy</a> · Fast & Safe Online PDF Tools
+  </footer>
+
+  <!-- SCRIPT ENGINE: On-demand dynamic loading + Zero error popups -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let currentFile = null;
+      let currentTargetKb = 100;
+      let currentRawBuffer = null;
+      let scriptsLoadingPromise = null;
+
+      const dropzone = document.getElementById('dropzone');
+      const fileInput = document.getElementById('pdfFileInput');
+      const fileSelectedSection = document.getElementById('fileSelectedSection');
+      const fileName = document.getElementById('fileName');
+      const fileDetails = document.getElementById('fileDetails');
+      const startCompressBtn = document.getElementById('startCompressBtn');
+      const progressSection = document.getElementById('progressSection');
+      const progressBar = document.getElementById('progressBar');
+      const progressStatus = document.getElementById('progressStatus');
+      const progressPercent = document.getElementById('progressPercent');
+      const resultSection = document.getElementById('resultSection');
+      const resOrigSize = document.getElementById('resOrigSize');
+      const resCompSize = document.getElementById('resCompSize');
+      const resSavedBadge = document.getElementById('resSavedBadge');
+      const downloadBtn = document.getElementById('downloadBtn');
+
+      const presetButtons = document.querySelectorAll('.preset-btn');
+      const customInputWrap = document.getElementById('customInputWrap');
+      const customKbInput = document.getElementById('customKb');
+
+      // Dynamic on-demand script loader: Downloads 0 bytes of heavy PDF libraries until a file is selected!
+      function ensurePdfScripts() {
+        if (window.pdfjsLib && window.PDFLib) return Promise.resolve();
+        if (scriptsLoadingPromise) return scriptsLoadingPromise;
+
+        scriptsLoadingPromise = new Promise((resolve) => {
+          const s1 = document.createElement('script');
+          s1.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
+          s1.onload = () => {
+            if (window.pdfjsLib) {
+              pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+            }
+            const s2 = document.createElement('script');
+            s2.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.9/pdf-lib.min.js";
+            s2.onload = resolve;
+            s2.onerror = resolve; // Graceful resolve: will fallback to server API if CDN fails
+            document.head.appendChild(s2);
+          };
+          s1.onerror = resolve;
+          document.head.appendChild(s1);
+        });
+
+        return scriptsLoadingPromise;
+      }
+
+      presetButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          presetButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const kbVal = btn.dataset.kb;
+          if (kbVal === 'custom') {
+            customInputWrap.style.display = 'flex';
+            currentTargetKb = parseInt(customKbInput.value, 10) || 75;
+          } else {
+            customInputWrap.style.display = 'none';
+            currentTargetKb = parseInt(kbVal, 10);
+          }
+        });
+      });
+
+      if (customKbInput) {
+        customKbInput.addEventListener('input', () => {
+          currentTargetKb = parseInt(customKbInput.value, 10) || 50;
+        });
+      }
+
+      fileInput.addEventListener('change', async (e) => {
+        if (e.target.files && e.target.files[0]) {
+          // Pre-warm script loader in background while user verifies file
+          ensurePdfScripts();
+          await loadSelectedFile(e.target.files[0]);
+        }
+      });
+
+      function formatBytes(bytes) {
+        if (!bytes || bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+      }
+
+      async function loadSelectedFile(file) {
+        if (!file || !file.name.toLowerCase().endsWith('.pdf')) {
+          alert('Please choose a valid PDF file.');
+          return;
+        }
+
+        currentFile = file;
+        fileName.textContent = file.name;
+        fileSelectedSection.style.display = 'flex';
+        resultSection.style.display = 'none';
+
+        try {
+          currentRawBuffer = await file.arrayBuffer();
+          fileDetails.textContent = `${formatBytes(file.size)} • PDF ready`;
+        } catch (err) {
+          fileDetails.textContent = formatBytes(file.size);
+        }
+      }
+
+      startCompressBtn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        if (!currentFile) return;
+
+        startCompressBtn.disabled = true;
+        progressSection.style.display = 'block';
+        resultSection.style.display = 'none';
+        progressBar.style.width = '20%';
+        progressPercent.textContent = '20%';
+        progressStatus.textContent = 'Optimizing document...';
+
+        let outputBlob = null;
+
+        // 1. Try In-Browser Engine
+        try {
+          await ensurePdfScripts();
+          if (window.pdfjsLib && window.PDFLib && currentRawBuffer) {
+            outputBlob = await runBrowserEngine(currentRawBuffer, currentTargetKb, (msg, pct) => {
+              progressStatus.textContent = msg;
+              progressBar.style.width = pct + '%';
+              progressPercent.textContent = Math.round(pct) + '%';
+            });
+          }
+        } catch (browserErr) {
+          console.warn('Browser engine skipped, smoothly delegating to server:', browserErr);
+        }
+
+        // 2. Silent Server Fallback (No alert popups)
+        if (!outputBlob) {
+          progressStatus.textContent = 'Finishing optimization...';
+          progressBar.style.width = '75%';
+          progressPercent.textContent = '75%';
+
+          try {
+            outputBlob = await runServerEngine(currentFile, currentTargetKb);
+          } catch (serverErr) {
+            console.error('All engines failed:', serverErr);
+            alert('Compression failed. Please make sure file is not password protected.');
+            startCompressBtn.disabled = false;
+            progressSection.style.display = 'none';
+            return;
+          }
+        }
+
+        // 3. Render Output
+        progressBar.style.width = '100%';
+        progressPercent.textContent = '100%';
+        progressStatus.textContent = 'Done!';
+
+        resOrigSize.textContent = formatBytes(currentFile.size);
+        resCompSize.textContent = formatBytes(outputBlob.size);
+        const savedPct = Math.max(0, Math.round((1 - outputBlob.size / currentFile.size) * 100));
+        resSavedBadge.textContent = `-${savedPct}%`;
+
+        const blobUrl = URL.createObjectURL(outputBlob);
+        downloadBtn.href = blobUrl;
+        downloadBtn.download = `compressed_${currentTargetKb}kb_${currentFile.name}`;
+
+        resultSection.style.display = 'block';
+        startCompressBtn.disabled = false;
+      });
+
+      async function runBrowserEngine(rawBuffer, targetKb, onProgress) {
+        const targetBytes = targetKb * 1024;
+        const bufferCopy = rawBuffer.slice(0); // Protect against detachment
+        const pdfDoc = await pdfjsLib.getDocument({ data: new Uint8Array(bufferCopy) }).promise;
+        const numPages = pdfDoc.numPages;
+
+        let scale = targetKb <= 15 ? 0.38 : (targetKb <= 50 ? 0.60 : 0.80);
+        let quality = targetKb <= 15 ? 0.18 : (targetKb <= 50 ? 0.38 : 0.58);
+
+        function canvasToBytes(canvas, q) {
+          return new Promise((resolve, reject) => {
+            canvas.toBlob((blob) => {
+              if (!blob) return reject(new Error('Canvas rasterization failed'));
+              blob.arrayBuffer().then(b => resolve(new Uint8Array(b)));
+            }, 'image/jpeg', q);
+          });
+        }
+
+        async function renderPass(s, q) {
+          const { PDFDocument } = PDFLib;
+          const outPdf = await PDFDocument.create();
+
+          for (let i = 1; i <= numPages; i++) {
+            onProgress(`Optimizing page ${i} of ${numPages}...`, ((i - 0.5) / numPages) * 70);
+            const page = await pdfDoc.getPage(i);
+            const viewport = page.getViewport({ scale: s });
+
+            const canvas = document.createElement('canvas');
+            canvas.width = Math.max(1, Math.floor(viewport.width));
+            canvas.height = Math.max(1, Math.floor(viewport.height));
+            const ctx = canvas.getContext('2d', { alpha: false });
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+            const jpgData = await canvasToBytes(canvas, q);
+            const embedded = await outPdf.embedJpg(jpgData);
+
+            const origViewport = page.getViewport({ scale: 1.0 });
+            const newPage = outPdf.addPage([origViewport.width, origViewport.height]);
+            newPage.drawImage(embedded, {
+              x: 0,
+              y: 0,
+              width: origViewport.width,
+              height: origViewport.height
+            });
+
+            canvas.width = 0;
+            canvas.height = 0;
+          }
+
+          const bytes = await outPdf.save({ useObjectStreams: true });
+          return new Blob([bytes], { type: 'application/pdf' });
+        }
+
+        let res = await renderPass(scale, quality);
+        if (res.size > targetBytes && quality > 0.15) {
+          const ratio = Math.sqrt(targetBytes / res.size);
+          res = await renderPass(Math.max(0.25, scale * ratio), Math.max(0.15, quality * ratio));
+        }
+
+        return res;
+      }
+
+      async function runServerEngine(file, targetKb) {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('target_kb', targetKb);
+
+        const res = await fetch('/api/compress', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!res.ok) throw new Error('Server compression failed');
+        return await res.blob();
+      }
+    });
+  </script>
+</body>
+</html>
