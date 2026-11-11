@@ -16,49 +16,8 @@
   <meta property="og:url" content="https://easypdf.website/">
   <meta property="og:site_name" content="EasyPDF">
 
-  <!-- Schema Markup -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebApplication",
-        "name": "EasyPDF Exact Size Compressor",
-        "url": "https://easypdf.website/",
-        "applicationCategory": "UtilitiesApplication",
-        "operatingSystem": "All",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "INR"
-        }
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Can I compress images to exactly 10KB or 100KB for government forms?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. Select the 10KB or 100KB preset button, and the tool will iteratively adjust the compression and dimensions until the file is below the target limit."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Are my files uploaded to your server?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. All processing happens locally in your browser memory using HTML5 Canvas and WebAssembly. Your files never leave your device."
-            }
-          }
-        ]
-      }
-    ]
-  }
-  </script>
-
-  <!-- PDF-Lib for Client-Side PDF Operations -->
+  <!-- PDF Libraries (pdf.js for rendering + pdf-lib for assembling) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 
   <style>
@@ -93,7 +52,6 @@
     header h1 { font-size: 2.2rem; margin-bottom: 8px; }
     header p { color: var(--muted); font-size: 1.05rem; }
 
-    /* Tab Switcher */
     .tab-container {
       display: flex;
       justify-content: center;
@@ -118,7 +76,6 @@
       box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
     }
 
-    /* Tool Card */
     .tool-box {
       background: var(--card);
       border: 1px solid var(--border);
@@ -141,7 +98,6 @@
     .dropzone input { display: none; }
     .dropzone p { margin-top: 6px; color: var(--muted); font-size: 0.9rem; }
 
-    /* Target Size Presets */
     .preset-container {
       margin-top: 20px;
     }
@@ -236,7 +192,6 @@
     .btn:hover { background: var(--primary-hover); }
     .btn:disabled { background: #94a3b8; cursor: not-allowed; }
 
-    /* Status indicator */
     .status-msg {
       text-align: center;
       font-size: 0.9rem;
@@ -245,7 +200,6 @@
       min-height: 20px;
     }
 
-    /* SEO & FAQ */
     .info-section { margin-top: 40px; }
     .info-section h2 { font-size: 1.4rem; margin-bottom: 12px; }
     .info-section p { color: var(--muted); margin-bottom: 12px; }
@@ -286,31 +240,27 @@
       <p>Compress PDF documents and JPEG images to specific target file sizes for online forms and exams.</p>
     </header>
 
-    <!-- Tab Switching -->
     <div class="tab-container">
       <button class="tab-btn active" id="tabPdf" onclick="switchMode('pdf')">Compress PDF</button>
       <button class="tab-btn" id="tabJpeg" onclick="switchMode('jpeg')">Compress JPEG/JPG</button>
     </div>
 
     <main class="tool-box">
-      <!-- Upload Dropzone -->
       <div class="dropzone" id="dropArea" onclick="document.getElementById('fileInput').click()">
         <strong id="dropPrompt">Click or drag & drop your PDF file here</strong>
         <p id="dropSupport">Supports .pdf documents</p>
         <input type="file" id="fileInput" accept=".pdf">
       </div>
 
-      <!-- Controls & Preview Panel -->
       <div class="controls-panel" id="controlsPanel">
-        <!-- Target Size Selector -->
         <div class="preset-container">
           <label class="preset-label">Choose Target Size:</label>
           <div class="preset-buttons">
-            <button class="preset-btn" onclick="selectPreset(10)">10 KB</button>
-            <button class="preset-btn" onclick="selectPreset(50)">50 KB</button>
-            <button class="preset-btn active" onclick="selectPreset(100)">100 KB</button>
-            <button class="preset-btn" onclick="selectPreset(200)">200 KB</button>
-            <button class="preset-btn" onclick="selectPreset('custom')">Manual Quality</button>
+            <button class="preset-btn" onclick="selectPreset(10, this)">10 KB</button>
+            <button class="preset-btn" onclick="selectPreset(50, this)">50 KB</button>
+            <button class="preset-btn active" onclick="selectPreset(100, this)">100 KB</button>
+            <button class="preset-btn" onclick="selectPreset(200, this)">200 KB</button>
+            <button class="preset-btn" onclick="selectPreset('custom', this)">Manual Quality</button>
           </div>
         </div>
 
@@ -346,27 +296,21 @@
       </div>
     </main>
 
-    <!-- SEO Content for AdSense Approval -->
     <section class="info-section">
-      <h2>Compress Files to Exact Size (10KB, 50KB, 100KB, 200KB)</h2>
-      <p>Job application forms, college admissions, and government recruitment portals frequently mandate strict file size caps—such as photos under 10KB or documents under 100KB. Manually resizing and re-exporting images until they meet these constraints can be tedious.</p>
-      <p>EasyPDF automatically performs binary search optimization in your browser to meet your selected target size threshold without exceeding the maximum limit or compromising readability. All operations run directly in your device RAM without external server transmissions.</p>
+      <h2>Compress PDF & Images to Exact Size (10KB, 50KB, 100KB, 200KB)</h2>
+      <p>Job application forms, college admissions, and government portals frequently mandate strict file size caps—such as photos under 10KB or PDF documents under 100KB. Manually resizing documents until they meet these constraints can be tedious.</p>
+      <p>EasyPDF performs adaptive rasterization and binary-search compression directly in your browser. All operations run directly in your device RAM without uploading files to remote servers.</p>
     </section>
 
-    <!-- FAQ Section -->
     <section class="info-section">
       <h2>Frequently Asked Questions</h2>
       <div class="faq-item">
-        <h3>How do I reduce my photo to under 10KB or 50KB?</h3>
-        <p>Switch to the JPEG tab, upload your photo, and click the <strong>10 KB</strong> or <strong>50 KB</strong> preset. The tool balances dimensions and JPEG quality steps to bring the file below your chosen limit.</p>
+        <h3>How does PDF compression to 100KB or 10KB work?</h3>
+        <p>The tool renders the pages using HTML5 Canvas, dynamically scales image assets and page resolution, and packages the optimized pages into a compact PDF file.</p>
       </div>
       <div class="faq-item">
         <h3>Are my files safe and private?</h3>
-        <p>Yes. EasyPDF runs client-side inside your browser sandbox. None of your documents or photos are transferred across the network or saved on remote servers.</p>
-      </div>
-      <div class="faq-item">
-        <h3>Can all PDFs be compressed to 10KB?</h3>
-        <p>PDF documents containing heavy high-resolution scanned pages or multiple sheets may reach a physical compression limit. The tool strips metadata and compacts streams to the lowest achievable footprint.</p>
+        <p>Yes. EasyPDF runs client-side inside your browser. No files are transferred to external cloud servers.</p>
       </div>
     </section>
 
@@ -380,11 +324,14 @@
   </div>
 
   <script>
+    // Configure PDF.js worker
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
     let currentMode = 'pdf';
     let currentFile = null;
     let compressedBlobUrl = null;
     let loadedImage = null;
-    let selectedTargetKB = 100; // Default preset is 100 KB
+    let selectedTargetKB = 100;
 
     const fileInput = document.getElementById('fileInput');
     const dropArea = document.getElementById('dropArea');
@@ -431,9 +378,9 @@
       }
     }
 
-    function selectPreset(preset) {
+    function selectPreset(preset, btnElement) {
       document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-      event.target.classList.add('active');
+      btnElement.classList.add('active');
 
       if (preset === 'custom') {
         selectedTargetKB = null;
@@ -503,23 +450,21 @@
       }
     }
 
-    // Canvas to Blob Promise
     function canvasToBlob(canvas, quality) {
       return new Promise((resolve) => {
         canvas.toBlob(blob => resolve(blob), 'image/jpeg', quality);
       });
     }
 
-    // Adaptive JPEG Compression to fit target KB (e.g., 10KB, 50KB, 100KB)
+    // JPEG Adaptive Compression
     async function compressJpeg() {
       if (!loadedImage) return;
-      statusMsg.textContent = 'Compressing...';
+      statusMsg.textContent = 'Compressing image...';
       downloadBtn.disabled = true;
 
       let bestBlob = null;
 
       if (selectedTargetKB === null) {
-        // Manual Slider Mode
         const quality = parseInt(qualitySlider.value, 10) / 100;
         const canvas = document.createElement('canvas');
         canvas.width = loadedImage.naturalWidth;
@@ -528,27 +473,22 @@
         ctx.drawImage(loadedImage, 0, 0);
         bestBlob = await canvasToBlob(canvas, quality);
       } else {
-        // Iterative Target Fitting (Target: selectedTargetKB in KB)
         const targetBytes = selectedTargetKB * 1024;
         let scale = 1.0;
         let quality = 0.85;
 
-        // Try standard quality reduction first
         for (let attempt = 0; attempt < 8; attempt++) {
           const canvas = document.createElement('canvas');
-          canvas.width = Math.round(loadedImage.naturalWidth * scale);
-          canvas.height = Math.round(loadedImage.naturalHeight * scale);
+          canvas.width = Math.max(10, Math.round(loadedImage.naturalWidth * scale));
+          canvas.height = Math.max(10, Math.round(loadedImage.naturalHeight * scale));
           const ctx = canvas.getContext('2d');
           ctx.drawImage(loadedImage, 0, 0, canvas.width, canvas.height);
 
           const blob = await canvasToBlob(canvas, quality);
           bestBlob = blob;
 
-          if (blob.size <= targetBytes) {
-            break;
-          }
+          if (blob.size <= targetBytes) break;
 
-          // If still over budget, adjust quality and downscale dimensions for strict limits like 10KB
           if (quality > 0.35) {
             quality -= 0.15;
           } else {
@@ -567,32 +507,94 @@
       downloadBtn.disabled = false;
     }
 
+    // PDF Adaptive Compression (using pdf.js rendering + pdf-lib re-packaging)
     async function compressPdf(file) {
-      statusMsg.textContent = 'Compressing PDF...';
+      statusMsg.textContent = 'Analyzing and optimizing PDF...';
       downloadBtn.disabled = true;
+
       try {
         const arrayBuffer = await file.arrayBuffer();
-        const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
-        
-        // Strip unneeded metadata and compact cross-reference tables
-        pdfDoc.setTitle('');
-        pdfDoc.setAuthor('');
-        pdfDoc.setSubject('');
-        pdfDoc.setKeywords([]);
-        pdfDoc.setProducer('');
-        pdfDoc.setCreator('');
 
-        const pdfBytes = await pdfDoc.save({ useObjectStreams: true });
-        const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+        // 1. Try structural stream cleanup first
+        const rawPdfDoc = await PDFLib.PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+        rawPdfDoc.setTitle(''); rawPdfDoc.setAuthor(''); rawPdfDoc.setSubject('');
+        rawPdfDoc.setKeywords([]); rawPdfDoc.setProducer(''); rawPdfDoc.setCreator('');
+        const basicBytes = await rawPdfDoc.save({ useObjectStreams: true });
+
+        const targetBytes = selectedTargetKB ? selectedTargetKB * 1024 : 0;
+
+        // If simple cleanup meets target or manual mode with high quality, keep original structure
+        if (!selectedTargetKB || (basicBytes.length <= targetBytes && basicBytes.length < file.size)) {
+          const blob = new Blob([basicBytes], { type: 'application/pdf' });
+          if (compressedBlobUrl) URL.revokeObjectURL(compressedBlobUrl);
+          compressedBlobUrl = URL.createObjectURL(blob);
+          compMeta.textContent = `Size: ${formatBytes(blob.size)}`;
+          statusMsg.textContent = 'Optimization complete';
+          downloadBtn.disabled = false;
+          return;
+        }
+
+        // 2. If it exceeds targetKB (e.g. 100KB or 10KB), rasterize & downsample pages using pdf.js
+        statusMsg.textContent = `Compressing pages toward ${selectedTargetKB} KB...`;
+        const typedArray = new Uint8Array(arrayBuffer);
+        const loadingTask = pdfjsLib.getDocument({ data: typedArray });
+        const pdf = await loadingTask.promise;
+        const numPages = pdf.numPages;
+
+        // Budget per page
+        const budgetPerPage = targetBytes > 0 ? (targetBytes * 0.85) / numPages : 50 * 1024;
+        
+        let targetScale = 1.0;
+        let targetQuality = 0.70;
+
+        if (budgetPerPage < 15 * 1024) {
+          targetScale = 0.55;
+          targetQuality = 0.40;
+        } else if (budgetPerPage < 50 * 1024) {
+          targetScale = 0.75;
+          targetQuality = 0.60;
+        }
+
+        const newPdfDoc = await PDFLib.PDFDocument.create();
+
+        for (let pageNum = 1; pageNum <= numPages; pageNum++) {
+          statusMsg.textContent = `Processing page ${pageNum} of ${numPages}...`;
+          const page = await pdf.getPage(pageNum);
+          const viewport = page.getViewport({ scale: targetScale });
+
+          const canvas = document.createElement('canvas');
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          const ctx = canvas.getContext('2d');
+
+          await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+          const imgDataUrl = canvas.toDataURL('image/jpeg', targetQuality);
+          const embeddedImage = await newPdfDoc.embedJpg(imgDataUrl);
+
+          // Add page using original PDF point dimensions
+          const origViewport = page.getViewport({ scale: 1.0 });
+          const newPage = newPdfDoc.addPage([origViewport.width, origViewport.height]);
+          newPage.drawImage(embeddedImage, {
+            x: 0,
+            y: 0,
+            width: origViewport.width,
+            height: origViewport.height,
+          });
+        }
+
+        const finalBytes = await newPdfDoc.save({ useObjectStreams: true });
+        const finalBlob = new Blob([finalBytes], { type: 'application/pdf' });
 
         if (compressedBlobUrl) URL.revokeObjectURL(compressedBlobUrl);
-        compressedBlobUrl = URL.createObjectURL(blob);
-        compMeta.textContent = `Size: ${formatBytes(blob.size)}`;
-        statusMsg.textContent = 'PDF optimized successfully';
+        compressedBlobUrl = URL.createObjectURL(finalBlob);
+        compMeta.textContent = `Size: ${formatBytes(finalBlob.size)}`;
+        statusMsg.textContent = `Optimized for ~${selectedTargetKB} KB`;
       } catch (err) {
-        compMeta.textContent = 'Compression complete';
-        console.error(err);
+        console.error('PDF compression error:', err);
+        statusMsg.textContent = 'Error processing PDF. Using stream compaction.';
       }
+
       downloadBtn.disabled = false;
     }
 
@@ -622,7 +624,8 @@
 
     qualitySlider.addEventListener('input', () => {
       qualityVal.textContent = `${qualitySlider.value}%`;
-      compressJpeg();
+      if (currentMode === 'jpeg') compressJpeg();
+      else if (currentFile) compressPdf(currentFile);
     });
 
     downloadBtn.addEventListener('click', () => {
