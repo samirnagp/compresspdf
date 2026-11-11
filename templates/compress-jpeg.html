@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <title>Compress JPEG Online Free - Reduce JPG File Size Securely | EasyPDF</title>
+  <meta name="description" content="Compress JPEG images online for free without uploading to any server. Reduce JPG image file sizes with custom quality control fast and 100% privately.">
+  <meta name="keywords" content="compress jpeg, reduce jpg size, image compressor online, compress image without losing quality, free jpeg optimizer, secure image compression">
+  <link rel="canonical" href="https://easypdf.website/compress-jpeg">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Compress JPEG Online Free - EasyPDF">
+  <meta property="og:description" content="Easily reduce JPEG file size in seconds. 100% private and client-side processing.">
+  <meta property="og:url" content="https://easypdf.website/compress-jpeg">
+  <meta property="og:site_name" content="EasyPDF">
+
+  <!-- Structured Data: WebApplication & FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "EasyPDF JPEG Compressor",
+        "url": "https://easypdf.website/compress-jpeg",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript. Requires HTML5.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "INR"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Are my images uploaded to your server?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. All compression is performed entirely inside your web browser using HTML5 Canvas. Your files never leave your device."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Will compressing my JPEG reduce its quality noticeably?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A compression setting between 70% and 80% usually slashes file size by up to 60-75% without noticeable loss in visible image quality."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is there a limit on how many JPEGs I can compress?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Because the processing uses your local system hardware, you can compress as many files as you like without daily quotas or sign-ups."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+
+    header { text-align: center; margin-bottom: 30px; }
+    header h1 { font-size: 2rem; margin-bottom: 8px; color: var(--text); }
+    header p { color: var(--text-muted); font-size: 1.05rem; }
+
+    .tool-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      margin-bottom: 40px;
+    }
+
+    .dropzone {
+      border: 2px dashed #93c5fd;
+      background: #eff6ff;
+      border-radius: var(--radius);
+      padding: 40px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .dropzone:hover { background: #dbeafe; border-color: var(--primary); }
+    .dropzone input { display: none; }
+    .dropzone p { margin-top: 8px; color: var(--text-muted); font-size: 0.95rem; }
+
+    .controls { margin-top: 25px; display: none; }
+    .control-group { margin-bottom: 20px; }
+    .control-label { display: flex; justify-content: space-between; font-weight: 600; margin-bottom: 8px; }
+    input[type="range"] { width: 100%; accent-color: var(--primary); height: 6px; }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 25px;
+    }
+    .preview-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      background: #fafafa;
+    }
+    .preview-box img { max-width: 100%; max-height: 220px; object-fit: contain; border-radius: 6px; }
+    .preview-box .meta { margin-top: 10px; font-size: 0.9rem; font-weight: 500; }
+
+    .btn {
+      display: inline-block;
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 600;
+      padding: 14px 20px;
+      border-radius: 8px;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      margin-top: 20px;
+      font-size: 1rem;
+    }
+    .btn:hover { background: var(--primary-hover); }
+
+    .content-section { margin-top: 40px; }
+    .content-section h2 { font-size: 1.5rem; margin-bottom: 16px; color: var(--text); }
+    .content-section p { margin-bottom: 14px; color: var(--text-muted); }
+
+    .faq-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-bottom: 12px;
+    }
+    .faq-item h3 { font-size: 1.1rem; margin-bottom: 6px; }
+    .faq-item p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0; }
+
+    .privacy-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    footer a { color: var(--primary); text-decoration: none; margin: 0 10px; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 640px) {
+      .preview-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="privacy-badge">🔒 100% Client-Side • Files Never Leave Your Device</div>
+      <h1>Compress JPEG Image Online</h1>
+      <p>Reduce JPG image sizes with custom quality balance without quality loss.</p>
+    </header>
+
+    <main class="tool-card">
+      <div class="dropzone" id="dropArea" onclick="document.getElementById('fileInput').click()">
+        <strong>Click or drag & drop JPEG/JPG file here</strong>
+        <p>Supports .jpg and .jpeg formats</p>
+        <input type="file" id="fileInput" accept="image/jpeg, image/jpg">
+      </div>
+
+      <div class="controls" id="toolControls">
+        <div class="control-group">
+          <div class="control-label">
+            <span>Compression Quality</span>
+            <span id="qualityVal">75%</span>
+          </div>
+          <input type="range" id="qualitySlider" min="10" max="95" value="75">
+        </div>
+
+        <div class="preview-grid">
+          <div class="preview-box">
+            <strong>Original</strong>
+            <div style="margin-top: 10px;"><img id="originalPreview" alt="Original JPEG preview"></div>
+            <div class="meta" id="originalMeta">Size: -</div>
+          </div>
+          <div class="preview-box">
+            <strong>Compressed</strong>
+            <div style="margin-top: 10px;"><img id="compressedPreview" alt="Compressed JPEG preview"></div>
+            <div class="meta" id="compressedMeta">Size: -</div>
+          </div>
+        </div>
+
+        <button class="btn" id="downloadBtn">Download Compressed JPEG</button>
+      </div>
+    </main>
+
+    <!-- Additional Informational Content for AdSense Approval -->
+    <section class="content-section">
+      <h2>How to Compress JPG/JPEG Images Securely</h2>
+      <p>EasyPDF allows you to reduce JPEG file size directly within your browser window using HTML5 Canvas technology. When you select an image, your browser decodes the pixel data and re-encodes the image stream based on your chosen target quality factor. Because all processing executes locally inside memory, large photos are compressed without transmission lag, server bandwidth bottlenecks, or data interception risks.</p>
+      <p>Adjust the quality slider to find your preferred balance between visual clarity and file size reduction. Standard photographs typically compress to 25–40% of their original file weight with no perceptible blur or artifacting.</p>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="content-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <h3>Are my images uploaded to your servers?</h3>
+        <p>No. EasyPDF performs all processing locally inside your web browser using HTML5 Canvas. Your images are never transmitted across the network or stored anywhere.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How much can I reduce my JPEG file size?</h3>
+        <p>Most JPEG photographs can be compressed by 40% to 75% at a quality setting of 70–80% without visible degradation on typical mobile and desktop screens.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Is there any file limit or cost?</h3>
+        <p>The tool is 100% free with no account registration or file limits required.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026 EasyPDF. All rights reserved.</p>
+      <p style="margin-top: 6px;">
+        <a href="/">Home</a> • 
+        <a href="/privacy">Privacy Policy</a>
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    const dropArea = document.getElementById('dropArea');
+    const fileInput = document.getElementById('fileInput');
+    const toolControls = document.getElementById('toolControls');
+    const qualitySlider = document.getElementById('qualitySlider');
+    const qualityVal = document.getElementById('qualityVal');
+    const originalPreview = document.getElementById('originalPreview');
+    const compressedPreview = document.getElementById('compressedPreview');
+    const originalMeta = document.getElementById('originalMeta');
+    const compressedMeta = document.getElementById('compressedMeta');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    let loadedImage = null;
+    let originalFileName = 'image.jpg';
+    let compressedBlobUrl = null;
+
+    function formatBytes(bytes) {
+      if (!bytes || bytes === 0) return '0 B';
+      const k = 1024;
+      const sizes = ['B', 'KB', 'MB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function processCompression() {
+      if (!loadedImage) return;
+
+      const quality = parseInt(qualitySlider.value, 10) / 100;
+      const canvas = document.createElement('canvas');
+      canvas.width = loadedImage.naturalWidth;
+      canvas.height = loadedImage.naturalHeight;
+
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(loadedImage, 0, 0);
+
+      canvas.toBlob((blob) => {
+        if (!blob) return;
+
+        if (compressedBlobUrl) URL.revokeObjectURL(compressedBlobUrl);
+        compressedBlobUrl = URL.createObjectURL(blob);
+        compressedPreview.src = compressedBlobUrl;
+        compressedMeta.textContent = `Size: ${formatBytes(blob.size)}`;
+      }, 'image/jpeg', quality);
+    }
+
+    function handleFile(file) {
+      if (!file || !file.type.match(/image\/jpe?g/i)) {
+        alert('Please select a valid JPEG or JPG file.');
+        return;
+      }
+
+      originalFileName = file.name;
+      originalMeta.textContent = `Size: ${formatBytes(file.size)}`;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        originalPreview.src = e.target.result;
+        loadedImage = new Image();
+        loadedImage.onload = () => {
+          toolControls.style.display = 'block';
+          processCompression();
+        };
+        loadedImage.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Drag and Drop listeners
+    ['dragenter', 'dragover'].forEach(name => {
+      dropArea.addEventListener(name, (e) => {
+        e.preventDefault();
+        dropArea.style.background = '#dbeafe';
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(name => {
+      dropArea.addEventListener(name, (e) => {
+        e.preventDefault();
+        dropArea.style.background = '#eff6ff';
+      });
+    });
+
+    dropArea.addEventListener('drop', (e) => {
+      const files = e.dataTransfer.files;
+      if (files.length) handleFile(files[0]);
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files.length) handleFile(e.target.files[0]);
+    });
+
+    qualitySlider.addEventListener('input', () => {
+      qualityVal.textContent = `${qualitySlider.value}%`;
+      processCompression();
+    });
+
+    downloadBtn.addEventListener('click', () => {
+      if (!compressedBlobUrl) return;
+      const a = document.createElement('a');
+      a.href = compressedBlobUrl;
+      const dotIdx = originalFileName.lastIndexOf('.');
+      const baseName = dotIdx !== -1 ? originalFileName.substring(0, dotIdx) : originalFileName;
+      a.download = `${baseName}-compressed.jpg`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  </script>
+</body>
+</html>
