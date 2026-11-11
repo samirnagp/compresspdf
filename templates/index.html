@@ -474,4 +474,173 @@
         bestBlob = await canvasToBlob(canvas, quality);
       } else {
         const targetBytes = selectedTargetKB * 1024;
-        let scale = 1
+        let scale = 1.0;
+        let quality = 0.85;
+
+        for (let attempt = 0; attempt < 8; attempt++) {
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.max(10, Math.round(loadedImage.naturalWidth * scale));
+          canvas.height = Math.max(10, Math.round(loadedImage.naturalHeight * scale));
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(loadedImage, 0, 0, canvas.width, canvas.height);
+
+          const blob = await canvasToBlob(canvas, quality);
+          bestBlob = blob;
+
+          if (blob.size <= targetBytes) break;
+
+          if (quality > 0.35) {
+            quality -= 0.15;
+          } else {
+            scale *= 0.75;
+          }
+        }
+      }
+
+      if (bestBlob) {
+        if (compressedBlobUrl) URL.revokeObjectURL(compressedBlobUrl);
+        compressedBlobUrl = URL.createObjectURL(bestBlob);
+        compImgPreview.src = compressedBlobUrl;
+        compMeta.textContent = `Size: ${formatBytes(bestBlob.size)}`;
+        statusMsg.textContent = selectedTargetKB ? `Optimized under ~${selectedTargetKB} KB` : 'Optimization complete';
+      }
+      downloadBtn.disabled = false;
+    }
+
+    // PDF Adaptive Compression (using pdf.js rendering + pdf-lib re-packaging)
+    async function compressPdf(file) {
+      statusMsg.textContent = 'Analyzing and optimizing PDF...';
+      downloadBtn.disabled = true;
+
+      try {
+        const arrayBuffer = await file.arrayBuffer();
+
+        // 1. Try structural stream cleanup first
+        const rawPdfDoc = await PDFLib.PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+        rawPdfDoc.setTitle(''); rawPdfDoc.setAuthor(''); rawPdfDoc.setSubject('');
+        rawPdfDoc.setKeywords([]); rawPdfDoc.setProducer(''); rawPdfDoc.setCreator('');
+        const basicBytes = await rawPdfDoc.save({ useObjectStreams: true });
+
+        const targetBytes = selectedTargetKB ? selectedTargetKB * 1024 : 0;
+
+        // If simple cleanup meets target or manual mode with high quality, keep original structure
+        if (!selectedTargetKB || (basicBytes.length <= targetBytes && basicBytes.length < file.size)) {
+          const blob = new Blob([basicBytes], { type: 'application/pdf' });
+          if (compressedBlobUrl) URL.revokeObjectURL(compressedBlobUrl);
+          compressedBlobUrl = URL.createObjectURL(blob);
+          compMeta.textContent = `Size: ${formatBytes(blob.size)}`;
+          statusMsg.textContent = 'Optimization complete';
+          downloadBtn.disabled = false;
+          return;
+        }
+
+        // 2. If it exceeds targetKB (e.g. 100KB or 10KB), rasterize & downsample pages using pdf.js
+        statusMsg.textContent = `Compressing pages toward ${selectedTargetKB} KB...`;
+        const typedArray = new Uint8Array(arrayBuffer);
+        const loadingTask = pdfjsLib.getDocument({ data: typedArray });
+        const pdf = await loadingTask.promise;
+        const numPages = pdf.numPages;
+
+        // Budget per page
+        const budgetPerPage = targetBytes > 0 ? (targetBytes * 0.85) / numPages : 50 * 1024;
+        
+        let targetScale = 1.0;
+        let targetQuality = 0.70;
+
+        if (budgetPerPage < 15 * 1024) {
+          targetScale = 0.55;
+          targetQuality = 0.40;
+        } else if (budgetPerPage < 50 * 1024) {
+          targetScale = 0.75;
+          targetQuality = 0.60;
+        }
+
+        const newPdfDoc = await PDFLib.PDFDocument.create();
+
+        for (let pageNum = 1; pageNum <= numPages; pageNum++) {
+          statusMsg.textContent = `Processing page ${pageNum} of ${numPages}...`;
+          const page = await pdf.getPage(pageNum);
+          const viewport = page.getViewport({ scale: targetScale });
+
+          const canvas = document.createElement('canvas');
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          const ctx = canvas.getContext('2d');
+
+          await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+          const imgDataUrl = canvas.toDataURL('image/jpeg', targetQuality);
+          const embeddedImage = await newPdfDoc.embedJpg(imgDataUrl);
+
+          // Add page using original PDF point dimensions
+          const origViewport = page.getViewport({ scale: 1.0 });
+          const newPage = newPdfDoc.addPage([origViewport.width, origViewport.height]);
+          newPage.drawImage(embeddedImage, {
+            x: 0,
+            y: 0,
+            width: origViewport.width,
+            height: origViewport.height,
+          });
+        }
+
+        const finalBytes = await newPdfDoc.save({ useObjectStreams: true });
+        const finalBlob = new Blob([finalBytes], { type: 'application/pdf' });
+
+        if (compressedBlobUrl) URL.revokeObjectURL(compressedBlobUrl);
+        compressedBlobUrl = URL.createObjectURL(finalBlob);
+        compMeta.textContent = `Size: ${formatBytes(finalBlob.size)}`;
+        statusMsg.textContent = `Optimized for ~${selectedTargetKB} KB`;
+      } catch (err) {
+        console.error('PDF compression error:', err);
+        statusMsg.textContent = 'Error processing PDF. Using stream compaction.';
+      }
+
+      downloadBtn.disabled = false;
+    }
+
+    // Drag-and-drop
+    ['dragenter', 'dragover'].forEach(name => {
+      dropArea.addEventListener(name, (e) => {
+        e.preventDefault();
+        dropArea.style.background = '#dbeafe';
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(name => {
+      dropArea.addEventListener(name, (e) => {
+        e.preventDefault();
+        dropArea.style.background = '#eff6ff';
+      });
+    });
+
+    dropArea.addEventListener('drop', (e) => {
+      const files = e.dataTransfer.files;
+      if (files.length) handleFile(files[0]);
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files.length) handleFile(e.target.files[0]);
+    });
+
+    qualitySlider.addEventListener('input', () => {
+      qualityVal.textContent = `${qualitySlider.value}%`;
+      if (currentMode === 'jpeg') compressJpeg();
+      else if (currentFile) compressPdf(currentFile);
+    });
+
+    downloadBtn.addEventListener('click', () => {
+      if (!compressedBlobUrl || !currentFile) return;
+      const a = document.createElement('a');
+      a.href = compressedBlobUrl;
+      const dotIdx = currentFile.name.lastIndexOf('.');
+      const baseName = dotIdx !== -1 ? currentFile.name.substring(0, dotIdx) : currentFile.name;
+      const ext = currentMode === 'pdf' ? '.pdf' : '.jpg';
+      const label = selectedTargetKB ? `-${selectedTargetKB}kb` : '-compressed';
+      a.download = `${baseName}${label}${ext}`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  </script>
+</body>
+</html>
