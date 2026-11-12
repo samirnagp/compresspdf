@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Homepage: Unified PDF & JPEG Compressor -->
   <url>
-    <loc>https://easypdf.website/</loc>
+    <loc>https://www.easypdf.website//</loc>
     <lastmod>2026-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -10,7 +10,7 @@
 
   <!-- JPEG Compression Landing Route -->
   <url>
-    <loc>https://easypdf.website/compress-jpeg</loc>
+    <loc>https://www.easypdf.website//compress-jpeg</loc>
     <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -18,25 +18,25 @@
 
   <!-- Legal & Trust Compliance Pages (Required for AdSense) -->
   <url>
-    <loc>https://easypdf.website/privacy</loc>
+    <loc>https://www.easypdf.website//privacy</loc>
     <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://easypdf.website/terms</loc>
+    <loc>https://www.easypdf.website//terms</loc>
     <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://easypdf.website/about</loc>
+    <loc>https://www.easypdf.website//about</loc>
     <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://easypdf.website/contact</loc>
+    <loc>https://www.easypdf.website//contact</loc>
     <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
