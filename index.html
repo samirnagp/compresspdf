@@ -54,7 +54,45 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 
-  <style>
+  <style>/* Navigation Header Bar */
+.site-header {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 0;
+  width: 100%;
+}
+.header-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Aligns brand group to the upper left */
+}
+
+/* Nav Logo Action Link */
+.logo-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.logo-link:hover {
+  opacity: 0.95;
+  transform: translateY(-0.5px);
+}
+.logo-icon {
+  display: block;
+  max-width: 100%;
+  height: auto; /* Scales proportionally */
+}
+
+/* Mobile responsive adapter */
+@media (max-width: 640px) {
+  .header-container {
+    justify-content: center; /* Gracefully center the unified brand block on handheld screens */
+  }
+}
     :root {
       --primary: #2563eb;
       --primary-hover: #1d4ed8;
