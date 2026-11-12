@@ -8,8 +8,12 @@
   <meta name="description" content="Free tool to compress PDF documents and JPEG images to exact target sizes like 10KB, 50KB, or 100KB online. 100% private client-side processing.">
   <meta name="keywords" content="compress pdf to 100kb, compress jpeg to 50kb, compress image to 10kb, reduce pdf size, jpg size reducer, online photo compressor">
   <link rel="canonical" href="https://www.easypdf.website/">
-<a href="/" class="logo-link" aria-label="EasyPDF Home">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 110" height="46" style="display:block; width:auto;">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232563eb'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>E</text></svg>">
+
+  <!-- DNS Prefetch for fast background library fetch -->
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Compress PDF & JPEG to Exact Size (10KB, 100KB) - EasyPDF">
@@ -18,7 +22,7 @@
   <meta property="og:site_name" content="EasyPDF">
 
   <!-- Schema Markup -->
-  <script type="text/javascript" src="https://ff.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=AqKmY3WWKkcHvF4VpJxeervhhW0GxMss6SyqmKhkrrqoVQ4vt9DHCNaE-26i2CLsQxvZns55sDaSSU-LgnfgFSn16tx8QUry5K5IJ9d4DJaaB9QZOXTfJ0cedAkC67xLiWhrCyDLNmB3rZ56SXCW3hXbW_GS7iPW3rZT9le_D4-ZSFUjnWl4DceDwg7VVNAzW82yjFil7T5_y4GZsvQ-MTO_otk2FRj3RQ6-wIR2_N9wGyJkN4BTM2uIYdG1N0fjRZqCwz_dgkSkb467wH47TqMdC1LfReGSFhH3_CF4N0xc7PzNJ75fSr7Fr9AdsSlM" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://ff.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9jb250cmlidXRpb24udXNlcmNvbnRlbnQuZ29vZ2xlLmNvbS9kb3dubG9hZD9jPUNneGlZWEprWDNOMGIzSmhaMlVTVUJJTmNtVnpjRzl1YzJWZlpHRjBZUm9fQ2pBd09UVmlZVGRoT0daaVpqZGhabU16TURBd05qWXdNVEEzT0RBek5ETTNPREEyTm1NMU1XSTFaakl4TkRSbE9EWVNDeElIRUlPbDdMTFBFeGdCJmZpbGVuYW1lPWluZGV4Lmh0bWwmb3BpPTEwMzEzNTA1MA"/><script type="application/ld+json">
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
@@ -59,10 +63,6 @@
   }
   </script>
 
-  <!-- PDF Libraries (pdf.js for rendering + pdf-lib for assembling) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-
   <style>
     :root {
       --primary: #2563eb;
@@ -78,17 +78,17 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background: var(--bg); color: var(--text); line-height: 1.6; }
 
-    /* Navigation Header Bar with Upper-Left Logo */
+    /* Navigation Header Bar */
     .site-header {
       background: var(--card);
       border-bottom: 1px solid var(--border);
-      padding: 12px 0;
+      padding: 10px 0;
       width: 100%;
     }
     .header-container {
       max-width: 900px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -97,171 +97,103 @@
       display: inline-flex;
       align-items: center;
       text-decoration: none;
-      transition: transform 0.15s ease, opacity 0.15s ease;
-    }
-    .logo-link:hover {
-      opacity: 0.92;
-      transform: translateY(-0.5px);
-    }
-    .logo-img {
-      display: block;
-      height: 48px;
-      width: auto;
     }
     .nav-links {
       display: flex;
-      gap: 18px;
+      gap: 14px;
     }
     .nav-links a {
       color: var(--muted);
       text-decoration: none;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       font-weight: 600;
-      transition: color 0.15s ease;
     }
-    .nav-links a:hover {
-      color: var(--primary);
-    }
+    .nav-links a:hover { color: var(--primary); }
 
-    .container { max-width: 900px; margin: 0 auto; padding: 32px 20px 40px; }
+    .container { max-width: 900px; margin: 0 auto; padding: 24px 16px 40px; }
 
-    .hero-header { text-align: center; margin-bottom: 28px; }
+    .hero-header { text-align: center; margin-bottom: 24px; }
     .badge {
       display: inline-flex;
       align-items: center;
       background: #ecfdf5;
       color: #065f46;
       border: 1px solid #a7f3d0;
-      padding: 6px 14px;
+      padding: 5px 12px;
       border-radius: 20px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
-    .hero-header h1 { font-size: 2.1rem; margin-bottom: 8px; }
-    .hero-header p { color: var(--muted); font-size: 1.05rem; }
+    .hero-header h1 { font-size: 1.85rem; margin-bottom: 6px; line-height: 1.25; }
+    .hero-header p { color: var(--muted); font-size: 0.98rem; }
 
     .tab-container {
       display: flex;
       justify-content: center;
       gap: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
     .tab-btn {
-      padding: 10px 24px;
+      padding: 10px 20px;
       border: 1px solid var(--border);
       background: var(--card);
       color: var(--muted);
       font-weight: 600;
       border-radius: 30px;
       cursor: pointer;
-      font-size: 0.95rem;
-      transition: all 0.2s ease;
+      font-size: 0.92rem;
     }
     .tab-btn.active {
       background: var(--primary);
       color: #fff;
       border-color: var(--primary);
-      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
     }
 
     .tool-box {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 30px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-      margin-bottom: 35px;
+      padding: 24px 18px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      margin-bottom: 30px;
     }
 
     .dropzone {
       border: 2px dashed #93c5fd;
       background: #eff6ff;
       border-radius: var(--radius);
-      padding: 40px 20px;
+      padding: 36px 16px;
       text-align: center;
       cursor: pointer;
-      transition: all 0.2s ease;
     }
     .dropzone:hover { background: #dbeafe; border-color: var(--primary); }
     .dropzone input { display: none; }
-    .dropzone p { margin-top: 6px; color: var(--muted); font-size: 0.9rem; }
+    .dropzone p { margin-top: 6px; color: var(--muted); font-size: 0.88rem; }
 
-    .preset-container {
-      margin-top: 20px;
-    }
-    .preset-label {
-      font-weight: 600;
-      font-size: 0.95rem;
-      margin-bottom: 10px;
-      display: block;
-    }
-    .preset-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+    .preset-container { margin-top: 18px; }
+    .preset-label { font-weight: 600; font-size: 0.92rem; margin-bottom: 8px; display: block; }
+    .preset-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
     .preset-btn {
-      padding: 8px 18px;
+      padding: 8px 14px;
       border-radius: 8px;
       border: 1px solid var(--border);
       background: #f1f5f9;
       color: var(--text);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s ease;
     }
-    .preset-btn:hover { background: #e2e8f0; }
-    .preset-btn.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-    }
+    .preset-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
 
-    .controls-panel {
-      display: none;
-      margin-top: 25px;
-    }
-    .slider-row {
-      display: flex;
-      justify-content: space-between;
-      font-weight: 600;
-      margin-bottom: 8px;
-      font-size: 0.95rem;
-    }
-    input[type="range"] {
-      width: 100%;
-      accent-color: var(--primary);
-      height: 6px;
-      cursor: pointer;
-    }
+    .controls-panel { display: none; margin-top: 22px; }
+    .slider-row { display: flex; justify-content: space-between; font-weight: 600; margin-bottom: 8px; font-size: 0.92rem; }
+    input[type="range"] { width: 100%; accent-color: var(--primary); height: 6px; cursor: pointer; }
 
-    .preview-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin: 20px 0;
-    }
-    .preview-card {
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 15px;
-      text-align: center;
-      background: #fafafa;
-    }
-    .preview-card img {
-      max-width: 100%;
-      max-height: 180px;
-      object-fit: contain;
-      border-radius: 4px;
-    }
-    .meta-tag {
-      margin-top: 10px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text);
-    }
+    .preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0; }
+    .preview-card { border: 1px solid var(--border); border-radius: 8px; padding: 12px; text-align: center; background: #fafafa; }
+    .preview-card img { max-width: 100%; max-height: 160px; object-fit: contain; border-radius: 4px; }
+    .meta-tag { margin-top: 8px; font-size: 0.88rem; font-weight: 600; color: var(--text); }
 
     .btn {
       display: block;
@@ -275,80 +207,49 @@
       cursor: pointer;
       font-size: 1rem;
       text-align: center;
-      text-decoration: none;
-      transition: background 0.2s ease;
     }
     .btn:hover { background: var(--primary-hover); }
     .btn:disabled { background: #94a3b8; cursor: not-allowed; }
 
-    .status-msg {
-      text-align: center;
-      font-size: 0.9rem;
-      margin-top: 8px;
-      color: var(--muted);
-      min-height: 20px;
-    }
+    .status-msg { text-align: center; font-size: 0.88rem; margin-top: 8px; color: var(--muted); min-height: 20px; }
 
-    .info-section { margin-top: 40px; }
-    .info-section h2 { font-size: 1.4rem; margin-bottom: 12px; }
-    .info-section p { color: var(--muted); margin-bottom: 12px; }
+    .info-section { margin-top: 34px; }
+    .info-section h2 { font-size: 1.3rem; margin-bottom: 10px; }
+    .info-section p { color: var(--muted); margin-bottom: 12px; font-size: 0.95rem; }
 
-    .faq-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 18px 20px;
-      margin-bottom: 10px;
-    }
-    .faq-item h3 { font-size: 1.05rem; margin-bottom: 6px; }
-    .faq-item p { color: var(--muted); font-size: 0.95rem; }
+    .faq-item { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 10px; }
+    .faq-item h3 { font-size: 1rem; margin-bottom: 6px; }
+    .faq-item p { color: var(--muted); font-size: 0.92rem; }
 
-    footer {
-      text-align: center;
-      margin-top: 50px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-    footer a { color: var(--primary); text-decoration: none; margin: 0 10px; }
-    footer a:hover { text-decoration: underline; }
+    footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.88rem; color: var(--muted); }
+    footer a { color: var(--primary); text-decoration: none; margin: 0 8px; }
 
     @media (max-width: 640px) {
-      .header-container {
-        flex-direction: column;
-        gap: 10px;
-      }
+      .header-container { flex-direction: column; gap: 8px; }
+      .hero-header h1 { font-size: 1.55rem; }
       .preview-grid { grid-template-columns: 1fr; }
-      .preset-buttons { justify-content: space-between; }
       .preset-btn { flex: 1 1 45%; text-align: center; }
     }
   </style>
 </head>
 <body>
 
-<!-- Upper-Left Brand Header -->
+  <!-- Upper-Left Brand Header -->
   <header class="site-header">
     <div class="header-container">
       <a href="/" class="logo-link" aria-label="EasyPDF Home">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 110" height="46" style="display:block; width:auto;">
-          <!-- Red PDF Document Base -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 110" height="42" style="display:block; width:auto;">
           <rect x="16" y="10" width="56" height="74" rx="8" fill="#ef4444" />
           <polygon points="56,10 72,26 56,26" fill="#b91c1c" />
           <rect x="26" y="32" width="22" height="5" rx="2.5" fill="#ffffff" opacity="0.9" />
           <rect x="26" y="43" width="22" height="5" rx="2.5" fill="#ffffff" opacity="0.9" />
           <rect x="26" y="54" width="22" height="5" rx="2.5" fill="#ffffff" opacity="0.9" />
           <rect x="26" y="65" width="15" height="5" rx="2.5" fill="#ffffff" opacity="0.9" />
-
-          <!-- Blue Image Document Foreground -->
           <rect x="46" y="24" width="56" height="74" rx="8" fill="#2563eb" />
           <polygon points="86,24 102,40 86,40" fill="#1d4ed8" />
           <polygon points="52,88 65,68 74,78 86,60 96,88" fill="#1e40af" />
-          <!-- Compression Hourglass Icon -->
           <polygon points="80,54 94,54 87,63" fill="#ffffff" />
           <polygon points="87,63 94,72 80,72" fill="#ffffff" />
-
-          <!-- Brand Text -->
           <text x="118" y="62" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="44" fill="#0f172a">Easy<tspan fill="#2563eb">PDF</tspan></text>
           <text x="120" y="88" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="500" font-size="18" fill="#64748b">and Image Compressor</text>
         </svg>
@@ -360,6 +261,7 @@
       </nav>
     </div>
   </header>
+
   <div class="container">
     <div class="hero-header">
       <div class="badge">🔒 100% Client-Side • Local Memory Processing</div>
@@ -391,7 +293,7 @@
           </div>
         </div>
 
-        <div id="manualControls" style="display: none; margin-top: 20px;">
+        <div id="manualControls" style="display: none; margin-top: 18px;">
           <div class="slider-row">
             <span>Compression Quality</span>
             <span id="qualityVal">75%</span>
@@ -402,16 +304,16 @@
         <div class="preview-grid">
           <div class="preview-card">
             <strong>Original</strong>
-            <div id="origPreviewWrap" style="margin-top: 10px; min-height: 80px; display: flex; align-items: center; justify-content: center;">
-              <span id="origPdfIcon" style="font-size: 2.5rem; display: none;">📄</span>
+            <div style="margin-top: 8px; min-height: 70px; display: flex; align-items: center; justify-content: center;">
+              <span id="origPdfIcon" style="font-size: 2.2rem; display: none;">📄</span>
               <img id="origImgPreview" style="display: none;" alt="Original Preview">
             </div>
             <div class="meta-tag" id="origMeta">Size: -</div>
           </div>
           <div class="preview-card">
             <strong>Compressed</strong>
-            <div id="compPreviewWrap" style="margin-top: 10px; min-height: 80px; display: flex; align-items: center; justify-content: center;">
-              <span id="compPdfIcon" style="font-size: 2.5rem; display: none;">📄</span>
+            <div style="margin-top: 8px; min-height: 70px; display: flex; align-items: center; justify-content: center;">
+              <span id="compPdfIcon" style="font-size: 2.2rem; display: none;">📄</span>
               <img id="compImgPreview" style="display: none;" alt="Compressed Preview">
             </div>
             <div class="meta-tag" id="compMeta">Size: -</div>
@@ -455,14 +357,12 @@
   </div>
 
   <script>
-    // Configure PDF.js worker
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
     let currentMode = 'pdf';
     let currentFile = null;
     let compressedBlobUrl = null;
     let loadedImage = null;
     let selectedTargetKB = 100;
+    let pdfLibsLoaded = false;
 
     const fileInput = document.getElementById('fileInput');
     const dropArea = document.getElementById('dropArea');
@@ -481,6 +381,34 @@
     const compPdfIcon = document.getElementById('compPdfIcon');
     const origImgPreview = document.getElementById('origImgPreview');
     const compImgPreview = document.getElementById('compImgPreview');
+
+    function loadScript(src) {
+      return new Promise((resolve, reject) => {
+        if (document.querySelector(`script[src="${src}"]`)) return resolve();
+        const s = document.createElement('script');
+        s.src = src;
+        s.async = true;
+        s.onload = resolve;
+        s.onerror = reject;
+        document.body.appendChild(s);
+      });
+    }
+
+    async function ensurePdfLibraries() {
+      if (pdfLibsLoaded && window.pdfjsLib && window.PDFLib) return;
+      statusMsg.textContent = 'Loading PDF engine...';
+      await Promise.all([
+        loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js'),
+        loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js')
+      ]);
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      pdfLibsLoaded = true;
+    }
+
+    // Preload PDF libraries quietly after initial mobile paint settles
+    window.addEventListener('load', () => {
+      setTimeout(() => { ensurePdfLibraries().catch(() => {}); }, 2500);
+    });
 
     function formatBytes(bytes) {
       if (!bytes || bytes === 0) return '0 B';
@@ -587,7 +515,6 @@
       });
     }
 
-    // JPEG Adaptive Compression
     async function compressJpeg() {
       if (!loadedImage) return;
       statusMsg.textContent = 'Compressing image...';
@@ -638,12 +565,12 @@
       downloadBtn.disabled = false;
     }
 
-    // PDF Adaptive Compression
     async function compressPdf(file) {
-      statusMsg.textContent = 'Analyzing and optimizing PDF...';
       downloadBtn.disabled = true;
-
       try {
+        await ensurePdfLibraries();
+        statusMsg.textContent = 'Analyzing and optimizing PDF...';
+
         const arrayBuffer = await file.arrayBuffer();
 
         const rawPdfDoc = await PDFLib.PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
@@ -718,13 +645,12 @@
         statusMsg.textContent = `Optimized for ~${selectedTargetKB} KB`;
       } catch (err) {
         console.error('PDF compression error:', err);
-        statusMsg.textContent = 'Error processing PDF. Using stream compaction.';
+        statusMsg.textContent = 'Error processing PDF. Please try again.';
       }
 
       downloadBtn.disabled = false;
     }
 
-    // Drag-and-drop
     ['dragenter', 'dragover'].forEach(name => {
       dropArea.addEventListener(name, (e) => {
         e.preventDefault();
