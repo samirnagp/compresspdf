@@ -122,5 +122,9 @@ def sitemap():
 
 @app.route('/robots.txt')
 def robots():
-    if os.path.exists(os.path.join(app.root_path, 'static', 'robots.txt')):
-        return
+    robots_content = (
+        "User-agent: *\n"
+        "Allow: /\n"
+        "Sitemap: https://www.easypdf.website/sitemap.xml\n"
+    )
+    return Response(robots_content, mimetype='text/plain')
