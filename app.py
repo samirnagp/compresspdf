@@ -17,20 +17,23 @@ try:
 except ImportError:
     pass
 
+
 @app.after_request
 def add_performance_headers(response):
+    # Enable HTTP Keep-Alive and edge-friendly caching[cite: 5]
     if request.path.startswith('/static') or request.path.endswith('.xml') or request.path.endswith('.txt'):
         response.headers['Cache-Control'] = 'public, max-age=604800, immutable'
     elif request.path in ['/', '/compress-jpeg', '/privacy', '/terms', '/about', '/contact']:
         response.headers['Cache-Control'] = 'public, max-age=3600, stale-while-revalidate=86400'
     return response
 
+
 def render_page_or_fallback(template_name, title, heading, body_html):
-    """Renders the HTML template if it exists, otherwise serves a clean compliant page so Googlebot never gets a 404."""
+    """Renders the HTML template if it exists, otherwise serves a clean compliant page so crawlers never get a 404."""
     template_path = os.path.join(app.root_path, 'templates', template_name)
     if os.path.exists(template_path):
         return render_template(template_name)
-    
+
     fallback_html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,9 +61,11 @@ def render_page_or_fallback(template_name, title, heading, body_html):
 </html>"""
     return Response(fallback_html, mimetype='text/html')
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/compress-jpeg')
 def compress_jpeg():
@@ -69,19 +74,27 @@ def compress_jpeg():
         return render_template('compress-jpeg.html')
     return render_template('index.html')
 
+
 @app.route('/privacy')
 def privacy():
-    return render_template('privacy.html')
+    body = """
+    <p>At EasyPDF (www.easypdf.website), your privacy is our priority. Most file compression tasks are performed locally inside your web browser using client-side JavaScript and HTML5 Canvas without uploading files to our servers.</p>
+    <p><strong>1. File Handling:</strong> When files are processed via our API, they are handled strictly in temporary memory (RAM) and immediately discarded after returning the compressed file. We do not permanently store or inspect user files.</p>
+    <p><strong>2. Cookies & Advertising:</strong> We may use standard analytics and third-party advertising partners (such as Google AdSense) that use cookies to serve relevant ads based on prior visits.</p>
+    """
+    return render_page_or_fallback('privacy.html', 'Privacy Policy', 'Privacy Policy', body)
+
 
 @app.route('/terms')
 def terms():
     body = """
     <p>Welcome to EasyPDF (www.easypdf.website). By accessing and using our online PDF and image compression utilities, you agree to comply with these Terms of Service.</p>
     <p><strong>1. Service Usage:</strong> EasyPDF provides free browser-based and automated document optimization tools for personal, educational, and professional use. You agree not to misuse the service or attempt to disrupt server infrastructure.</p>
-    <p><strong>2. File Ownership & Responsibility:</strong> You retain full ownership of all documents and images you process. You are solely responsible for ensuring you have the legal right to process any files uploaded or loaded into the tool.</p>
+    <p><strong>2. File Ownership & Responsibility:</strong> You retain full ownership of all documents and images you process. You are solely responsible for ensuring you have the legal right to process any files loaded into the tool.</p>
     <p><strong>3. Disclaimer of Warranties:</strong> The tools are provided "as is" without warranties of any kind. Always keep a backup copy of your original documents before compressing them.</p>
     """
     return render_page_or_fallback('terms.html', 'Terms of Service', 'Terms of Service', body)
+
 
 @app.route('/about')
 def about():
@@ -90,6 +103,7 @@ def about():
     <p>Built with modern web standards, EasyPDF prioritizes speed, accessibility on mobile devices, and strict data privacy—processing files locally in your browser memory whenever possible without permanent server storage.</p>
     """
     return render_page_or_fallback('about.html', 'About Us', 'About EasyPDF', body)
+
 
 @app.route('/contact')
 def contact():
@@ -100,40 +114,23 @@ def contact():
     """
     return render_page_or_fallback('contact.html', 'Contact Us', 'Contact Us', body)
 
-@app.route('/sitemap.xml')
-def sitemap():
-    # Check static folder first, then root folder
-    if os.path.exists(os.path.join(app.root_path, 'static', 'sitemap.xml')):
-        return send_from_directory('static', 'sitemap.xml', mimetype='application/xml')
-    if os.path.exists(os.path.join(app.root_path, 'sitemap.xml')):
-        return send_from_directory(app.root_path, 'sitemap.xml', mimetype='application/xml')
-    
-    # Dynamic fallback sitemap so it never returns 404
-    xml = """<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.easypdf.website/</loc><priority>1.0</priority></url>
-  <url><loc>https://www.easypdf.website/compress-jpeg</loc><priority>0.8</priority></url>
-  <url><loc>https://www.easypdf.website/privacy</loc><priority>0.5</priority></url>
-  <url><loc>https://www.easypdf.website/terms</loc><priority>0.5</priority></url>
-  <url><loc>https://www.easypdf.website/about</loc><priority>0.5</priority></url>
-  <url><loc>https://www.easypdf.website/contact</loc><priority>0.5</priority></url>
-</urlset>"""
-    return Response(xml, mimetype='application/xml')
 
-@app.route('/robots.txt')
-def robots():
-    robots_content = (
-        "User-agent: *\n"
-        "Allow: /\n"
-        "Disallow: /api/\n"
-        "Disallow: /health\n"
-        "Sitemap: https://www.easypdf.website/sitemap.xml\n"
-    )
-    return Response(robots_content, mimetype='text/plain')
-    @app.route('/sitemap.xml')
+@app.route('/sitemap.xml')
 @app.route('/sitemap_index.xml')
 def sitemap():
+    # Serve static sitemap if present, otherwise generate clean XML dynamically
     if os.path.exists(os.path.join(app.root_path, 'static', 'sitemap.xml')):
         return send_from_directory('static', 'sitemap.xml', mimetype='application/xml')
     if os.path.exists(os.path.join(app.root_path, 'sitemap.xml')):
         return send_from_directory(app.root_path, 'sitemap.xml', mimetype='application/xml')
+
+    xml = """<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.easypdf.website/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>
