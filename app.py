@@ -125,6 +125,8 @@ def robots():
     robots_content = (
         "User-agent: *\n"
         "Allow: /\n"
+        "Disallow: /api/\n"
+        "Disallow: /health\n"
         "Sitemap: https://www.easypdf.website/sitemap.xml\n"
     )
     return Response(robots_content, mimetype='text/plain')
