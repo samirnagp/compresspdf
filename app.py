@@ -8,7 +8,7 @@ import pypdf
 
 app = Flask(__name__)
 CORS(app)
-app.config['MAX_CONTENT_LENGTH'] = 30 * 1024 * 1024  # 30 MB max[cite: 5]
+app.config['MAX_CONTENT_LENGTH'] = 30 * 1024 * 1024  # 30 MB max
 
 try:
     from flask_compress import Compress
@@ -115,27 +115,58 @@ def robots():
 
 @app.route('/health')
 def health():
-    return jsonify({"status": "healthy", "service": "EasyPDF Compressor"})[cite: 5]
+    return jsonify({"status": "healthy", "service": "EasyPDF Compressor"})
 
 
 def compress_pypdf_stream(input_bytes):
-    reader = pypdf.PdfReader(io.BytesIO(input_bytes))[cite: 5]
-    writer = pypdf.PdfWriter()[cite: 5]
-    for page in reader.pages:[cite: 5]
-        page.compress_content_streams()[cite: 5]
-        writer.add_page(page)[cite: 5]
-    out = io.BytesIO()[cite: 5]
-    writer.write(out)[cite: 5]
-    del reader[cite: 5]
-    gc.collect()[cite: 5]
-    return out.getvalue()[cite: 5]
+    reader = pypdf.PdfReader(io.BytesIO(input_bytes))
+    writer = pypdf.PdfWriter()
+    for page in reader.pages:
+        page.compress_content_streams()
+        writer.add_page(page)
+    out = io.BytesIO()
+    writer.write(out)
+    del reader
+    gc.collect()
+    return out.getvalue()
 
 
 @app.route('/api/compress', methods=['POST'])
 def compress_pdf_api():
-    if 'file' not in request.files:[cite: 5]
-        return jsonify({"error": "No file uploaded"}), 400[cite: 5]
+    if 'file' not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
 
-    file = request.files['file'][cite: 5]
-    if not file.filename.lower().endswith('.pdf'):[cite: 5]
-        return jsonify({"error": "Uploaded file must be a PDF"}), 400[cite: 5]
+    file = request.files['file']
+    if not file.filename.lower().endswith('.pdf'):
+        return jsonify({"error": "Uploaded file must be a PDF"}), 400
+
+    target_kb = request.form.get('target_kb', type=int)
+    if not target_kb or target_kb < 5:
+        target_kb = 100
+
+    target_bytes = target_kb * 1024
+    input_bytes = file.read()
+
+    if len(input_bytes) <= target_bytes:
+        return send_file(
+            io.BytesIO(input_bytes),
+            mimetype='application/pdf',
+            as_attachment=True,
+            download_name=f"compressed_{file.filename}"
+        )
+
+    try:
+        light_compressed = compress_pypdf_stream(input_bytes)
+        if len(light_compressed) <= target_bytes:
+            return send_file(
+                io.BytesIO(light_compressed),
+                mimetype='application/pdf',
+                as_attachment=True,
+                download_name=f"compressed_{target_kb}kb_{file.filename}"
+            )
+    except Exception:
+        pass
+
+    try:
+        from pdf2image import convert_from_bytes
+        max_dim = 420 if target_kb <= 15 else (650 if target_kb <= 50 else
