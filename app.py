@@ -130,3 +130,10 @@ def robots():
         "Sitemap: https://www.easypdf.website/sitemap.xml\n"
     )
     return Response(robots_content, mimetype='text/plain')
+    @app.route('/sitemap.xml')
+@app.route('/sitemap_index.xml')
+def sitemap():
+    if os.path.exists(os.path.join(app.root_path, 'static', 'sitemap.xml')):
+        return send_from_directory('static', 'sitemap.xml', mimetype='application/xml')
+    if os.path.exists(os.path.join(app.root_path, 'sitemap.xml')):
+        return send_from_directory(app.root_path, 'sitemap.xml', mimetype='application/xml')
