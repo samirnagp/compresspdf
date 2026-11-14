@@ -3,95 +3,213 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy - EasyPDF</title>
-  <meta name="description" content="Privacy Policy for EasyPDF (easypdf.website). Learn how we prioritize client-side processing and zero data retention.">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans antialiased">
+  <title>Privacy Policy (GDPR & CCPA Compliant) | EasyPDF</title>
+  <meta name="description" content="Privacy Policy for EasyPDF (www.easypdf.website). Learn how we protect your documents with client-side processing, our cookie usage, and your GDPR & CCPA rights.">
+  <link rel="canonical" href="https://www.easypdf.website/privacy">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232563eb'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>E</text></svg>">
 
-  <header class="border-b border-slate-200 bg-white sticky top-0 z-50">
-    <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-md">
-          <i data-lucide="layers" class="w-6 h-6"></i>
-        </div>
-        <span class="text-xl font-bold tracking-tight text-slate-900">Easy<span class="text-indigo-600">PDF</span></span>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #e2e8f0;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); line-height: 1.7; }
+
+    .site-header {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 0;
+      width: 100%;
+    }
+    .header-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo-link { display: inline-flex; align-items: center; text-decoration: none; }
+    .nav-links { display: flex; gap: 14px; }
+    .nav-links a { color: #64748b; text-decoration: none; font-size: 0.88rem; font-weight: 600; }
+    .nav-links a:hover { color: var(--primary); }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 30px 16px 50px; }
+
+    .policy-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    h1 { font-size: 1.9rem; margin-bottom: 6px; color: var(--text); }
+    .last-updated { font-size: 0.88rem; color: #64748b; margin-bottom: 24px; }
+
+    h2 {
+      font-size: 1.25rem;
+      margin-top: 26px;
+      margin-bottom: 10px;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+    }
+
+    p { color: var(--muted); margin-bottom: 14px; font-size: 0.96rem; }
+    ul { margin: 10px 0 16px 22px; color: var(--muted); font-size: 0.96rem; }
+    li { margin-bottom: 8px; }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .highlight-box {
+      background: #eff6ff;
+      border-left: 4px solid var(--primary);
+      padding: 14px 18px;
+      border-radius: 6px;
+      margin: 18px 0;
+      color: #1e3a8a;
+      font-size: 0.94rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 0.88rem;
+      color: #64748b;
+    }
+    footer a { color: var(--primary); text-decoration: none; margin: 0 8px; }
+
+    @media (max-width: 640px) {
+      .header-container { flex-direction: column; gap: 8px; }
+      .policy-card { padding: 22px 18px; }
+      h1 { font-size: 1.55rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="/" class="logo-link" aria-label="EasyPDF Home">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 110" height="42" style="display:block; width:auto;">
+          <rect x="16" y="10" width="56" height="74" rx="8" fill="#ef4444" />
+          <polygon points="56,10 72,26 56,26" fill="#b91c1c" />
+          <rect x="26" y="32" width="22" height="5" rx="2.5" fill="#ffffff" opacity="0.9" />
+          <rect x="26" y="43" width="22" height="5" rx="2.5" fill="#ffffff" opacity="0.9" />
+          <rect x="26" y="54" width="22" height="5" rx="2.5" fill="#ffffff" opacity="0.9" />
+          <rect x="26" y="65" width="15" height="5" rx="2.5" fill="#ffffff" opacity="0.9" />
+          <rect x="46" y="24" width="56" height="74" rx="8" fill="#2563eb" />
+          <polygon points="86,24 102,40 86,40" fill="#1d4ed8" />
+          <polygon points="52,88 65,68 74,78 86,60 96,88" fill="#1e40af" />
+          <polygon points="80,54 94,54 87,63" fill="#ffffff" />
+          <polygon points="87,63 94,72 80,72" fill="#ffffff" />
+          <text x="118" y="62" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="44" fill="#0f172a">Easy<tspan fill="#2563eb">PDF</tspan></text>
+          <text x="120" y="88" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="500" font-size="18" fill="#64748b">and Image Compressor</text>
+        </svg>
       </a>
-      <a href="/" class="text-sm font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-1">
-        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Tools
-      </a>
+      <nav class="nav-links">
+        <a href="/">PDF & Image Tool</a>
+        <a href="/compress-jpeg">JPEG Compressor</a>
+        <a href="/about">About</a>
+      </nav>
     </div>
   </header>
 
-  <main class="max-w-3xl mx-auto px-4 py-12 flex-1 w-full">
-    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 md:p-12">
-      <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-semibold uppercase tracking-wider mb-4 border border-emerald-200">
-        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i> Privacy by Architecture
+  <div class="container">
+    <main class="policy-card">
+      <h1>Privacy Policy</h1>
+      <p class="last-updated"><strong>Effective Date:</strong> November 13, 2026 &bull; <strong>Website:</strong> https://www.easypdf.website</p>
+
+      <div class="highlight-box">
+        <strong>Privacy-First Guarantee:</strong> EasyPDF performs PDF and JPEG compression directly inside your web browser's local memory (RAM). Your documents and images are never permanently saved, archived, viewed, or sold by us.
       </div>
-      <h1 class="text-3xl font-extrabold text-slate-900 mb-2">Privacy Policy</h1>
-      <p class="text-xs text-slate-500 mb-8">Last updated: November 2026</p>
 
-      <div class="space-y-6 text-sm text-slate-700 leading-relaxed">
-        <section>
-          <h2 class="text-lg font-bold text-slate-900 mb-2">1. Core Privacy Principle: Zero Retention</h2>
-          <p>
-            At <strong>EasyPDF</strong> (accessible from <a href="https://easypdf.website" class="text-indigo-600 underline">easypdf.website</a>), your file confidentiality is our primary priority. We believe online utilities should not retain, profile, or sell personal documents.
-          </p>
-        </section>
+      <p>At <strong>EasyPDF</strong> (accessible from <code>https://www.easypdf.website</code>), safeguarding the privacy of our visitors and their documents is our primary commitment. This Privacy Policy explains what types of information are collected and recorded by EasyPDF, how we handle uploaded or processed files, and your data protection rights under the General Data Protection Regulation (GDPR) and the California Consumer Privacy Act (CCPA/CPRA).</p>
 
-        <section>
-          <h2 class="text-lg font-bold text-slate-900 mb-2">2. How Your Files Are Processed</h2>
-          <ul class="list-disc pl-5 space-y-2">
-            <li>
-              <strong>Browser-First Execution:</strong> In supported browsers, document rendering, quality scaling, and multi-pass compression are executed locally inside your web browser using WebAssembly and client-side JavaScript. In this mode, your documents never travel across the internet.
-            </li>
-            <li>
-              <strong>Automated Fallback Processing:</strong> When fallback processing is required (e.g. for low-memory devices or deep rasterization), files are transmitted over an encrypted HTTPS connection, processed in isolated temporary memory buffers, and immediately purged upon download completion.
-            </li>
-            <li>
-              <strong>No Long-Term Storage:</strong> We do not store your files on persistent disks, databases, or external object stores.
-            </li>
-          </ul>
-        </section>
+      <h2>1. File Handling & Document Security</h2>
+      <ul>
+        <li><strong>Client-Side Browser Processing:</strong> Our primary PDF and JPEG compression tools execute locally on your device using HTML5 Canvas and WebAssembly/JavaScript libraries. Your files remain on your device throughout compression.</li>
+        <li><strong>Ephemeral Server API Processing:</strong> If a file is processed through our fallback compression API, it is handled strictly in volatile temporary memory (RAM) solely to generate the compressed output and is immediately purged once the download response completes.</li>
+        <li><strong>No Permanent Storage or Indexing:</strong> We do not maintain databases of user documents, extract text/metadata from your files, or make user files accessible to search engines or third parties.</li>
+      </ul>
 
-        <section>
-          <h2 class="text-lg font-bold text-slate-900 mb-2">3. Information We Do Not Collect</h2>
-          <p>
-            We do not require user account registration, email sign-ups, phone numbers, or credit card information to use our size compression tools. We never inspect, read, index, or train artificial intelligence models on your uploaded PDF contents.
-          </p>
-        </section>
+      <h2>2. Information We Collect Automatically (Log Files)</h2>
+      <p>Like most standard websites and cloud hosting providers (such as Render and Cloudflare), EasyPDF follows standard procedures for using server and security log files. These logs do not contain your compressed files and are used strictly for security, DDoS mitigation, and performance diagnostics. Information logged may include:</p>
+      <ul>
+        <li>Internet Protocol (IP) addresses (anonymized or truncated where supported)</li>
+        <li>Browser type, device category, and operating system</li>
+        <li>Date and time stamps of requests</li>
+        <li>Referring/exit pages and HTTP status codes</li>
+      </ul>
 
-        <section>
-          <h2 class="text-lg font-bold text-slate-900 mb-2">4. Cookies and Analytics</h2>
-          <p>
-            EasyPDF may use standard, privacy-friendly server logs (such as HTTP response status codes and bandwidth totals) strictly for network performance and DDOS mitigation. We do not use third-party behavioral trackers or sell personal browsing metrics.
-          </p>
-        </section>
+      <h2>3. Cookies, Web Beacons & Google AdSense</h2>
+      <p>EasyPDF uses cookies and similar browser storage mechanisms to remember user preferences, measure aggregate site traffic, and display advertisements.</p>
+      <ul>
+        <li><strong>Google AdSense & Third-Party Vendors:</strong> Third-party vendors, including Google, use cookies (such as the DoubleClick DART cookie) to serve ads to users based on their prior visits to <code>www.easypdf.website</code> or other websites on the internet.</li>
+        <li><strong>Opting Out of Personalized Advertising:</strong> Users may opt out of personalized advertising by visiting <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer">Google Ads Settings</a>. Alternatively, you can opt out of third-party vendor cookies for personalized advertising by visiting <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info</a>.</li>
+        <li><strong>Managing Cookies in Your Browser:</strong> You can disable or clear cookies at any time through your individual browser settings.</li>
+      </ul>
 
-        <section>
-          <h2 class="text-lg font-bold text-slate-900 mb-2">5. Data Security</h2>
-          <p>
-            All network communication with <a href="https://easypdf.website" class="text-indigo-600 underline">easypdf.website</a> is secured using modern TLS/HTTPS encryption in transit.
-          </p>
-        </section>
+      <h2>4. GDPR Data Protection Rights (EEA & UK Users)</h2>
+      <p>If you are a resident of the European Economic Area (EEA) or the United Kingdom, you are entitled to the following data protection rights under the General Data Protection Regulation (GDPR):</p>
+      <ul>
+        <li><strong>The Right to Access:</strong> You have the right to request copies of any personal data we hold about you (note: we do not store user files or require account registration).</li>
+        <li><strong>The Right to Rectification:</strong> You have the right to request that we correct any information you believe is inaccurate.</li>
+        <li><strong>The Right to Erasure ("Right to be Forgotten"):</strong> You have the right to request that we erase your personal data under applicable conditions.</li>
+        <li><strong>The Right to Restrict or Object to Processing:</strong> You have the right to object to or request restrictions on how your data is processed, including opting out of non-essential analytics or ad personalization cookies.</li>
+        <li><strong>The Right to Data Portability:</strong> You have the right to request the transfer of data we have collected to another organization or directly to you.</li>
+      </ul>
+      <p>To exercise any of these rights, contact us at <a href="mailto:support@easypdf.website">support@easypdf.website</a>. We will respond within 30 days.</p>
 
-        <section>
-          <h2 class="text-lg font-bold text-slate-900 mb-2">6. Contact Us</h2>
-          <p>
-            If you have questions regarding this Privacy Policy or your data security, please contact us at support@easypdf.website.
-          </p>
-        </section>
-      </div>
-    </div>
-  </main>
+      <h2>5. CCPA / CPRA Privacy Rights (California Residents)</h2>
+      <p>Under the California Consumer Privacy Act (CCPA), as amended by the California Privacy Rights Act (CPRA), California residents have specific rights regarding their personal information:</p>
+      <ul>
+        <li><strong>Right to Know & Access:</strong> Request disclosure of the categories and specific pieces of personal data a business has collected about consumers.</li>
+        <li><strong>Right to Delete:</strong> Request the deletion of any personal data collected from you, subject to legal exceptions.</li>
+        <li><strong>Right to Opt-Out of Sale or Sharing:</strong> EasyPDF <strong>does not sell</strong> your personal information or uploaded documents. Where third-party advertising cookies constitute "sharing" for cross-context behavioral advertising under CPRA, you may opt out via <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer">Google Ads Settings</a> or by enabling a Global Privacy Control (GPC) signal in your browser.</li>
+        <li><strong>Right to Non-Discrimination:</strong> We will never discriminate against you for exercising any of your CCPA/CPRA privacy rights.</li>
+      </ul>
 
-  <footer class="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
-    © 2026 EasyPDF · Fast, Safe Online PDF Utilities.
-  </footer>
+      <h2>6. Children's Information</h2>
+      <p>Protecting children while using the internet is important to us. EasyPDF does not knowingly collect any Personal Identifiable Information (PII) from children under the age of 13 (or 16 in the EEA). If you believe a child has provided personal information through our contact channels, please contact us immediately and we will promptly remove it.</p>
 
-  <script>
-    if (window.lucide) lucide.createIcons();
-  </script>
+      <h2>7. Third-Party Links</h2>
+      <p>Our website may contain links to external websites or social media platforms (such as Instagram). We are not responsible for the privacy practices or content of external websites and encourage you to review their respective privacy policies.</p>
+
+      <h2>8. Changes to This Privacy Policy</h2>
+      <p>We may update this Privacy Policy from time to time to reflect changes in legal requirements, advertising partners, or site features. Any updates will be posted on this page with an updated "Effective Date."</p>
+
+      <h2>9. Contact Us</h2>
+      <p>If you have any questions, privacy requests, or concerns about this Privacy Policy, please reach out to us:</p>
+      <ul>
+        <li><strong>Email:</strong> <a href="mailto:support@easypdf.website">support@easypdf.website</a></li>
+        <li><strong>Website:</strong> <a href="https://www.easypdf.website/contact">https://www.easypdf.website/contact</a></li>
+      </ul>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 EasyPDF. All rights reserved.</p>
+      <p style="margin-top: 6px;">
+        <a href="/">Home</a> &bull; 
+        <a href="/compress-jpeg">Compress JPEG</a> &bull; 
+        <a href="/privacy">Privacy Policy</a> &bull; 
+        <a href="/terms">Terms of Service</a> &bull; 
+        <a href="/about">About Us</a> &bull; 
+        <a href="/contact">Contact Us</a>
+      </p>
+    </footer>
+  </div>
+
 </body>
 </html>
