@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Compress PDF & JPEG to 10KB, 50KB, 100KB Online Free | EasyPDF</title>
-  <meta name="description" content="Free tool to compress PDF documents and JPEG images to exact target sizes like 10KB, 50KB, or 100KB online. 100% private client-side processing.">
-  <meta name="keywords" content="compress pdf to 100kb, compress jpeg to 50kb, compress image to 10kb, reduce pdf size, jpg size reducer, online photo compressor">
+  <title>Compress PDF & Convert Any Image (PNG, WebP) to JPEG 10KB–100KB | EasyPDF</title>
+  <meta name="description" content="Free tool to compress PDF documents and convert PNG, WebP, BMP, or any photo format to JPEG under 10KB, 50KB, or 100KB online. 100% private client-side processing.">
+  <meta name="keywords" content="compress pdf to 100kb, convert png to jpeg, image to jpg converter, compress jpeg to 50kb, webp to jpg, compress image to 10kb, reduce pdf size">
   <link rel="canonical" href="https://www.easypdf.website/">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232563eb'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>E</text></svg>">
 
@@ -16,8 +16,8 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Compress PDF & JPEG to Exact Size (10KB, 100KB) - EasyPDF">
-  <meta property="og:description" content="Reduce PDF documents and images to 10KB, 50KB, 100KB, or 200KB instantly and securely.">
+  <meta property="og:title" content="Compress PDF & Convert Any Image to JPEG (10KB–100KB) - EasyPDF">
+  <meta property="og:description" content="Reduce PDF documents and convert PNG, WebP, or any picture format to JPEG at 10KB, 50KB, 100KB, or 200KB instantly.">
   <meta property="og:url" content="https://www.easypdf.website/">
   <meta property="og:site_name" content="EasyPDF">
 
@@ -28,7 +28,7 @@
     "@graph": [
       {
         "@type": "WebApplication",
-        "name": "EasyPDF Exact Size Compressor",
+        "name": "EasyPDF Compressor & Image to JPEG Converter",
         "url": "https://www.easypdf.website/",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "All",
@@ -41,6 +41,14 @@
       {
         "@type": "FAQPage",
         "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Can I convert PNG, WebP, or other image formats to JPEG?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Select the Image to JPEG tab and upload any PNG, WebP, BMP, GIF, or JPG file. EasyPDF automatically converts transparent backgrounds to clean white and exports an optimized JPEG at your chosen KB size."
+            }
+          },
           {
             "@type": "Question",
             "name": "How does PDF compression to 100KB or 10KB work?",
@@ -256,7 +264,7 @@
       </a>
       <nav class="nav-links">
         <a href="/">PDF & Image Tool</a>
-        <a href="/compress-jpeg">JPEG Compressor</a>
+        <a href="/compress-jpeg">Image to JPEG</a>
         <a href="/about">About</a>
       </nav>
     </div>
@@ -265,13 +273,13 @@
   <div class="container">
     <div class="hero-header">
       <div class="badge">🔒 100% Client-Side • Local Memory Processing</div>
-      <h1>Compress to 10KB, 50KB, 100KB</h1>
-      <p>Compress PDF documents and JPEG images to specific target file sizes for online forms and exams.</p>
+      <h1>Compress PDF & Convert Any Image to JPEG</h1>
+      <p>Convert PNG, WebP, BMP, or any photo format to JPEG and compress PDFs to 10KB, 50KB, 100KB, or 200KB.</p>
     </div>
 
     <div class="tab-container">
       <button class="tab-btn active" id="tabPdf" onclick="switchMode('pdf')">Compress PDF</button>
-      <button class="tab-btn" id="tabJpeg" onclick="switchMode('jpeg')">Compress JPEG/JPG</button>
+      <button class="tab-btn" id="tabJpeg" onclick="switchMode('jpeg')">Convert & Compress Image to JPEG</button>
     </div>
 
     <main class="tool-box">
@@ -283,27 +291,27 @@
 
       <div class="controls-panel" id="controlsPanel">
         <div class="preset-container">
-          <label class="preset-label">Choose Target Size:</label>
+          <label class="preset-label">Choose Target Output Size:</label>
           <div class="preset-buttons">
             <button class="preset-btn" onclick="selectPreset(10, this)">10 KB</button>
             <button class="preset-btn" onclick="selectPreset(50, this)">50 KB</button>
             <button class="preset-btn active" onclick="selectPreset(100, this)">100 KB</button>
             <button class="preset-btn" onclick="selectPreset(200, this)">200 KB</button>
-            <button class="preset-btn" onclick="selectPreset('custom', this)">Manual Quality</button>
+            <button class="preset-btn" onclick="selectPreset('custom', this)">Manual Quality (JPG)</button>
           </div>
         </div>
 
         <div id="manualControls" style="display: none; margin-top: 18px;">
           <div class="slider-row">
-            <span>Compression Quality</span>
-            <span id="qualityVal">75%</span>
+            <span>JPEG Output Quality</span>
+            <span id="qualityVal">85%</span>
           </div>
-          <input type="range" id="qualitySlider" min="5" max="95" value="75">
+          <input type="range" id="qualitySlider" min="5" max="95" value="85">
         </div>
 
         <div class="preview-grid">
           <div class="preview-card">
-            <strong>Original</strong>
+            <strong id="origLabel">Original</strong>
             <div style="margin-top: 8px; min-height: 70px; display: flex; align-items: center; justify-content: center;">
               <span id="origPdfIcon" style="font-size: 2.2rem; display: none;">📄</span>
               <img id="origImgPreview" style="display: none;" alt="Original Preview">
@@ -311,28 +319,32 @@
             <div class="meta-tag" id="origMeta">Size: -</div>
           </div>
           <div class="preview-card">
-            <strong>Compressed</strong>
+            <strong id="compLabel">Compressed</strong>
             <div style="margin-top: 8px; min-height: 70px; display: flex; align-items: center; justify-content: center;">
               <span id="compPdfIcon" style="font-size: 2.2rem; display: none;">📄</span>
-              <img id="compImgPreview" style="display: none;" alt="Compressed Preview">
+              <img id="compImgPreview" style="display: none;" alt="Compressed JPEG Preview">
             </div>
             <div class="meta-tag" id="compMeta">Size: -</div>
           </div>
         </div>
 
-        <button class="btn" id="downloadBtn">Download Compressed File</button>
+        <button class="btn" id="downloadBtn">Download File</button>
         <div class="status-msg" id="statusMsg"></div>
       </div>
     </main>
 
     <section class="info-section">
-      <h2>Compress PDF & Images to Exact Size (10KB, 50KB, 100KB, 200KB)</h2>
-      <p>Job application forms, college admissions, and government portals frequently mandate strict file size caps—such as photos under 10KB or PDF documents under 100KB. Manually resizing documents until they meet these constraints can be tedious.</p>
-      <p>EasyPDF performs adaptive rasterization and binary-search compression directly in your browser. All operations run directly in your device RAM without uploading files to remote servers.</p>
+      <h2>Convert PNG, WebP & Any Picture Format to JPEG (10KB–200KB)</h2>
+      <p>Online exam forms, college admissions, and government portals frequently reject PNG, WebP, or HEIC/BMP screenshots and require strict <strong>.jpg / .jpeg</strong> files under 10KB, 50KB, or 100KB.</p>
+      <p>EasyPDF converts any browser-supported image format (PNG, WebP, BMP, GIF, SVG, JPG) into a clean JPEG with a solid white background for transparent images—all inside your device RAM without uploading files to any server.</p>
     </section>
 
     <section class="info-section">
       <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <h3>Can I convert PNG, WebP, or other image formats to JPEG?</h3>
+        <p>Yes. Switch to the "Convert & Compress Image to JPEG" tab and select any PNG, WebP, BMP, GIF, or JPG picture. Transparent backgrounds are automatically filled with crisp white before exporting as JPEG.</p>
+      </div>
       <div class="faq-item">
         <h3>How does PDF compression to 100KB or 10KB work?</h3>
         <p>The tool renders the pages using HTML5 Canvas, dynamically scales image assets and page resolution, and packages the optimized pages into a compact PDF file.</p>
@@ -347,7 +359,7 @@
       <p>© 2026 EasyPDF. All rights reserved.</p>
       <p style="margin-top: 6px;">
         <a href="/">Home</a> • 
-        <a href="/compress-jpeg">Compress JPEG</a> • 
+        <a href="/compress-jpeg">Image to JPEG</a> • 
         <a href="/privacy">Privacy Policy</a> • 
         <a href="/terms">Terms of Service</a> • 
         <a href="/about">About Us</a> • 
@@ -375,6 +387,8 @@
     const downloadBtn = document.getElementById('downloadBtn');
     const statusMsg = document.getElementById('statusMsg');
 
+    const origLabel = document.getElementById('origLabel');
+    const compLabel = document.getElementById('compLabel');
     const origMeta = document.getElementById('origMeta');
     const compMeta = document.getElementById('compMeta');
     const origPdfIcon = document.getElementById('origPdfIcon');
@@ -405,7 +419,6 @@
       pdfLibsLoaded = true;
     }
 
-    // Preload PDF libraries quietly after initial mobile paint settles
     window.addEventListener('load', () => {
       setTimeout(() => { ensurePdfLibraries().catch(() => {}); }, 2500);
     });
@@ -428,12 +441,18 @@
         fileInput.setAttribute('accept', '.pdf');
         dropPrompt.textContent = 'Click or drag & drop your PDF file here';
         dropSupport.textContent = 'Supports .pdf documents';
+        origLabel.textContent = 'Original PDF';
+        compLabel.textContent = 'Compressed PDF';
+        downloadBtn.textContent = 'Download Compressed PDF';
       } else {
         document.getElementById('tabJpeg').classList.add('active');
         document.getElementById('tabPdf').classList.remove('active');
-        fileInput.setAttribute('accept', 'image/jpeg, image/jpg');
-        dropPrompt.textContent = 'Click or drag & drop your JPEG/JPG image here';
-        dropSupport.textContent = 'Supports .jpg and .jpeg formats';
+        fileInput.setAttribute('accept', 'image/*');
+        dropPrompt.textContent = 'Click or drag & drop any image (PNG, WebP, JPG, BMP, GIF)';
+        dropSupport.textContent = 'Converts any picture format to compressed .jpg';
+        origLabel.textContent = 'Original Image';
+        compLabel.textContent = 'Converted JPEG (.jpg)';
+        downloadBtn.textContent = 'Download Converted JPEG (.jpg)';
       }
     }
 
@@ -473,12 +492,13 @@
     function handleFile(file) {
       if (!file) return;
       currentFile = file;
-      origMeta.textContent = `Size: ${formatBytes(file.size)}`;
+      const extLabel = file.name.includes('.') ? file.name.split('.').pop().toUpperCase() : 'FILE';
+      origMeta.textContent = `${extLabel} • ${formatBytes(file.size)}`;
       controlsPanel.style.display = 'block';
 
       if (currentMode === 'pdf') {
         if (!file.name.toLowerCase().endsWith('.pdf')) {
-          alert('Please select a valid PDF file.');
+          alert('Please select a valid PDF file, or switch to the Image to JPEG tab.');
           resetState();
           return;
         }
@@ -488,8 +508,8 @@
         compPdfIcon.style.display = 'block';
         compressPdf(file);
       } else {
-        if (!file.type.match(/image\/jpe?g/i)) {
-          alert('Please select a valid JPEG/JPG image.');
+        if (!file.type.startsWith('image/') && !file.name.match(/\.(png|jpe?g|webp|bmp|gif|svg|ico|avif)$/i)) {
+          alert('Please select a valid image file (PNG, WebP, JPG, BMP, GIF, etc.).');
           resetState();
           return;
         }
@@ -498,54 +518,61 @@
         origImgPreview.style.display = 'block';
         compImgPreview.style.display = 'block';
 
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          origImgPreview.src = e.target.result;
-          loadedImage = new Image();
-          loadedImage.onload = () => compressJpeg();
-          loadedImage.src = e.target.result;
+        const objectUrl = URL.createObjectURL(file);
+        origImgPreview.src = objectUrl;
+        loadedImage = new Image();
+        loadedImage.onload = () => {
+          URL.revokeObjectURL(objectUrl);
+          compressJpeg();
         };
-        reader.readAsDataURL(file);
+        loadedImage.onerror = () => {
+          URL.revokeObjectURL(objectUrl);
+          alert('This image format is not supported by your browser. Try PNG, WebP, JPG, BMP, or GIF.');
+          resetState();
+        };
+        loadedImage.src = objectUrl;
       }
     }
 
-    function canvasToBlob(canvas, quality) {
+    // Draw with solid white background so transparent PNGs/WebPs don't turn black in JPEG
+    function renderImageToJpegBlob(img, width, height, quality) {
       return new Promise((resolve) => {
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, width, height);
+        ctx.drawImage(img, 0, 0, width, height);
         canvas.toBlob(blob => resolve(blob), 'image/jpeg', quality);
       });
     }
 
+    // Universal Image -> JPEG Converter & Target-KB Compressor
     async function compressJpeg() {
       if (!loadedImage) return;
-      statusMsg.textContent = 'Compressing image...';
+      statusMsg.textContent = 'Converting to JPEG & optimizing...';
       downloadBtn.disabled = true;
 
       let bestBlob = null;
+      const origW = loadedImage.naturalWidth || 800;
+      const origH = loadedImage.naturalHeight || 600;
 
       if (selectedTargetKB === null) {
         const quality = parseInt(qualitySlider.value, 10) / 100;
-        const canvas = document.createElement('canvas');
-        canvas.width = loadedImage.naturalWidth;
-        canvas.height = loadedImage.naturalHeight;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(loadedImage, 0, 0);
-        bestBlob = await canvasToBlob(canvas, quality);
+        bestBlob = await renderImageToJpegBlob(loadedImage, origW, origH, quality);
       } else {
         const targetBytes = selectedTargetKB * 1024;
         let scale = 1.0;
-        let quality = 0.85;
+        let quality = 0.88;
 
-        for (let attempt = 0; attempt < 8; attempt++) {
-          const canvas = document.createElement('canvas');
-          canvas.width = Math.max(10, Math.round(loadedImage.naturalWidth * scale));
-          canvas.height = Math.max(10, Math.round(loadedImage.naturalHeight * scale));
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(loadedImage, 0, 0, canvas.width, canvas.height);
-
-          const blob = await canvasToBlob(canvas, quality);
+        for (let attempt = 0; attempt < 10; attempt++) {
+          const w = Math.max(16, Math.round(origW * scale));
+          const h = Math.max(16, Math.round(origH * scale));
+          const blob = await renderImageToJpegBlob(loadedImage, w, h, quality);
           bestBlob = blob;
 
-          if (blob.size <= targetBytes) break;
+          if (blob && blob.size <= targetBytes) break;
 
           if (quality > 0.35) {
             quality -= 0.15;
@@ -559,8 +586,10 @@
         if (compressedBlobUrl) URL.revokeObjectURL(compressedBlobUrl);
         compressedBlobUrl = URL.createObjectURL(bestBlob);
         compImgPreview.src = compressedBlobUrl;
-        compMeta.textContent = `Size: ${formatBytes(bestBlob.size)}`;
-        statusMsg.textContent = selectedTargetKB ? `Optimized under ~${selectedTargetKB} KB` : 'Optimization complete';
+        compMeta.textContent = `JPG • ${formatBytes(bestBlob.size)}`;
+        statusMsg.textContent = selectedTargetKB
+          ? `Converted to JPEG under ~${selectedTargetKB} KB`
+          : 'Converted to JPEG successfully';
       }
       downloadBtn.disabled = false;
     }
@@ -584,7 +613,7 @@
           const blob = new Blob([basicBytes], { type: 'application/pdf' });
           if (compressedBlobUrl) URL.revokeObjectURL(compressedBlobUrl);
           compressedBlobUrl = URL.createObjectURL(blob);
-          compMeta.textContent = `Size: ${formatBytes(blob.size)}`;
+          compMeta.textContent = `PDF • ${formatBytes(blob.size)}`;
           statusMsg.textContent = 'Optimization complete';
           downloadBtn.disabled = false;
           return;
@@ -641,7 +670,7 @@
 
         if (compressedBlobUrl) URL.revokeObjectURL(compressedBlobUrl);
         compressedBlobUrl = URL.createObjectURL(finalBlob);
-        compMeta.textContent = `Size: ${formatBytes(finalBlob.size)}`;
+        compMeta.textContent = `PDF • ${formatBytes(finalBlob.size)}`;
         statusMsg.textContent = `Optimized for ~${selectedTargetKB} KB`;
       } catch (err) {
         console.error('PDF compression error:', err);
@@ -687,7 +716,7 @@
       const dotIdx = currentFile.name.lastIndexOf('.');
       const baseName = dotIdx !== -1 ? currentFile.name.substring(0, dotIdx) : currentFile.name;
       const ext = currentMode === 'pdf' ? '.pdf' : '.jpg';
-      const label = selectedTargetKB ? `-${selectedTargetKB}kb` : '-compressed';
+      const label = selectedTargetKB ? `-${selectedTargetKB}kb` : '-converted';
       a.download = `${baseName}${label}${ext}`;
       document.body.appendChild(a);
       a.click();
