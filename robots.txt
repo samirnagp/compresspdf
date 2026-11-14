@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /health
 
-Sitemap: https://easypdf.website/sitemap.xml
+Sitemap: https://www.easypdf.website/sitemap.xml
