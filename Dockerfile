@@ -1,17 +1,21 @@
-FROM python:3.11-slim
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    poppler-utils \
-    && rm -rf /var/lib/apt/lists/*
-
+FROM node:20-bookworm-slim AS deps
 WORKDIR /app
+COPY package.json ./
+RUN npm install
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
+FROM node:20-bookworm-slim AS build
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+RUN npm run build
 
-ENV PORT=8080
-EXPOSE 8080
-
-CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:${PORT:-8080} --workers 2 --timeout 120 app:app"]
+FROM node:20-bookworm-slim
+RUN apt-get update && apt-get install -y --no-install-recommends ghostscript \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
+ENV NODE_ENV=production PORT=10000 HOSTNAME=0.0.0.0
+COPY --from=build /app/.next/standalone ./
+COPY --from=build /app/.next/static ./.next/static
+COPY --from=build /app/public ./public
+EXPOSE 10000
+CMD ["node", "server.js"]
