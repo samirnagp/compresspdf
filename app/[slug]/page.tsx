@@ -22,7 +22,7 @@ export default function ToolPage({ params }: { params: { slug: string } }) {
       <p className="lead">{page.description}</p>
       <Tool kind={page.kind} size={page.size} />
       <h2>Other sizes</h2>
-      <ul className="links">{related.map((p) => <li key={p.slug}><Link href={`/${p.slug}`}>{p.title}</Link></li>)}</ul>
+      <ul className="links">{related.map((p) => <li key={p.slug}><Link href={`/${p.slug}`}>{p.size} KB</Link></li>)}</ul>
     </>
   );
 }

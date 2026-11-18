@@ -1,25 +1,41 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
+import { Montserrat } from 'next/font/google';
 import './globals.css';
+
+const display = Montserrat({ subsets: ['latin'], weight: ['700', '800'], variable: '--font-display', display: 'swap' });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.easypdf.website'),
   title: { default: 'EasyPDF: Compress PDF & Convert Images to JPEG', template: '%s | EasyPDF' },
   description: 'Compress PDFs and convert PNG, WebP or BMP images to JPEG under 10KB, 50KB, 100KB or 200KB.',
+  openGraph: { images: ['/og.png'], siteName: 'EasyPDF', type: 'website' },
+  twitter: { card: 'summary_large_image', images: ['/og.png'] },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en"><body>
-      <header>
-        <Link className="brand" href="/">EasyPDF</Link>
-        <nav><Link href="/compress-pdf-to-100kb">Compress PDF</Link><Link href="/image-to-jpeg-100kb">Image to JPEG</Link></nav>
-      </header>
-      <main>{children}</main>
-      <footer>
-        <nav aria-label="Footer"><Link href="/about">About</Link><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link><Link href="/contact">Contact</Link></nav>
-        <p>© {new Date().getFullYear()} EasyPDF. Small files are processed in your browser. Larger ones are uploaded only if you choose, and deleted right after.</p>
-      </footer>
-    </body></html>
+    <html lang="en" className={display.variable}>
+      <body>
+        <header className="wrap site-header">
+          <Link className="brand" href="/" aria-label="EasyPDF home">
+            <Image src="/glyph.png" alt="" width={36} height={36} priority style={{ width: 'auto', height: 36 }} />
+            <span>Easy<b>PDF</b></span>
+          </Link>
+          <nav aria-label="Main">
+            <Link href="/compress-pdf-to-100kb">PDF</Link>
+            <Link href="/image-to-jpeg-100kb">Image</Link>
+          </nav>
+        </header>
+        <main className="wrap">{children}</main>
+        <footer className="wrap site-footer">
+          <nav aria-label="Footer">
+            <Link href="/about">About</Link><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link><Link href="/contact">Contact</Link>
+          </nav>
+          <p>© {new Date().getFullYear()} EasyPDF. Small files are processed in your browser. Larger ones are uploaded only if you choose, and deleted right after.</p>
+        </footer>
+      </body>
+    </html>
   );
 }
