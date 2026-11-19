@@ -97,3 +97,10 @@ details { border:1px solid var(--line); border-radius:10px; background:var(--sur
 summary { cursor:pointer; font-weight:600; padding:12px 0; }
 details[open] summary { border-bottom:1px solid var(--line); margin-bottom:12px; }
 details p { margin:0 0 14px; }
+
+.cards { display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
+.card { display:flex; flex-direction:column; gap:6px; padding:18px; border:1px solid var(--line); border-radius:var(--radius); background:var(--surface); color:var(--ink); text-decoration:none; }
+.card:hover { border-color:var(--blue-hi); }
+.card span { color:var(--muted); font-size:.95rem; }
+.meta { color:var(--muted); font-size:.9rem; margin-top:-12px; }
+article section p { max-width:42em; }

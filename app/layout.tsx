@@ -34,12 +34,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <nav aria-label="Main">
             <Link href="/compress-pdf-to-100kb">PDF</Link>
             <Link href="/image-to-jpeg-100kb">Image</Link>
+            <Link href="/guides">Guides</Link>
           </nav>
         </header>
         <main className="wrap">{children}</main>
         <footer className="wrap site-footer">
           <nav aria-label="Footer">
-            <Link href="/about">About</Link><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link><Link href="/contact">Contact</Link><PrivacySettings />
+            <Link href="/guides">Guides</Link><Link href="/about">About</Link><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link><Link href="/contact">Contact</Link><PrivacySettings />
           </nav>
           <p>© {new Date().getFullYear()} EasyPDF. Small files are processed in your browser. Larger ones are uploaded only if you choose, and deleted right after.</p>
         </footer>
