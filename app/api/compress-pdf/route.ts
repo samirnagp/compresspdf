@@ -14,7 +14,7 @@ export async function POST(req: Request) {
   const form = await req.formData();
   const file = form.get('file');
   const target = Number(form.get('target')) * 1024;
-  if (!(file instanceof File) || !target) return Response.json({ error: 'Choose a PDF and a target size.' }, { status: 400 });
+  if (!(file instanceof File) || !(target >= 5 * 1024 && target <= 5120 * 1024)) return Response.json({ error: 'Choose a PDF and a target size.' }, { status: 400 });
   if (file.size > MAX_UPLOAD_MB * 1024 * 1024) return Response.json({ error: `File is over ${MAX_UPLOAD_MB}MB.` }, { status: 413 });
 
   const input = Buffer.from(await file.arrayBuffer());
