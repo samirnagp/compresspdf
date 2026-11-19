@@ -100,3 +100,25 @@ export const homeFaq: QA[] = [
   { q: 'Why can I not select text in my compressed PDF?', a: 'To reach small sizes, the browser version turns each page into an image. Keep your original if you need selectable text.' },
   { q: 'Does it cost anything?', a: 'No. It is free and needs no account.' },
 ];
+
+const SAFE_QA: QA = {
+  q: 'Are my files uploaded?',
+  a: 'Files up to 5 MB are processed inside your browser and never leave your device. Larger files, or ones your browser cannot handle, are uploaded only if you choose, and are deleted right after processing.',
+};
+
+export const customFaq: QA[] = [
+  { q: 'What sizes can I enter?', a: 'Any size from 5 KB to 5,120 KB (5 MB). Very small targets may not be reachable for large or detailed files.' },
+  { q: 'Does it work for both PDFs and images?', a: 'Yes. Choose a PDF to compress it, or an image to convert it to a JPEG at your size. The tool picks the right method from the file you choose.' },
+  { q: 'Why is my result a little smaller than the number I typed?', a: 'The goal is the best quality that stays under your limit, so the result usually lands slightly below it. It is never intentionally over.' },
+  { q: 'Why is the file still over my size?', a: 'The tool stops at the smallest result it can make without making the file unusable. Reduce the pages or crop the image, or enter a larger size.' },
+  SAFE_QA,
+];
+
+export const convertFaq: QA[] = [
+  { q: 'Which image formats can I convert to JPEG?', a: 'Any format your browser can open, including PNG, WebP, GIF, BMP and SVG. HEIC photos from some phones may not open in every browser. If yours does not, export it as JPEG or PNG from your phone first.' },
+  { q: 'Will the image lose quality?', a: 'JPEG is a lossy format, so the file is not identical to the original. We use a high quality setting, so differences are hard to see. Keep your original file.' },
+  { q: 'Does the image size change?', a: 'The pixel dimensions stay the same. The file size often shrinks for PNG files. A photo that is already a JPEG may stay about the same or grow slightly.' },
+  { q: 'What happens to a transparent background?', a: 'JPEG cannot store transparency, so transparent areas are filled with white.' },
+  { q: 'Do I need a size limit?', a: 'No. This tool just converts. If a form has a size limit, use the JPEG by size or custom size tools instead.' },
+  SAFE_QA,
+];

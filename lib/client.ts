@@ -74,3 +74,16 @@ export async function compressPdfLocal(file: File, targetBytes: number): Promise
   }
   return { blob: best!, fit: false };
 }
+
+// Plain conversion to JPEG at high quality, keeping the original dimensions.
+export async function convertToJpegLocal(file: File): Promise<Local> {
+  const img = await loadImage(file);
+  const c = document.createElement('canvas');
+  c.width = img.naturalWidth || img.width || 800;
+  c.height = img.naturalHeight || img.height || 600;
+  const ctx = c.getContext('2d')!;
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, c.width, c.height);
+  ctx.drawImage(img, 0, 0, c.width, c.height);
+  return { blob: await toJpeg(c, 0.92), fit: true };
+}
