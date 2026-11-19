@@ -17,6 +17,7 @@ export default function Page() {
       <div className="size-groups">
         <div><h3>Compress PDF</h3><ul className="links">{group('pdf').map((p) => <li key={p.slug}><Link href={`/${p.slug}`}>{p.size} KB</Link></li>)}</ul></div>
         <div><h3>Image to JPEG</h3><ul className="links">{group('image').map((p) => <li key={p.slug}><Link href={`/${p.slug}`}>{p.size} KB</Link></li>)}</ul></div>
+        <div><h3>More tools</h3><ul className="links"><li><Link href="/compress-to-custom-size">Custom size</Link></li><li><Link href="/convert-image-to-jpeg">Convert to JPEG</Link></li></ul></div>
       </div>
       <h2>Guides</h2>
       <div className="cards">
