@@ -1,7 +1,7 @@
 import { faq, howTo, homeFaq, tips, type QA } from '@/lib/content';
 import type { Kind } from '@/lib/tools';
 
-function Faq({ title, items }: { title: string; items: QA[] }) {
+export function Faq({ title, items }: { title: string; items: QA[] }) {
   return (
     <section>
       <h2>{title}</h2>
