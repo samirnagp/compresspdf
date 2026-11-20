@@ -109,3 +109,9 @@ article section p { max-width:42em; }
 .tab { white-space:nowrap; flex:none; }
 .num { font:inherit; width:9em; padding:10px 12px; border:1.5px solid var(--line); border-radius:10px; background:var(--surface); color:var(--ink); }
 .tab-desc { color:var(--muted); margin:0 0 14px; }
+
+/* Phones: show all four tabs at once as a 2x2 grid, no sideways scrolling */
+@media (max-width: 600px) {
+  .tabs { display:grid; grid-template-columns:1fr 1fr; width:100%; overflow:visible; border-radius:18px; }
+  .tab { white-space:normal; text-align:center; padding:10px 8px; border-radius:14px; }
+}
