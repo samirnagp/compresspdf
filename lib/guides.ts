@@ -1,12 +1,14 @@
+import { moreGuides } from './guides-more';
 export type Section = { h: string; p?: string[]; ul?: string[]; ol?: string[] };
 export type Guide = {
-  slug: string; title: string; description: string; updated: string; intro: string;
+  slug: string; group: 'PDF' | 'Photos & images'; title: string; description: string; updated: string; intro: string;
   sections: Section[]; links: { label: string; href: string }[];
 };
 
 export const guides: Guide[] = [
   {
     slug: 'reduce-pdf-size-for-online-application',
+    group: 'PDF',
     title: 'How to Reduce a PDF’s File Size for an Online Application',
     description: 'Practical ways to get a PDF under a form’s size limit without making it unreadable: scanning settings, export options, and when to compress.',
     updated: 'November 19, 2026',
@@ -52,6 +54,7 @@ export const guides: Guide[] = [
   },
   {
     slug: 'photo-and-signature-under-50kb-for-online-forms',
+    group: 'Photos & images',
     title: 'How to Get a Photo or Signature Under 50 KB for Online Forms',
     description: 'How to take, crop and convert a photo or signature to a small JPEG that meets an online form’s size limit, with tips to keep it sharp.',
     updated: 'November 19, 2026',
@@ -95,6 +98,7 @@ export const guides: Guide[] = [
       { label: 'Image to JPEG under 10 KB', href: '/image-to-jpeg-10kb' },
     ],
   },
+  ...moreGuides,
 ];
 
 export const getGuide = (slug: string) => guides.find((g) => g.slug === slug);
