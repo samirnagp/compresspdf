@@ -1,42 +1,36 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getGuide, guides } from '@/lib/guides';
+import Tool from '@/components/Tool';
+import AdSlot from '@/components/AdSlot';
+import { ToolGuide } from '@/components/Guide';
+import { getPage, pages } from '@/lib/tools';
 
 export const dynamicParams = false;
-export const generateStaticParams = () => guides.map((g) => ({ slug: g.slug }));
+export const generateStaticParams = () => pages.map((p) => ({ slug: p.slug }));
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const g = getGuide(params.slug);
-  return g ? { title: g.title, description: g.description, alternates: { canonical: `/guides/${g.slug}` } } : {};
+  const page = getPage(params.slug);
+  return page ? { title: page.title, description: page.description, alternates: { canonical: `/${page.slug}` } } : {};
 }
 
-export default function GuidePage({ params }: { params: { slug: string } }) {
-  const g = getGuide(params.slug);
-  if (!g) notFound();
-  const related = guides.filter((x) => x.group === g.group && x.slug !== g.slug).slice(0, 3);
+export default function ToolPage({ params }: { params: { slug: string } }) {
+  const page = getPage(params.slug);
+  if (!page) notFound();
+  const related = pages.filter((p) => p.kind === page.kind && p.slug !== page.slug);
   return (
-    <article>
-      <p><Link href="/guides">← All guides</Link></p>
-      <h1>{g.title}</h1>
-      <p className="lead">{g.intro}</p>
-      <p className="meta">Last updated {g.updated}</p>
-      {g.sections.map((s) => (
-        <section key={s.h}>
-          <h2>{s.h}</h2>
-          {s.p?.map((t) => <p key={t}>{t}</p>)}
-          {s.ul && <ul className="steps">{s.ul.map((t) => <li key={t}>{t}</li>)}</ul>}
-          {s.ol && <ol className="steps">{s.ol.map((t) => <li key={t}>{t}</li>)}</ol>}
-        </section>
-      ))}
-      <h2>Try the tools</h2>
-      <ul className="links">{g.links.map((l) => <li key={l.href}><Link href={l.href}>{l.label}</Link></li>)}</ul>
-      <h2>Related guides</h2>
-      <div className="cards">
-        {related.map((r) => (
-          <Link key={r.slug} href={`/guides/${r.slug}`} className="card"><strong>{r.title}</strong></Link>
-        ))}
-      </div>
-    </article>
+    <>
+      <h1>{page.title}</h1>
+      <p className="lead">{page.description}</p>
+      <Tool kind={page.kind} size={page.size} />
+      <AdSlot />
+      <ToolGuide kind={page.kind} size={page.size} />
+      <h2>Other sizes</h2>
+      <ul className="links">{related.map((p) => <li key={p.slug}><Link href={`/${p.slug}`}>{p.size} KB</Link></li>)}</ul>
+      <h2>Need the other tool?</h2>
+      <ul className="links">
+        <li><Link href={page.kind === 'pdf' ? `/image-to-jpeg-${page.size}kb` : `/compress-pdf-to-${page.size}kb`}>{page.kind === 'pdf' ? `Image to JPEG under ${page.size} KB` : `Compress PDF to ${page.size} KB`}</Link></li>
+      </ul>
+    </>
   );
 }
