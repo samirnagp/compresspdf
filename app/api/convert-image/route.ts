@@ -1,30 +1,39 @@
 import sharp from 'sharp';
-import { allow, clientIp } from '@/lib/limit';
+import { guard, makeSlots } from '@/lib/limit';
 import { MAX_UPLOAD_MB } from '@/lib/tools';
 
 export const runtime = 'nodejs';
 
+sharp.cache(false);
+sharp.concurrency(1);
+const slots = makeSlots(3);
+
+// Refuse "image bombs": files that are small but expand to enormous pixel counts.
+const open = (input: Buffer) => sharp(input, { limitInputPixels: 60_000_000 });
+
 async function encode(input: Buffer, scale: number, quality: number) {
-  const meta = await sharp(input).metadata();
+  const meta = await open(input).metadata();
   const width = Math.max(16, Math.round((meta.width ?? 800) * scale));
-  return sharp(input).rotate().resize({ width }).flatten({ background: '#ffffff' })
+  return open(input).rotate().resize({ width }).flatten({ background: '#ffffff' })
     .jpeg({ quality, mozjpeg: true }).toBuffer();
 }
 
 export async function POST(req: Request) {
-  if (!allow(clientIp(req))) return Response.json({ error: 'Too many requests. Try again in a minute.' }, { status: 429 });
-  const form = await req.formData();
-  const file = form.get('file');
-  const convertOnly = form.get('mode') === 'convert';
-  const target = Number(form.get('target')) * 1024;
-  if (!(file instanceof File)) return Response.json({ error: 'Choose an image first.' }, { status: 400 });
-  if (!convertOnly && !(target >= 5 * 1024 && target <= 5120 * 1024)) return Response.json({ error: 'Enter a size between 5 and 5120 KB.' }, { status: 400 });
-  if (file.size > MAX_UPLOAD_MB * 1024 * 1024) return Response.json({ error: `File is over ${MAX_UPLOAD_MB}MB.` }, { status: 413 });
-
-  const input = Buffer.from(await file.arrayBuffer());
+  const blocked = guard(req, 20);
+  if (blocked) return blocked;
+  if (!slots.acquire()) return Response.json({ error: 'The server is busy. Please try again in a minute.' }, { status: 503 });
   try {
+    const form = await req.formData();
+    const file = form.get('file');
+    const convertOnly = form.get('mode') === 'convert';
+    const target = Number(form.get('target')) * 1024;
+    if (!(file instanceof File)) return Response.json({ error: 'Choose an image first.' }, { status: 400 });
+    if (!convertOnly && !(target >= 5 * 1024 && target <= 5120 * 1024)) return Response.json({ error: 'Enter a size between 5 and 5120 KB.' }, { status: 400 });
+    if (file.size > MAX_UPLOAD_MB * 1024 * 1024) return Response.json({ error: `File is over ${MAX_UPLOAD_MB}MB.` }, { status: 413 });
+
+    const input = Buffer.from(await file.arrayBuffer());
     if (convertOnly) {
-      const out = await sharp(input).rotate().flatten({ background: '#ffffff' }).jpeg({ quality: 90, mozjpeg: true }).toBuffer();
+      const out = await open(input).rotate().flatten({ background: '#ffffff' }).jpeg({ quality: 90, mozjpeg: true }).toBuffer();
       return new Response(out, { headers: { 'Content-Type': 'image/jpeg', 'X-Fit': '1' } });
     }
     let best: Buffer | null = null;
@@ -41,5 +50,7 @@ export async function POST(req: Request) {
     return new Response(best!, { headers: { 'Content-Type': 'image/jpeg', 'X-Fit': '0' } });
   } catch {
     return Response.json({ error: 'Could not read that image.' }, { status: 422 });
+  } finally {
+    slots.release();
   }
 }
