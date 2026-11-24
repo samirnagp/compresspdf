@@ -1,16 +1,16 @@
-FROM node:22-bookworm-slim AS deps
+FROM node:25-bookworm-slim AS deps
 WORKDIR /app
 COPY package.json ./
 RUN npm install
 
-FROM node:22-bookworm-slim AS build
+FROM node:25-bookworm-slim AS build
 WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
 
-FROM node:22-bookworm-slim
+FROM node:25-bookworm-slim
 RUN apt-get update && apt-get install -y --no-install-recommends ghostscript \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
